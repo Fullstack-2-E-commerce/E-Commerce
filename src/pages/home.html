@@ -3,7 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Home | Mi Tienda</title>
+    <link rel="stylesheet" href="../css/home-styles.css" />
   </head>
-  <body></body>
+  <body>
+    <header class="site-header">
+      <a href="./home.html" class="logo">Mi Tienda</a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="./nosotros.html">Nosotros</a></li>
+          <li><a href="./blogs.html">Blogs</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Bienvenido a Mi Tienda</h1>
+        <p>Encuentra los mejores productos al mejor precio.</p>
+        <a href="#productos" class="btn">Ver productos</a>
+      </section>
+
+      <section id="productos" class="productos">
+        <h2>Productos destacados</h2>
+        <div class="productos-grid">
+          <article class="producto">
+            <div class="producto-img"></div>
+            <h3>Producto 1</h3>
+            <p class="precio">$9.990</p>
+          </article>
+          <article class="producto">
+            <div class="producto-img"></div>
+            <h3>Producto 2</h3>
+            <p class="precio">$19.990</p>
+          </article>
+          <article class="producto">
+            <div class="producto-img"></div>
+            <h3>Producto 3</h3>
+            <p class="precio">$29.990</p>
+          </article>
+          <article class="producto">
+            <div class="producto-img"></div>
+            <h3>Producto 4</h3>
+            <p class="precio">$39.990</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Mi Tienda. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+  </body>
 </html>
