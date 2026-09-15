@@ -3,58 +3,162 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | Mi Tienda</title>
+    <title>La Lira del Fogón | Cocina casera chilena</title>
     <link rel="stylesheet" href="../css/home-styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a href="./home.html" class="logo">Mi Tienda</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="./home.html">Home</a></li>
-          <li><a href="./nosotros.html">Nosotros</a></li>
-          <li><a href="./blogs.html">Blogs</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
+      <div class="container header-inner">
+        <a href="./home.html" class="logo">La Lira<span class="logo-em"> del Fogón</span></a>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a href="./home.html" class="nav-link is-active">Home</a></li>
+            <li><a href="./nosotros.html" class="nav-link">Nosotros</a></li>
+            <li><a href="./blogs.html" class="nav-link">Blogs</a></li>
+            <li><a href="./contacto.html" class="nav-link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
       <section class="hero">
-        <h1>Bienvenido a Mi Tienda</h1>
-        <p>Encuentra los mejores productos al mejor precio.</p>
-        <a href="#productos" class="btn">Ver productos</a>
+        <div class="hero-plate" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="hero-kicker">Cocina casera chilena</p>
+          <h1 class="hero-title">
+            <span class="hero-line" style="--i: 1">Recetas que</span>
+            <span class="hero-line hero-line--tinta" style="--i: 2">
+              cuentan historias
+            </span>
+            <span class="hero-line hero-line--stroke" style="--i: 3">
+              del fogón a tu mesa
+            </span>
+          </h1>
+          <div class="hero-ornament" aria-hidden="true"></div>
+          <p class="hero-tagline">
+            Platos de temporada, recetas heredadas y el sabor de la mesa
+            familiar chilena.
+          </p>
+          <a href="#productos" class="btn">Ver los platos</a>
+        </div>
       </section>
 
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-segment">
+            <span class="marquee-item">Pastel de choclo</span>
+            <span class="marquee-item">Porotos granados</span>
+            <span class="marquee-item">Cazuela de vacuno</span>
+            <span class="marquee-item">Empanada de pino</span>
+            <span class="marquee-item">Charquicán</span>
+            <span class="marquee-item">Sopaipillas</span>
+          </div>
+          <div class="marquee-segment">
+            <span class="marquee-item">Pastel de choclo</span>
+            <span class="marquee-item">Porotos granados</span>
+            <span class="marquee-item">Cazuela de vacuno</span>
+            <span class="marquee-item">Empanada de pino</span>
+            <span class="marquee-item">Charquicán</span>
+            <span class="marquee-item">Sopaipillas</span>
+          </div>
+        </div>
+      </div>
+
       <section id="productos" class="productos">
-        <h2>Productos destacados</h2>
-        <div class="productos-grid">
-          <article class="producto">
-            <div class="producto-img"></div>
-            <h3>Producto 1</h3>
-            <p class="precio">$9.990</p>
-          </article>
-          <article class="producto">
-            <div class="producto-img"></div>
-            <h3>Producto 2</h3>
-            <p class="precio">$19.990</p>
-          </article>
-          <article class="producto">
-            <div class="producto-img"></div>
-            <h3>Producto 3</h3>
-            <p class="precio">$29.990</p>
-          </article>
-          <article class="producto">
-            <div class="producto-img"></div>
-            <h3>Producto 4</h3>
-            <p class="precio">$39.990</p>
-          </article>
+        <div class="container">
+          <header class="productos-head revelar">
+            <div class="productos-head-titulo">
+              <p class="productos-kicker">Recién sacados del fogón</p>
+              <h2 class="productos-titulo">Platos destacados</h2>
+            </div>
+            <p class="productos-lead">
+              Lo que hoy sale de la cocina: recetas heredadas y productos de
+              la temporada.
+            </p>
+          </header>
+
+          <div class="productos-grid">
+            <article class="producto revelar">
+              <figure class="producto-img producto-img--choclo">
+                <span class="producto-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="producto-body">
+                <p class="producto-categoria">Plato típico</p>
+                <h3 class="producto-nombre">Pastel de choclo</h3>
+                <p class="producto-desc">
+                  Choclo dulce con pino de carne, huevo y aceitunas.
+                </p>
+                <p class="precio">$7.990</p>
+              </div>
+            </article>
+
+            <article class="producto revelar">
+              <figure class="producto-img producto-img--porotos">
+                <span class="producto-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="producto-body">
+                <p class="producto-categoria">Guiso de temporada</p>
+                <h3 class="producto-nombre">Porotos granados</h3>
+                <p class="producto-desc">
+                  Porotos maduros, choclo y zapallo, bien aliñados.
+                </p>
+                <p class="precio">$6.490</p>
+              </div>
+            </article>
+
+            <article class="producto revelar">
+              <figure class="producto-img producto-img--cazuela">
+                <span class="producto-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="producto-body">
+                <p class="producto-categoria">La tradición</p>
+                <h3 class="producto-nombre">Cazuela de vacuno</h3>
+                <p class="producto-desc">
+                  El clásico de los domingos, con verduras de la huerta.
+                </p>
+                <p class="precio">$8.490</p>
+              </div>
+            </article>
+
+            <article class="producto revelar">
+              <figure class="producto-img producto-img--empanada">
+                <span class="producto-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="producto-body">
+                <p class="producto-categoria">De la fonda</p>
+                <h3 class="producto-nombre">Empanada de pino</h3>
+                <p class="producto-desc">
+                  Masa casera, pino jugoso y el sabor de las fiestas.
+                </p>
+                <p class="precio">$2.990</p>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Mi Tienda. Todos los derechos reservados.</p>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">La Lira del Fogón</p>
+          <p class="footer-tagline">
+            Cocina casera hecha con cariño, del campo a tu mesa.
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegación del pie">
+          <ul>
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./nosotros.html">Nosotros</a></li>
+            <li><a href="./blogs.html">Blogs</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 La Lira del Fogón. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
     <script src="../js/app.js"></script>
