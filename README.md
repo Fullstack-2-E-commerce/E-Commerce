@@ -1,6 +1,6 @@
 # E-Commerce — Proyecto Fullstack 2
 
-Proyecto académico de la asignatura **DSY1104 (Fullstack 2)**: un e-commerce dinámico construido con HTML, CSS y JavaScript puro, sin frameworks de frontend.
+Proyecto académico de la asignatura **DSY1104 (Fullstack 2)**: un e-commerce dinámico construido con HTML, CSS y JavaScript.
 
 ## Descripción
 

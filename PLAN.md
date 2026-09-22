@@ -2,7 +2,7 @@
 
 > **Asignatura:** DSY1104 (Fullstack 2)
 > **Proyecto:** E-commerce dedicado a restaurantes de comida casera chilena.
-> **Tecnologías:** HTML, CSS y JavaScript.
+> **Tecnologías:** HTML, CSS, JavaScript y React
 
 ---
 
