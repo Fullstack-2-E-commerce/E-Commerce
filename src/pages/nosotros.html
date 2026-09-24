@@ -3,54 +3,147 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nosotros | Mi Tienda</title>
+    <title>Nosotros | Sabores de Chile</title>
     <link rel="stylesheet" href="../css/home-styles.css" />
+    <link rel="stylesheet" href="../css/nosotros-styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a href="./home.html" class="logo">Mi Tienda</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="./home.html">Home</a></li>
-          <li><a href="./nosotros.html">Nosotros</a></li>
-          <li><a href="./blogs.html">Blogs</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
+      <div class="container header-inner">
+        <a href="./home.html" class="logo"
+          >Sabores de<span class="logo-em"> Chile</span></a
+        >
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a href="./home.html" class="nav-link">Home</a></li>
+            <li>
+              <a href="./nosotros.html" class="nav-link is-active">Nosotros</a>
+            </li>
+            <li><a href="./blogs.html" class="nav-link">Blogs</a></li>
+            <li><a href="./contacto.html" class="nav-link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
-      <section class="nosotros">
-        <h1>Sobre nosotros</h1>
-        <p>
-          En Mi Tienda nos dedicamos a ofrecer productos de calidad con la mejor
-          atención al cliente. Nuestra misión es superar las expectativas de
-          cada comprador.
-        </p>
+      <section class="nosotros-hero">
+        <div class="nosotros-glow" aria-hidden="true"></div>
+        <div class="container">
+          <div class="nosotros-hero-inner">
+            <p class="nosotros-hero-kicker">Nuestra historia</p>
+            <h1 class="nosotros-hero-titulo">
+              Cocina que abraza,<br />
+              desde la mesa <span class="nosotros-hero-em">chilena</span>
+            </h1>
+            <p class="nosotros-hero-lead">
+              Somos una empresa familiar de comida casera que rescata recetas
+              heredadas y las lleva del fogón a tu mesa.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <h2>Nuestro equipo</h2>
-        <div class="equipo-grid">
-          <article class="integrante">
-            <div class="integrante-img"></div>
-            <h3>Integrante 1</h3>
-            <p>Cargo / área</p>
-          </article>
-          <article class="integrante">
-            <div class="integrante-img"></div>
-            <h3>Integrante 2</h3>
-            <p>Cargo / área</p>
-          </article>
-          <article class="integrante">
-            <div class="integrante-img"></div>
-            <h3>Integrante 3</h3>
-            <p>Cargo / área</p>
-          </article>
+      <section class="historia">
+        <div class="container">
+          <div class="historia-grid">
+            <div class="historia-texto revelar">
+              <p class="productos-kicker">Quiénes somos</p>
+              <h2 class="productos-titulo">Del fogón familiar a tu mesa</h2>
+              <p>
+                Sabores de Chile nace de una convicción sencilla: la comida
+                casera chilena se cocina con cariño, con tiempo y con recetas
+                que pasan de generación en generación. Lo que empezó como la
+                mesa familiar de los domingos hoy es una tienda que acerca esa
+                tradición a tu hogar.
+              </p>
+            </div>
+            <div class="historia-texto revelar">
+              <p class="productos-kicker">Nuestra misión</p>
+              <h2 class="productos-titulo">Honrar el sabor de siempre</h2>
+              <p>
+                Trabajamos con ingredientes de temporada y productores locales.
+                Cada plato se prepara al estilo artesanal: papas, choclo,
+                porotos y verduras de la huerta, sazonadas con el cariño de una
+                cocina donde todo se hace como en casa, sin atajos ni
+                industrialización.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="valores">
+        <div class="container">
+          <header class="valores-head revelar">
+            <p class="productos-kicker">Lo que nos mueve</p>
+            <h2 class="productos-titulo">Los ingredientes de casa</h2>
+            <p class="valores-lead">
+              Cuatro pilares guían cada receta que sale de nuestra cocina.
+            </p>
+          </header>
+
+          <div class="receta">
+            <article class="ingrediente revelar">
+              <p class="ingrediente-medida">de la tierra</p>
+              <h3 class="ingrediente-nombre">Ingredientes de temporada</h3>
+              <p class="ingrediente-nota">
+                Comemos lo que la tierra da en cada estación, de la mano de
+                productores locales.
+              </p>
+            </article>
+
+            <article class="ingrediente revelar">
+              <p class="ingrediente-medida">de la abuela</p>
+              <h3 class="ingrediente-nombre">Recetas heredadas</h3>
+              <p class="ingrediente-nota">
+                Rescatamos la cocina de las abuelas, sin atajos y con el sabor
+                de siempre.
+              </p>
+            </article>
+
+            <article class="ingrediente revelar">
+              <p class="ingrediente-medida">con calma</p>
+              <h3 class="ingrediente-nombre">Hecho con cariño</h3>
+              <p class="ingrediente-nota">
+                Cada plato es artesanal: se prepara con tiempo, dedicación y
+                buenos ingredientes.
+              </p>
+            </article>
+
+            <article class="ingrediente revelar">
+              <p class="ingrediente-medida">en familia</p>
+              <h3 class="ingrediente-nombre">La mesa familiar</h3>
+              <p class="ingrediente-nota">
+                Nos sentamos a comer juntos como familia, porque ese es el
+                corazón de nuestra cocina.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Mi Tienda. Todos los derechos reservados.</p>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">Sabores de Chile</p>
+          <p class="footer-tagline">
+            Cocina casera hecha con cariño, del campo a tu mesa.
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegación del pie">
+          <ul>
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./nosotros.html">Nosotros</a></li>
+            <li><a href="./blogs.html">Blogs</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Sabores de Chile. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
     <script src="../js/app.js"></script>
