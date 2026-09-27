@@ -1,0 +1,228 @@
+/* Blogs — Sabores de Chile. Reusa tokens de home-styles.css */
+.blog-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4rem, 9vw, 6.5rem);
+  background-image: var(--noise-paper);
+}
+.blog-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 78% 22%,
+      rgba(212, 160, 23, 0.14),
+      transparent 55%
+    ),
+    radial-gradient(circle at 12% 88%, rgba(192, 57, 43, 0.1), transparent 50%);
+  pointer-events: none;
+}
+.blog-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  animation: revelarFogon 0.9s var(--ease-salida) both;
+}
+@keyframes revelarFogon {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+.blog-titulo {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  letter-spacing: -0.02em;
+}
+.blog-titulo em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+.blog-lead {
+  margin-top: var(--space-md);
+  color: var(--color-text-muted);
+  max-width: 52ch;
+}
+.blog-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+.filtro {
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-salida);
+}
+.filtro:hover {
+  border-color: var(--color-accent-deep);
+  transform: translateY(-1px);
+}
+.filtro.is-activo {
+  background: var(--color-bg-dark);
+  color: var(--color-bg-light);
+  border-color: var(--color-bg-dark);
+}
+.blog-listado {
+  padding-bottom: var(--space-2xl);
+}
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s var(--ease-salida),
+    box-shadow 0.3s ease;
+}
+.post:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.post[hidden] {
+  display: none;
+}
+.post-img {
+  margin: 0;
+  aspect-ratio: 16/10;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.post-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--noise-paper);
+  pointer-events: none;
+}
+.post-img--choclo {
+  background: linear-gradient(
+    160deg,
+    #f0c96b,
+    var(--color-accent) 50%,
+    var(--color-accent-deep)
+  );
+}
+.post-img--porotos {
+  background: linear-gradient(
+    160deg,
+    var(--color-green),
+    var(--color-green-deep) 65%,
+    #24361a
+  );
+}
+.post-img--sopaipilla {
+  background: linear-gradient(
+    160deg,
+    var(--color-primary),
+    var(--color-primary-deep) 65%,
+    #42120a
+  );
+}
+.post-plato {
+  position: relative;
+  z-index: 1;
+  width: 4.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 10px rgba(255, 255, 255, 0.08),
+    0 10px 26px rgba(0, 0, 0, 0.22);
+  transition: transform 0.45s var(--ease-salida);
+}
+.post:hover .post-plato {
+  transform: scale(1.12) rotate(18deg);
+}
+.post-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+  padding: var(--space-md);
+}
+.post-categoria {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-green-deep);
+  margin: 0;
+}
+.post-titulo {
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+.post-extracto {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+.post-meta {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  border-top: 1px dashed var(--color-border);
+  padding-top: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+.post-link {
+  font-weight: 500;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  margin-top: var(--space-xs);
+}
+.post-link::after {
+  content: "→";
+  transition: transform 0.25s var(--ease-salida);
+}
+.post-link:hover::after {
+  transform: translateX(4px);
+}
+.blog-cta {
+  margin-top: var(--space-xl);
+  background: var(--color-bg-dark);
+  background-image: var(--noise-dark);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+  border-top: 3px solid var(--color-primary);
+}
+.blog-cta h2 {
+  color: var(--color-bg-light);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+.blog-cta p {
+  color: var(--color-text-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .blog-hero-inner {
+    animation: none;
+  }
+}

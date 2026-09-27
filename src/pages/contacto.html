@@ -3,52 +3,202 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto | Mi Tienda</title>
+    <title>Contacto | Sabores de Chile</title>
+    <meta
+      name="description"
+      content="Escríbenos: pedidos, eventos y recetas de cocina casera chilena."
+    />
     <link rel="stylesheet" href="../css/home-styles.css" />
+    <link rel="stylesheet" href="../css/contacto-styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a href="./home.html" class="logo">Mi Tienda</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="./home.html">Home</a></li>
-          <li><a href="./nosotros.html">Nosotros</a></li>
-          <li><a href="./blogs.html">Blogs</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
+      <div class="container header-inner">
+        <a href="./home.html" class="logo"
+          >Sabores de<span class="logo-em"> Chile</span></a
+        >
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a href="./home.html" class="nav-link">Home</a></li>
+            <li><a href="./nosotros.html" class="nav-link">Nosotros</a></li>
+            <li><a href="./blogs.html" class="nav-link">Blogs</a></li>
+            <li>
+              <a
+                href="./contacto.html"
+                class="nav-link is-active"
+                aria-current="page"
+                >Contacto</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
-      <section class="contacto">
-        <h1>Contáctanos</h1>
-        <p>Completa el formulario y te responderemos a la brevedad.</p>
-        <form class="contacto-form">
-          <div class="campo">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" />
+      <section class="contacto-hero">
+        <div class="container">
+          <div class="contacto-hero-inner">
+            <p class="productos-kicker">Escríbenos a la cocina</p>
+            <h1 class="contacto-titulo">
+              Conversemos <em>del fogón a tu mesa</em>
+            </h1>
+            <p class="contacto-lead">
+              Pedidos para la semana, eventos familiares o esa receta que
+              quieres recuperar. Te respondemos a la brevedad.
+            </p>
           </div>
-          <div class="campo">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" name="correo" />
-          </div>
-          <div class="campo">
-            <label for="asunto">Asunto</label>
-            <input type="text" id="asunto" name="asunto" />
-          </div>
-          <div class="campo">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5"></textarea>
-          </div>
-          <button type="submit" class="btn">Enviar</button>
-        </form>
+        </div>
       </section>
+
+      <div class="container contacto-grid">
+        <aside class="contacto-info revelar">
+          <div class="info-card">
+            <p class="productos-kicker">Nuestra cocina</p>
+            <h2>Encuéntranos y haz tu pedido</h2>
+            <p>
+              Estamos en Santiago y repartimos platos caseros de temporada,
+              hechos con ingredientes locales.
+            </p>
+            <ul class="info-lista">
+              <li>
+                <strong>Dirección</strong
+                ><span>Av. Cocina Casera 123, Ñuñoa, Santiago</span>
+              </li>
+              <li>
+                <strong>Correo</strong><span>hola@saboresdechile.cl</span>
+              </li>
+              <li><strong>Teléfono</strong><span>+56 9 1234 5678</span></li>
+            </ul>
+            <p class="horario">
+              Lunes a sábado, de 10:00 a 20:00. Domingos, solo retiros
+              programados.
+            </p>
+          </div>
+          <div class="info-card">
+            <p class="productos-kicker">Antes de escribir</p>
+            <h2>¿Qué nos puedes pedir?</h2>
+            <p>
+              Menú semanal, porotos granados de temporada, empanadas para fondas
+              y cazuelas para toda la familia.
+            </p>
+          </div>
+        </aside>
+
+        <section
+          class="contacto-form-card revelar"
+          aria-labelledby="titulo-form"
+        >
+          <p class="productos-kicker">Carta a la cocina</p>
+          <h2 id="titulo-form" class="productos-titulo">
+            Formulario de contacto
+          </h2>
+          <p class="form-ayuda">
+            Todos los campos son obligatorios. Solo usamos tus datos para
+            responderte.
+          </p>
+          <form id="contactoForm" class="contacto-form" novalidate>
+            <div class="form-fila">
+              <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  maxlength="50"
+                  autocomplete="name"
+                  aria-describedby="nombreError"
+                  required
+                />
+                <small
+                  id="nombreError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
+              <div class="campo">
+                <label for="correo">Correo</label>
+                <input
+                  type="email"
+                  id="correo"
+                  name="correo"
+                  maxlength="100"
+                  placeholder="ejemplo@gmail.com"
+                  autocomplete="email"
+                  aria-describedby="correoError"
+                  required
+                />
+                <small
+                  id="correoError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="asunto">Asunto</label>
+              <input
+                type="text"
+                id="asunto"
+                name="asunto"
+                maxlength="100"
+                placeholder="Pedido semanal, evento, receta…"
+                aria-describedby="asuntoError"
+                required
+              />
+              <small
+                id="asuntoError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+            <div class="campo">
+              <label for="mensaje">Mensaje</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="5"
+                maxlength="1000"
+                placeholder="Cuéntanos qué necesitas…"
+                aria-describedby="mensajeError"
+                required
+              ></textarea>
+              <small
+                id="mensajeError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+            <button type="submit" class="btn">Enviar mensaje</button>
+            <p id="contactoMessage" class="form-message" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Mi Tienda. Todos los derechos reservados.</p>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">Sabores de Chile</p>
+          <p class="footer-tagline">
+            Cocina casera hecha con cariño, del campo a tu mesa.
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegación del pie">
+          <ul>
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./nosotros.html">Nosotros</a></li>
+            <li><a href="./blogs.html">Blogs</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Sabores de Chile. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
     <script src="../js/app.js"></script>
+    <script src="../js/contacto.js"></script>
   </body>
 </html>

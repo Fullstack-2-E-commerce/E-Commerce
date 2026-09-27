@@ -13,7 +13,7 @@ Tienda en línea de comida casera chilena con dos áreas principales:
 - **Vistas de Tienda** (lado cliente): Home, Nosotros, Blogs, Detalle de Blogs, Contacto, Login y Registro de Usuarios.
 - **Vistas de Administrador**: Dashboard, listados y mantenedores (Usuarios y Productos).
 
-Todo el contenido (catálogo de productos, regiones/comunas, usuarios) se maneja mediante arreglos en JavaScript, y la persistencia del carrito y datos se hace con `localStorage`.
+Todo el contenido (catálogo de productos, regiones/comunas, usuarios) se maneja mediante arreglos en JavaScript. El carrito se mantiene solo en memoria durante la sesión (sin Web Storage). **Por seguridad, en Login/Registro no se debe utilizar `localStorage` ni `sessionStorage` para credenciales, tokens o datos personales (riesgo XSS); solo memoria o backend seguro.**
 
 ---
 
@@ -102,7 +102,7 @@ Elementos: ilustraciones de ingredientes chilenos (ají, merkén, papas, choclo)
 
 - [ ] Crear el arreglo JS con el catálogo de productos inicial.
 - [ ] Implementar el renderizado dinámico en la tienda y en la vista de detalle.
-- [ ] Programar las funciones del carrito (agregar, modificar cantidades, calcular total) respaldadas en `localStorage`.
+- [ ] Programar las funciones del carrito (agregar, modificar cantidades, calcular total) mantenidas en memoria durante la sesión (sin Web Storage por seguridad).
 
 ### Fase 4 — Validaciones de formularios y reglas de negocio
 
@@ -133,7 +133,7 @@ Validar campos en formularios con JavaScript en tiempo real:
 | ------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Configurar el repositorio público de GitHub y gestionar las ramas    |
 | Lógica de productos mediante arrays en JS                                       | Redactar la **sección 1** del ERS (Introducción, Propósito y Ámbito) |
-| Implementación del Carrito de Compras en JS + LocalStorage                      |                                                                      |
+| Implementación del Carrito de Compras en JS en memoria (sin Web Storage)         |                                                                      |
 | Validaciones JS del Formulario de Contacto                                      |                                                                      |
 
 ### Integrante 2 — Módulo: Usuarios y Autenticación (Encargado Ernesto)

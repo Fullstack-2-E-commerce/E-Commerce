@@ -18,7 +18,7 @@ Evaluación de la asignatura DSY1104: guía paso a paso y estrategia óptima de 
 ### Paso 3: Lógica de productos y carrito de compras (JavaScript)
 - [ ] Crear el arreglo JS con el catálogo de productos inicial.
 - [ ] Implementar el renderizado dinámico en la tienda y en la vista de detalle.
-- [ ] Programar las funciones del carrito (agregar, modificar cantidades, calcular total) respaldadas en `localStorage`.
+- [ ] Programar las funciones del carrito (agregar, modificar cantidades, calcular total) mantenidas en memoria durante la sesión (sin Web Storage por seguridad).
 
 ### Paso 4: Validaciones de formularios y reglas de negocio
 Validar campos en formularios con JavaScript en tiempo real:
@@ -47,7 +47,7 @@ Para lograr un avance simultáneo y equitativo en GitHub, se estructuran los mó
 |---|---|
 | Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Configurar el repositorio público de GitHub y gestionar las ramas |
 | Lógica de productos mediante arrays en JS | Redactar la **sección 1** del ERS (Introducción, Propósito y Ámbito) |
-| Implementación del Carrito de Compras en JS + LocalStorage | |
+| Implementación del Carrito de Compras en JS en memoria (sin Web Storage) | |
 | Validaciones JS del Formulario de Contacto | |
 
 ### Integrante 2 — Módulo: Usuarios y Autenticación (Encargado Ernesto)

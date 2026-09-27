@@ -3,61 +3,185 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blogs | Mi Tienda</title>
+    <title>Blog | Sabores de Chile</title>
+    <meta
+      name="description"
+      content="Historias, recetas y temporada de la cocina casera chilena."
+    />
     <link rel="stylesheet" href="../css/home-styles.css" />
+    <link rel="stylesheet" href="../css/blogs-styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a href="./home.html" class="logo">Mi Tienda</a>
-      <nav class="main-nav">
-        <ul>
-          <li><a href="./home.html">Home</a></li>
-          <li><a href="./nosotros.html">Nosotros</a></li>
-          <li><a href="./blogs.html">Blogs</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
+      <div class="container header-inner">
+        <a href="./home.html" class="logo"
+          >Sabores de<span class="logo-em"> Chile</span></a
+        >
+        <nav class="main-nav" aria-label="Navegación principal">
+          <ul>
+            <li><a href="./home.html" class="nav-link">Home</a></li>
+            <li><a href="./nosotros.html" class="nav-link">Nosotros</a></li>
+            <li>
+              <a
+                href="./blogs.html"
+                class="nav-link is-active"
+                aria-current="page"
+                >Blogs</a
+              >
+            </li>
+            <li><a href="./contacto.html" class="nav-link">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main>
-      <section class="blog">
-        <h1>Nuestro blog</h1>
-        <div class="blog-grid">
-          <article class="post">
-            <div class="post-img"></div>
-            <p class="post-categoria">Categoría</p>
-            <h2>Título del artículo 1</h2>
-            <p class="post-extracto">
-              Breve descripción del contenido del primer artículo.
+      <section class="blog-hero">
+        <div class="container">
+          <div class="blog-hero-inner">
+            <p class="productos-kicker">Cuaderno de la cocina</p>
+            <h1 class="blog-titulo">
+              Historias <em>que se cocinan a fuego lento</em>
+            </h1>
+            <p class="blog-lead">
+              Recetas heredadas, ingredientes de temporada y la mesa familiar
+              chilena. Filtra por lo que hoy te provoque.
             </p>
-            <a href="#" class="post-link">Leer más</a>
-          </article>
-          <article class="post">
-            <div class="post-img"></div>
-            <p class="post-categoria">Categoría</p>
-            <h2>Título del artículo 2</h2>
-            <p class="post-extracto">
-              Breve descripción del contenido del segundo artículo.
-            </p>
-            <a href="#" class="post-link">Leer más</a>
-          </article>
-          <article class="post">
-            <div class="post-img"></div>
-            <p class="post-categoria">Categoría</p>
-            <h2>Título del artículo 3</h2>
-            <p class="post-extracto">
-              Breve descripción del contenido del tercer artículo.
-            </p>
-            <a href="#" class="post-link">Leer más</a>
-          </article>
+            <div
+              class="blog-filtros"
+              role="group"
+              aria-label="Filtrar artículos por categoría"
+            >
+              <button
+                type="button"
+                class="filtro is-activo"
+                data-filtro="todas"
+                aria-pressed="true"
+              >
+                Todas
+              </button>
+              <button
+                type="button"
+                class="filtro"
+                data-filtro="temporada"
+                aria-pressed="false"
+              >
+                De temporada
+              </button>
+              <button
+                type="button"
+                class="filtro"
+                data-filtro="herencia"
+                aria-pressed="false"
+              >
+                Herencia
+              </button>
+              <button
+                type="button"
+                class="filtro"
+                data-filtro="fondas"
+                aria-pressed="false"
+              >
+                Fondas
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog-listado">
+        <div class="container">
+          <div class="blog-grid">
+            <article class="post revelar" data-categoria="temporada">
+              <figure class="post-img post-img--choclo">
+                <span class="post-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="post-body">
+                <p class="post-categoria">De temporada</p>
+                <h2 class="post-titulo">
+                  Pastel de choclo: el verano en una paila
+                </h2>
+                <p class="post-extracto">
+                  Choclo dulce molido, pino de carne y ese dorado que solo sale
+                  del horno de barro. Te contamos cómo elegir el choclo.
+                </p>
+                <p class="post-meta">6 min de lectura · Temporada de verano</p>
+                <a href="./detalle-blog.html#pastel-choclo" class="post-link"
+                  >Leer receta</a
+                >
+              </div>
+            </article>
+            <article class="post revelar" data-categoria="herencia">
+              <figure class="post-img post-img--porotos">
+                <span class="post-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="post-body">
+                <p class="post-categoria">Herencia</p>
+                <h2 class="post-titulo">
+                  Porotos granados como los de la abuela
+                </h2>
+                <p class="post-extracto">
+                  Porotos maduros, zapallo y albahaca. La receta que pasa de
+                  generación en generación, sin atajos.
+                </p>
+                <p class="post-meta">4 min de lectura · Cocina de familia</p>
+                <a href="./detalle-blog.html#porotos-granados" class="post-link"
+                  >Leer receta</a
+                >
+              </div>
+            </article>
+            <article class="post revelar" data-categoria="fondas">
+              <figure class="post-img post-img--sopaipilla">
+                <span class="post-plato" aria-hidden="true"></span>
+              </figure>
+              <div class="post-body">
+                <p class="post-categoria">Fondas</p>
+                <h2 class="post-titulo">Sopaipillas y pebre para el 18</h2>
+                <p class="post-extracto">
+                  Masa casera, zapallo y un pebre bien aliñado. Lo que no puede
+                  faltar en la fonda de la casa.
+                </p>
+                <p class="post-meta">5 min de lectura · Fiestas patrias</p>
+                <a href="./detalle-blog.html#sopaipillas" class="post-link"
+                  >Leer receta</a
+                >
+              </div>
+            </article>
+          </div>
+          <aside class="blog-cta revelar">
+            <div>
+              <h2>¿Probaste una receta? Cuéntanos cómo te quedó</h2>
+              <p>Escríbenos y la próxima historia puede salir de tu cocina.</p>
+            </div>
+            <a href="./contacto.html" class="btn">Ir a contacto</a>
+          </aside>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Mi Tienda. Todos los derechos reservados.</p>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">Sabores de Chile</p>
+          <p class="footer-tagline">
+            Cocina casera hecha con cariño, del campo a tu mesa.
+          </p>
+        </div>
+        <nav class="footer-nav" aria-label="Navegación del pie">
+          <ul>
+            <li><a href="./home.html">Home</a></li>
+            <li><a href="./nosotros.html">Nosotros</a></li>
+            <li><a href="./blogs.html">Blogs</a></li>
+            <li><a href="./contacto.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Sabores de Chile. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
     <script src="../js/app.js"></script>
+    <script src="../js/blogs.js"></script>
   </body>
 </html>

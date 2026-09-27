@@ -1,0 +1,202 @@
+/* Contacto — Sabores de Chile. Reusa tokens de home-styles.css */
+.contacto-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4rem, 9vw, 6.5rem);
+  text-align: left;
+  background-image: var(--noise-paper);
+}
+.contacto-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(192, 57, 43, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(circle at 10% 90%, rgba(107, 143, 60, 0.1), transparent 50%);
+  pointer-events: none;
+}
+.contacto-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  animation: revelarFogon 0.9s var(--ease-salida) both;
+}
+@keyframes revelarFogon {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+.contacto-titulo {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  letter-spacing: -0.02em;
+}
+.contacto-titulo em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+.contacto-lead {
+  margin-top: var(--space-md);
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  max-width: 48ch;
+}
+
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-2xl);
+  align-items: start;
+}
+.contacto-info {
+  display: grid;
+  gap: var(--space-md);
+}
+.info-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+.info-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--space-xs);
+}
+.info-card p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+.info-lista {
+  list-style: none;
+  margin: var(--space-md) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+.info-lista li {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: baseline;
+  font-size: 0.95rem;
+}
+.info-lista strong {
+  min-width: 74px;
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+.horario {
+  border-top: 1px dashed var(--color-border);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.contacto-form-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.contacto-form-card::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent),
+    var(--color-green)
+  );
+}
+.campo {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: var(--space-md);
+}
+.campo label {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.campo input,
+.campo textarea,
+.campo select {
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+}
+.campo textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+.campo input:focus,
+.campo textarea:focus {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: var(--color-accent-deep);
+  background: #fff;
+}
+.campo .error-message {
+  color: var(--color-primary-deep);
+  font-size: 0.85rem;
+  min-height: 1.1em;
+}
+.campo.invalido input,
+.campo.invalido textarea {
+  border-color: var(--color-primary);
+  background: #fff5f3;
+}
+.form-ayuda {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+.form-message {
+  margin-top: var(--space-md);
+  font-weight: 500;
+}
+.form-message.exito {
+  color: var(--color-green-deep);
+}
+.form-message.error {
+  color: var(--color-primary-deep);
+}
+.form-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 860px) {
+  .contacto-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-fila {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contacto-hero-inner {
+    animation: none;
+  }
+}
