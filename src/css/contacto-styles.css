@@ -25,18 +25,6 @@
   max-width: 640px;
   animation: revelarFogon 0.9s var(--ease-salida) both;
 }
-@keyframes revelarFogon {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-  }
-}
 .contacto-titulo {
   font-size: clamp(2.4rem, 6vw, 4.2rem);
   letter-spacing: -0.02em;
@@ -187,6 +175,8 @@
   gap: var(--space-md);
 }
 
+/* 860px y no 768px: por debajo de 861 el grid de 2 columnas deja la card del
+   formulario en ~311px y los inputs en ~123px, ilegibles. Medido. */
 @media (max-width: 860px) {
   .contacto-grid {
     grid-template-columns: 1fr;

@@ -24,18 +24,6 @@
   max-width: 660px;
   animation: revelarFogon 0.9s var(--ease-salida) both;
 }
-@keyframes revelarFogon {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-    filter: blur(0);
-  }
-}
 .blog-titulo {
   font-size: clamp(2.4rem, 6vw, 4.2rem);
   letter-spacing: -0.02em;
@@ -65,7 +53,10 @@
   background: var(--color-white);
   color: var(--color-text);
   cursor: pointer;
-  transition: all 0.25s var(--ease-salida);
+  min-height: 44px;
+  transition:
+    border-color 0.25s var(--ease-salida),
+    transform 0.25s var(--ease-salida);
 }
 .filtro:hover {
   border-color: var(--color-accent-deep);
@@ -148,6 +139,7 @@
   width: 4.5rem;
   aspect-ratio: 1;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
   border: 2px dashed rgba(255, 255, 255, 0.6);
   box-shadow:
     0 0 0 10px rgba(255, 255, 255, 0.08),
@@ -165,9 +157,9 @@
   padding: var(--space-md);
 }
 .post-categoria {
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
   color: var(--color-green-deep);
   margin: 0;
 }
@@ -192,6 +184,7 @@
   display: inline-flex;
   gap: 0.35rem;
   align-items: center;
+  min-height: 44px;
   margin-top: var(--space-xs);
 }
 .post-link::after {

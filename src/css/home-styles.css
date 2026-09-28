@@ -550,6 +550,22 @@ img {
   transform: none;
 }
 
+/* Entrada de los heroes interiores de cada página. Definición única: la usan
+   blogs-styles.css y contacto-styles.css. */
+@keyframes revelarFogon {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
 .productos-grid .revelar:nth-child(2) {
   transition-delay: 0.08s;
 }
