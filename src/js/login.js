@@ -1,6 +1,3 @@
-console.log("Login.js cargado");
-console.log("Supabase:", supabaseClient);
-
 const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", async function (event) {
@@ -68,7 +65,6 @@ loginForm.addEventListener("submit", async function (event) {
   }
 
   loginMessage.textContent = "Inicio de sesión exitoso.";
-  console.log("Usuario autenticado:", data.user);
 
   const datosUsuarioPendiente = localStorage.getItem("datosUsuarioPendiente");
 
@@ -84,7 +80,6 @@ loginForm.addEventListener("submit", async function (event) {
     if (errorPerfil) {
       console.error("Error al guardar los datos del usuario:", errorPerfil);
     } else {
-      console.log("Datos del usuario guardados correctamente.");
       localStorage.removeItem("datosUsuarioPendiente");
     }
   }
