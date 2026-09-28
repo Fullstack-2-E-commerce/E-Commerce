@@ -30,12 +30,13 @@ loginForm.addEventListener("submit", async function (event) {
   } else {
     const correoValido =
       email.endsWith("@duoc.cl") ||
+      email.endsWith("@duocuc.cl") ||
       email.endsWith("@profesor.duoc.cl") ||
       email.endsWith("@gmail.com");
 
     if (!correoValido) {
       emailError.textContent =
-        "Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
+        "Solo se permiten correos @duoc.cl, @duocuc.cl, @profesor.duoc.cl o @gmail.com.";
       valido = false;
     }
   }
