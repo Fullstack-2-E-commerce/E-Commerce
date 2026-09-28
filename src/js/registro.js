@@ -125,6 +125,9 @@ registroForm.addEventListener("submit", async function (event) {
   const { data, error } = await supabaseClient.auth.signUp({
     email: email,
     password: password,
+    options: {
+      emailRedirectTo: "http://127.0.0.3:5500/src/pages/login.html",
+    },
   });
 
   if (error) {
@@ -133,6 +136,21 @@ registroForm.addEventListener("submit", async function (event) {
   }
 
   console.log("Usuario creado en Auth:", data.user);
+  console.log("Sesión:", data.session);
+
+  const datosUsuario = {
+    id: data.user.id,
+    rut: rut,
+    nombre: nombre,
+    apellidos: apellidos,
+    email: email,
+    fecha_nacimiento: fechaNacimiento || null,
+    region: regiones[region].nombre,
+    comuna: comuna,
+    direccion: direccion,
+  };
+
+  localStorage.setItem("datosUsuarioPendiente", JSON.stringify(datosUsuario));
 
   registroMessage.textContent =
     "Cuenta creada correctamente. Revisa tu correo para confirmar tu cuenta.";
