@@ -1,5 +1,3 @@
-console.log("Registro.js cargado");
-
 const registroForm = document.getElementById("registroForm");
 
 registroForm.addEventListener("submit", async function (event) {
@@ -134,9 +132,6 @@ registroForm.addEventListener("submit", async function (event) {
     registroMessage.textContent = "Error al crear la cuenta: " + error.message;
     return;
   }
-
-  console.log("Usuario creado en Auth:", data.user);
-  console.log("Sesión:", data.session);
 
   const datosUsuario = {
     id: data.user.id,
