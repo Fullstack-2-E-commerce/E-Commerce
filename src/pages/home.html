@@ -25,24 +25,43 @@
 
     <main>
       <section class="hero">
-        <div class="hero-plate" aria-hidden="true"></div>
-        <div class="hero-content">
-          <p class="hero-kicker">Cocina casera chilena</p>
-          <h1 class="hero-title">
-            <span class="hero-line" style="--i: 1">Recetas que</span>
-            <span class="hero-line hero-line--tinta" style="--i: 2">
-              cuentan historias
-            </span>
-            <span class="hero-line hero-line--stroke" style="--i: 3">
-              del fogón a tu mesa
-            </span>
-          </h1>
-          <div class="hero-ornament" aria-hidden="true"></div>
-          <p class="hero-tagline">
-            Platos de temporada, recetas heredadas y el sabor de la mesa
-            familiar chilena.
-          </p>
-          <a href="#productos" class="btn">Ver los platos</a>
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <p class="hero-kicker">Cocina casera chilena</p>
+            <h1 class="hero-title">
+              <span class="hero-line">Recetas que</span>
+              <span class="hero-line hero-line--tinta">cuentan historias</span>
+              <span class="hero-line hero-line--ocre">del fogón a tu mesa</span>
+            </h1>
+            <div class="hero-ornament" aria-hidden="true"></div>
+            <p class="hero-tagline">
+              Platos de temporada, recetas heredadas y el sabor de la mesa
+              familiar chilena.
+            </p>
+            <a href="#productos" class="btn">Ver los platos</a>
+          </div>
+
+          <figure class="hero-placa">
+            <svg viewBox="0 0 200 200" role="img" aria-label="Ilustración de un choclo, un ají y una cazuela de comida casera chilena">
+              <g stroke="#2C1810" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                <!-- choclo -->
+                <path d="M78 78C58 70 46 56 44 40c20 0 36 12 44 28z" fill="#6B8F3C"/>
+                <path d="M78 78c20-8 32-22 34-38-20 0-36 12-44 28z" fill="#6B8F3C"/>
+                <rect x="56" y="50" width="44" height="80" rx="22" fill="#E8C840"/>
+                <path d="M56 78h44M56 104h44" fill="none" stroke-width="2.5"/>
+                <path d="M70 56v70M86 56v70" fill="none" stroke-width="2"/>
+                <!-- ají -->
+                <path d="M132 66c20 6 30 26 24 48s-24 32-38 26-16-28-10-48 10-32 24-26z" fill="#C0392B"/>
+                <path d="M132 66c-4-12 2-20 14-24 0 12-6 20-14 24z" fill="#6B8F3C"/>
+                <!-- cazuela -->
+                <path d="M44 146h84c0 30-18 46-42 46s-42-16-42-46z" fill="#C0392B"/>
+                <path d="M40 146c0-8 20-15 46-15s46 7 46 15" fill="#D4A017"/>
+                <circle cx="86" cy="124" r="7" fill="#D4A017"/>
+                <path d="M44 156c-10 0-16 6-16 13s7 12 15 12" fill="none" stroke-width="5"/>
+                <path d="M128 156c10 0 16 6 16 13s-7 12-15 12" fill="none" stroke-width="5"/>
+              </g>
+            </svg>
+          </figure>
         </div>
       </section>
 
@@ -82,8 +101,16 @@
 
           <div class="productos-grid">
             <article class="producto revelar">
-              <figure class="producto-img producto-img--choclo">
-                <span class="producto-plato" aria-hidden="true"></span>
+              <figure class="producto-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Choclo dulce con hojas de chollo">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round">
+                    <path d="M50 46C36 40 26 30 24 18c14 0 26 8 32 20z" fill="#6B8F3C"/>
+                    <path d="M50 46C64 40 74 30 76 18c-14 0-26 8-32 20z" fill="#6B8F3C"/>
+                    <rect x="34" y="26" width="32" height="58" rx="16" fill="#E8C840"/>
+                    <path d="M34 46h32M34 62h32" fill="none" stroke-width="2"/>
+                    <path d="M44 32v46M56 32v46" fill="none" stroke-width="1.6"/>
+                  </g>
+                </svg>
               </figure>
               <div class="producto-body">
                 <p class="producto-categoria">Plato típico</p>
@@ -96,8 +123,17 @@
             </article>
 
             <article class="producto revelar">
-              <figure class="producto-img producto-img--porotos">
-                <span class="producto-plato" aria-hidden="true"></span>
+              <figure class="producto-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Porotos granados en un plato">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round">
+                    <circle cx="50" cy="52" r="38" fill="#FAF7F2"/>
+                    <ellipse cx="40" cy="40" rx="11" ry="8" fill="#6B8F3C" transform="rotate(-18 40 40)"/>
+                    <ellipse cx="60" cy="38" rx="11" ry="8" fill="#C0392B" transform="rotate(14 60 38)"/>
+                    <ellipse cx="50" cy="56" rx="12" ry="8" fill="#6B8F3C" transform="rotate(-8 50 56)"/>
+                    <ellipse cx="64" cy="62" rx="10" ry="7" fill="#D4A017" transform="rotate(20 64 62)"/>
+                    <ellipse cx="36" cy="64" rx="9" ry="6" fill="#C0392B" transform="rotate(-24 36 64)"/>
+                  </g>
+                </svg>
               </figure>
               <div class="producto-body">
                 <p class="producto-categoria">Guiso de temporada</p>
@@ -110,8 +146,18 @@
             </article>
 
             <article class="producto revelar">
-              <figure class="producto-img producto-img--cazuela">
-                <span class="producto-plato" aria-hidden="true"></span>
+              <figure class="producto-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Cazuela de vacuno con tapa">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+                    <path d="M30 50c-9 0-14 5-14 11s6 10 13 10" fill="none" stroke-width="4"/>
+                    <path d="M70 50c9 0 14 5 14 11s-6 10-13 10" fill="none" stroke-width="4"/>
+                    <path d="M26 46h48c0 20-10 32-24 32S26 66 26 46z" fill="#C0392B"/>
+                    <path d="M24 46c0-7 12-12 26-12s26 5 26 12" fill="#D4A017"/>
+                    <circle cx="50" cy="30" r="6" fill="#D4A017"/>
+                    <path d="M38 22c-3-6 1-10 6-10" fill="none" stroke-width="2.5"/>
+                    <path d="M62 22c3-6-1-10-6-10" fill="none" stroke-width="2.5"/>
+                  </g>
+                </svg>
               </figure>
               <div class="producto-body">
                 <p class="producto-categoria">La tradición</p>
@@ -124,8 +170,15 @@
             </article>
 
             <article class="producto revelar">
-              <figure class="producto-img producto-img--empanada">
-                <span class="producto-plato" aria-hidden="true"></span>
+              <figure class="producto-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Empanada de pino">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round">
+                    <path d="M14 58c0-22 16-38 36-38s36 16 36 38z" fill="#D4A017"/>
+                    <path d="M14 58h72" fill="none" stroke-width="3.5"/>
+                    <path d="M22 58c0 4 3 6 6 6M34 58c0 4 3 6 6 6M46 58c0 4 3 6 6 6M58 58c0 4 3 6 6 6M70 58c0 4 3 6 6 6" fill="none" stroke-width="2"/>
+                    <path d="M42 42l8 8 8-8" fill="none" stroke-width="2.5"/>
+                  </g>
+                </svg>
               </figure>
               <div class="producto-body">
                 <p class="producto-categoria">De la fonda</p>

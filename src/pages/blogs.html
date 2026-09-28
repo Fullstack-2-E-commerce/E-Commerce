@@ -37,7 +37,7 @@
 
     <main>
       <section class="blog-hero">
-        <div class="container">
+        <div class="container blog-hero-grid">
           <div class="blog-hero-inner">
             <p class="productos-kicker">Cuaderno de la cocina</p>
             <h1 class="blog-titulo">
@@ -45,56 +45,41 @@
             </h1>
             <p class="blog-lead">
               Recetas heredadas, ingredientes de temporada y la mesa familiar
-              chilena. Filtra por lo que hoy te provoque.
+              chilena, contadas como las contaban en casa.
             </p>
-            <div
-              class="blog-filtros"
-              role="group"
-              aria-label="Filtrar artículos por categoría"
-            >
-              <button
-                type="button"
-                class="filtro is-activo"
-                data-filtro="todas"
-                aria-pressed="true"
-              >
-                Todas
-              </button>
-              <button
-                type="button"
-                class="filtro"
-                data-filtro="temporada"
-                aria-pressed="false"
-              >
-                De temporada
-              </button>
-              <button
-                type="button"
-                class="filtro"
-                data-filtro="herencia"
-                aria-pressed="false"
-              >
-                Herencia
-              </button>
-              <button
-                type="button"
-                class="filtro"
-                data-filtro="fondas"
-                aria-pressed="false"
-              >
-                Fondas
-              </button>
-            </div>
           </div>
+
+          <figure class="blog-hero-placa">
+            <svg viewBox="0 0 200 200" role="img" aria-label="Ilustración de un cuaderno de cocina con un ají, choclo y merkén">
+              <g stroke="#2C1810" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                <rect x="34" y="26" width="132" height="150" fill="#FAF7F2"/>
+                <path d="M50 26v150" fill="none" stroke="#C0392B" stroke-width="4"/>
+                <path d="M66 58h82M66 78h82M66 98h56" fill="none" stroke-width="2.5"/>
+                <path d="M100 118c14 0 24 10 24 22 0 14-11 24-24 24s-24-10-24-24c0-12 10-22 24-22z" fill="#C0392B"/>
+                <path d="M100 118c-3-9 2-15 10-18 0 9-4 15-10 18z" fill="#6B8F3C"/>
+                <path d="M148 66c8 0 14 5 14 12s-6 12-14 12-14-5-14-12 6-12 14-12z" fill="#6B8F3C"/>
+                <path d="M140 70c4-4 10-4 14 0" fill="none" stroke-width="2"/>
+                <path d="M70 128c10-4 20-4 30 0M70 142c10-4 20-4 30 0" fill="none" stroke="#8A6408" stroke-width="3"/>
+              </g>
+            </svg>
+          </figure>
         </div>
       </section>
 
       <section class="blog-listado">
         <div class="container">
           <div class="blog-grid">
-            <article class="post revelar" data-categoria="temporada">
-              <figure class="post-img post-img--choclo">
-                <span class="post-plato" aria-hidden="true"></span>
+            <article class="post revelar">
+              <figure class="post-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Choclo dulce">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round">
+                    <path d="M50 46C36 40 26 30 24 18c14 0 26 8 32 20z" fill="#6B8F3C"/>
+                    <path d="M50 46C64 40 74 30 76 18c-14 0-26 8-32 20z" fill="#6B8F3C"/>
+                    <rect x="34" y="26" width="32" height="58" rx="16" fill="#E8C840"/>
+                    <path d="M34 46h32M34 62h32" fill="none" stroke-width="2"/>
+                    <path d="M44 32v46M56 32v46" fill="none" stroke-width="1.6"/>
+                  </g>
+                </svg>
               </figure>
               <div class="post-body">
                 <p class="post-categoria">De temporada</p>
@@ -111,9 +96,18 @@
                 >
               </div>
             </article>
-            <article class="post revelar" data-categoria="herencia">
-              <figure class="post-img post-img--porotos">
-                <span class="post-plato" aria-hidden="true"></span>
+            <article class="post revelar">
+              <figure class="post-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Porotos granados en un plato">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round">
+                    <circle cx="50" cy="52" r="38" fill="#FAF7F2"/>
+                    <ellipse cx="40" cy="40" rx="11" ry="8" fill="#6B8F3C" transform="rotate(-18 40 40)"/>
+                    <ellipse cx="60" cy="38" rx="11" ry="8" fill="#C0392B" transform="rotate(14 60 38)"/>
+                    <ellipse cx="50" cy="56" rx="12" ry="8" fill="#6B8F3C" transform="rotate(-8 50 56)"/>
+                    <ellipse cx="64" cy="62" rx="10" ry="7" fill="#D4A017" transform="rotate(20 64 62)"/>
+                    <ellipse cx="36" cy="64" rx="9" ry="6" fill="#C0392B" transform="rotate(-24 36 64)"/>
+                  </g>
+                </svg>
               </figure>
               <div class="post-body">
                 <p class="post-categoria">Herencia</p>
@@ -130,9 +124,16 @@
                 >
               </div>
             </article>
-            <article class="post revelar" data-categoria="fondas">
-              <figure class="post-img post-img--sopaipilla">
-                <span class="post-plato" aria-hidden="true"></span>
+            <article class="post revelar">
+              <figure class="post-img">
+                <svg viewBox="0 0 100 100" role="img" aria-label="Sopaipilla dorada">
+                  <g stroke="#2C1810" stroke-width="2.5" stroke-linejoin="round">
+                    <circle cx="50" cy="52" r="34" fill="#D4A017"/>
+                    <circle cx="50" cy="52" r="34" fill="none"/>
+                    <path d="M50 52c0-9 9-13 15-8s3 15-5 17-17-3-14-11 11-12 19-6" fill="none" stroke-width="2.5"/>
+                    <path d="M50 18c8 4 12 10 14 16M50 86c-8-4-12-10-14-16" fill="none" stroke-width="2.5"/>
+                  </g>
+                </svg>
               </figure>
               <div class="post-body">
                 <p class="post-categoria">Fondas</p>
@@ -182,6 +183,5 @@
     </footer>
 
     <script src="../js/app.js"></script>
-    <script src="../js/blogs.js"></script>
   </body>
 </html>

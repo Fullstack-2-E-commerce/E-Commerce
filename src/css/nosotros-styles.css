@@ -1,194 +1,165 @@
+/* Nosotros — Sabores de Chile. Reusa el sistema de home-styles.css */
+
 .nosotros-hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(4.5rem, 10vw, 7.5rem);
-  background-image: var(--noise-paper);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--papel);
+  border-bottom: 3px solid var(--tinta);
 }
 
-.nosotros-hero::before {
-  content: "";
+.nosotros-hero::after {
+  content: '';
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      circle at 78% 30%,
-      rgba(192, 57, 43, 0.12),
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 20% 100%,
-      rgba(107, 143, 60, 0.1),
-      transparent 45%
-    );
-  pointer-events: none;
-}
-
-.nosotros-glow {
-  position: absolute;
-  bottom: -20%;
-  right: -6%;
-  width: min(460px, 60vw);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(233, 160, 58, 0.18) 0%,
-    rgba(233, 160, 58, 0.05) 45%,
-    transparent 72%
+  inset-inline: 0;
+  bottom: 0;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--oliva) 0 28px,
+    var(--ocre) 28px 56px,
+    var(--terracota) 56px 84px
   );
-  border: 1px dashed rgba(139, 115, 85, 0.35);
-  pointer-events: none;
-  animation: encenderGlow 1.4s var(--ease-salida) 0.1s both;
 }
 
-@keyframes encenderGlow {
-  from {
-    opacity: 0;
-    transform: scale(0.86);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.nosotros-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: var(--xl);
+  align-items: center;
 }
 
 .nosotros-hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 620px;
-  animation: revelarFogon 1s var(--ease-salida) both;
-}
-
-@keyframes revelarFogon {
-  from {
-    opacity: 0;
-    transform: translateY(26px);
-    filter: blur(6px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+  animation: revelarFogon 0.8s var(--salida) both;
 }
 
 .nosotros-hero-kicker {
-  font-family: var(--font-display);
+  font-family: var(--display);
   font-style: italic;
-  font-size: 1.05rem;
-  color: var(--color-accent-deep);
-  margin-bottom: var(--space-md);
+  font-size: 1.1rem;
+  color: var(--terracota-txt);
+  margin-bottom: var(--m);
 }
 
 .nosotros-hero-titulo {
-  font-size: clamp(2.6rem, 7vw, 4.8rem);
-  letter-spacing: -0.02em;
-  line-height: 1.04;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  text-shadow: 5px 5px 0 var(--oliva);
 }
 
 .nosotros-hero-em {
-  color: var(--color-primary);
+  color: var(--terracota);
 }
 
 .nosotros-hero-lead {
-  margin-top: var(--space-lg);
-  max-width: 46ch;
-  color: var(--color-text-muted);
-  font-size: 1.1rem;
+  margin-top: var(--l);
+  max-width: 44ch;
+  color: var(--tinta-2);
+  font-size: 1.05rem;
 }
 
+.nosotros-hero-placa {
+  border: 2px solid var(--tinta);
+  background: var(--blanco);
+  box-shadow: 8px 8px 0 var(--tinta);
+  padding: var(--m);
+  display: grid;
+  place-items: center;
+}
+
+.nosotros-hero-placa svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Historia */
 .historia {
-  padding-block: var(--space-2xl);
+  padding-block: var(--xxl);
 }
 
 .historia-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-xl);
+  gap: var(--xl);
 }
 
 .historia-texto p:not(.productos-kicker) {
-  margin-top: var(--space-md);
-  color: var(--color-text-muted);
+  margin-top: var(--m);
+  color: var(--tinta-2);
   font-size: 1.05rem;
 }
 
-.valores {
-  padding-block: var(--space-2xl);
-  background-color: var(--color-sand);
-  background-image: var(--noise-paper);
-  border-top: 1px solid var(--color-border);
-}
-
 .valores-head {
-  max-width: 480px;
-  margin-bottom: var(--space-xl);
+  max-width: 46ch;
+  margin-bottom: var(--xl);
 }
 
 .valores-lead {
-  margin-top: var(--space-sm);
-  color: var(--color-text-muted);
+  margin-top: var(--s);
+  color: var(--papel);
 }
 
+/* Pilares: fichas con ilustración */
 .receta {
-  border-top: 1px solid var(--color-border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--l);
 }
 
+/* Pilares: fichas de papel kraft sobre la pizarra */
 .ingrediente {
-  padding-block: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  box-shadow: 5px 5px 0 var(--terracota);
+  padding: var(--l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s);
+}
+
+.ingrediente svg {
+  width: 56px;
+  height: auto;
+  margin-bottom: var(--s);
 }
 
 .ingrediente-medida {
-  font-family: var(--font-display);
+  font-family: var(--display);
   font-style: italic;
   font-size: 1rem;
-  color: var(--color-accent-deep);
-  margin-bottom: var(--space-xs);
+  color: var(--terracota-2);
+  margin: 0;
 }
 
 .ingrediente-nombre {
-  font-size: 1.5rem;
-  transition: color 0.25s ease;
+  font-size: 1.35rem;
+  color: var(--tinta);
 }
 
 .ingrediente-nota {
-  margin-top: var(--space-sm);
-  max-width: 40ch;
-  color: var(--color-text-muted);
+  color: var(--tinta-2);
   font-size: 0.95rem;
 }
 
-.ingrediente:hover .ingrediente-nombre {
-  color: var(--color-primary);
-}
-
-@media (min-width: 769px) {
+@media (max-width: 900px) {
+  .nosotros-hero-grid,
+  .historia-grid,
   .receta {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--color-border);
+    grid-template-columns: 1fr;
   }
 
-  .ingrediente {
-    padding: var(--space-lg);
-    border-bottom: none;
+  .receta {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .ingrediente + .ingrediente {
-    border-left: 1px solid var(--color-border);
+  .nosotros-hero-placa {
+    max-width: 240px;
   }
 }
 
-@media (max-width: 768px) {
-  .historia-grid {
+@media (max-width: 560px) {
+  .receta {
     grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
-
-  .nosotros-glow {
-    right: -22%;
   }
 }

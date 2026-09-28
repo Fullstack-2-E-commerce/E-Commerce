@@ -1,192 +1,214 @@
-/* Contacto — Sabores de Chile. Reusa tokens de home-styles.css */
+/* Contacto — Sabores de Chile. Reusa el sistema de home-styles.css */
+
 .contacto-hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(4rem, 9vw, 6.5rem);
-  text-align: left;
-  background-image: var(--noise-paper);
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--papel);
+  border-bottom: 3px solid var(--tinta);
 }
-.contacto-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(192, 57, 43, 0.12),
-      transparent 55%
-    ),
-    radial-gradient(circle at 10% 90%, rgba(107, 143, 60, 0.1), transparent 50%);
-  pointer-events: none;
-}
-.contacto-hero-inner {
+
+.contacto-hero-grid {
   position: relative;
   z-index: 1;
-  max-width: 640px;
-  animation: revelarFogon 0.9s var(--ease-salida) both;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--xl);
+  align-items: center;
 }
+
+.contacto-hero-inner {
+  animation: revelarFogon 0.8s var(--salida) both;
+}
+
 .contacto-titulo {
   font-size: clamp(2.4rem, 6vw, 4.2rem);
-  letter-spacing: -0.02em;
+  text-shadow: 5px 5px 0 var(--terracota);
 }
+
 .contacto-titulo em {
-  color: var(--color-primary);
+  color: var(--ocre-2);
   font-style: normal;
 }
+
 .contacto-lead {
-  margin-top: var(--space-md);
-  color: var(--color-text-muted);
-  font-size: 1.05rem;
-  max-width: 48ch;
+  margin-top: var(--m);
+  color: var(--tinta-2);
+  max-width: 44ch;
 }
 
-.contacto-grid {
+.contacto-hero-placa {
+  border: 2px solid var(--tinta);
+  background: var(--blanco);
+  box-shadow: 8px 8px 0 var(--tinta);
+  padding: var(--m);
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: var(--space-xl);
-  padding-bottom: var(--space-2xl);
-  align-items: start;
-}
-.contacto-info {
-  display: grid;
-  gap: var(--space-md);
-}
-.info-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  box-shadow: var(--shadow-sm);
-}
-.info-card h2 {
-  font-size: 1.4rem;
-  margin-bottom: var(--space-xs);
-}
-.info-card p {
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-}
-.info-lista {
-  list-style: none;
-  margin: var(--space-md) 0 0;
-  padding: 0;
-  display: grid;
-  gap: var(--space-sm);
-}
-.info-lista li {
-  display: flex;
-  gap: var(--space-sm);
-  align-items: baseline;
-  font-size: 0.95rem;
-}
-.info-lista strong {
-  min-width: 74px;
-  font-family: var(--font-display);
-  font-weight: 500;
-}
-.horario {
-  border-top: 1px dashed var(--color-border);
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  font-style: italic;
-  color: var(--color-text-muted);
+  place-items: center;
 }
 
-.contacto-form-card {
-  background: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.25rem, 3vw, 2rem);
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-}
-.contacto-form-card::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 4px;
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    var(--color-accent),
-    var(--color-green)
-  );
-}
-.campo {
-  display: grid;
-  gap: 0.35rem;
-  margin-bottom: var(--space-md);
-}
-.campo label {
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-.campo input,
-.campo textarea,
-.campo select {
-  font: inherit;
-  color: var(--color-text);
-  background: var(--color-bg-light);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 0.65rem 0.8rem;
+.contacto-hero-placa svg {
   width: 100%;
-}
-.campo textarea {
-  resize: vertical;
-  min-height: 130px;
-}
-.campo input:focus,
-.campo textarea:focus {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 1px;
-  border-color: var(--color-accent-deep);
-  background: #fff;
-}
-.campo .error-message {
-  color: var(--color-primary-deep);
-  font-size: 0.85rem;
-  min-height: 1.1em;
-}
-.campo.invalido input,
-.campo.invalido textarea {
-  border-color: var(--color-primary);
-  background: #fff5f3;
-}
-.form-ayuda {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-}
-.form-message {
-  margin-top: var(--space-md);
-  font-weight: 500;
-}
-.form-message.exito {
-  color: var(--color-green-deep);
-}
-.form-message.error {
-  color: var(--color-primary-deep);
-}
-.form-fila {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
+  height: auto;
 }
 
 /* 860px y no 768px: por debajo de 861 el grid de 2 columnas deja la card del
    formulario en ~311px y los inputs en ~123px, ilegibles. Medido. */
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--xl);
+  padding-block: var(--xxl);
+  align-items: start;
+}
+
+.contacto-info {
+  display: grid;
+  gap: var(--l);
+}
+
+/* Cartel de la fonda: horario y datos como rótulo pintado */
+.info-card {
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  box-shadow: 6px 6px 0 var(--tinta);
+  padding: var(--l);
+}
+
+.info-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--s);
+}
+
+.info-card p {
+  color: var(--tinta-2);
+  font-size: 0.95rem;
+}
+
+.info-lista {
+  list-style: none;
+  margin: var(--m) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s);
+}
+
+.info-lista li {
+  display: flex;
+  gap: var(--s);
+  align-items: baseline;
+  font-size: 0.95rem;
+}
+
+.info-lista strong {
+  min-width: 78px;
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--terracota-txt);
+}
+
+.horario {
+  border-top: 2px dashed var(--tinta-2);
+  margin-top: var(--m);
+  padding-top: var(--m);
+  font-style: italic;
+  color: var(--tinta-2);
+}
+
+/* Formulario: ficha de receta con líneas de regla.
+   La tarjeta es el .contacto-form-card que envuelve al <form>; el form va pelado. */
+.contacto-form-card {
+  background: var(--blanco);
+  border: 2px solid var(--tinta);
+  box-shadow: 8px 8px 0 var(--tinta);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  position: relative;
+}
+
+.campo {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: var(--m);
+}
+
+.campo label {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+  font: inherit;
+  color: var(--tinta);
+  background: var(--crema);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+  outline: 3px solid var(--ocre-2);
+  outline-offset: 1px;
+  background: var(--blanco);
+}
+
+.campo .error-message {
+  color: var(--terracota-2);
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-height: 1.1em;
+}
+
+.campo.invalido input,
+.campo.invalido textarea {
+  background: #fdecea;
+  border-color: var(--terracota);
+}
+
+.form-ayuda {
+  font-size: 0.85rem;
+  color: var(--tinta-2);
+}
+
+.form-message {
+  margin-top: var(--m);
+  font-weight: 500;
+}
+
+.form-message.exito {
+  color: var(--oliva-2);
+}
+
+.form-message.error {
+  color: var(--terracota-2);
+}
+
+.form-fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--m);
+}
+
 @media (max-width: 860px) {
+  .contacto-hero-grid,
   .contacto-grid {
     grid-template-columns: 1fr;
   }
+
+  .contacto-hero-placa {
+    max-width: 240px;
+  }
+
   .form-fila {
     grid-template-columns: 1fr;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .contacto-hero-inner {
-    animation: none;
   }
 }
