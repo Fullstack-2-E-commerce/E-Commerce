@@ -1,73 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Iniciar Sesión | Comida Chilena</title>
 
-    <link rel="stylesheet" href="../css/home-styles.css">
-    <link rel="stylesheet" href="../css/auth-styles.css">
-</head>
+    <link rel="stylesheet" href="../css/home-styles.css" />
+    <link rel="stylesheet" href="../css/auth-styles.css" />
+  </head>
 
-<body>
-
+  <body>
     <main class="auth-container">
+      <section class="auth-card">
+        <h1>Iniciar Sesión</h1>
 
-        <section class="auth-card">
+        <p class="auth-subtitle">Ingresa a tu cuenta</p>
 
-            <h1>Iniciar Sesión</h1>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="login-email">Correo electrónico</label>
+            <input
+              type="email"
+              id="login-email"
+              name="email"
+              maxlength="100"
+              placeholder="ejemplo@gmail.com"
+              autocomplete="email"
+              required
+            />
+            <small
+              id="login-emailError"
+              class="error-message"
+              aria-live="polite"
+            ></small>
+          </div>
 
-            <p class="auth-subtitle">
-                Ingresa a tu cuenta
-            </p>
+          <div class="form-group">
+            <label for="login-password">Contraseña</label>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              autocomplete="current-password"
+              required
+            />
+            <small
+              id="login-passwordError"
+              class="error-message"
+              aria-live="polite"
+            ></small>
+          </div>
 
-            <form id="loginForm">
+          <button type="submit" id="loginButton" class="btn">
+            Iniciar Sesión
+          </button>
 
-                <div class="form-group">
-                    <label for="login-email">Correo electrónico</label>
-                    <input
-                        type="email"
-                        id="login-email"
-                        name="email"
-                        maxlength="100"
-                        placeholder="ejemplo@gmail.com"
-                        autocomplete="email"
-                        required
-                    >
-                    <small id="login-emailError" class="error-message" aria-live="polite"></small>
-                </div>
+          <p id="loginMessage" class="form-message" aria-live="polite"></p>
+        </form>
 
-                <div class="form-group">
-                    <label for="login-password">Contraseña</label>
-                    <input
-                        type="password"
-                        id="login-password"
-                        name="password"
-                        placeholder="Ingresa tu contraseña"
-                        autocomplete="current-password"
-                        required
-                    >
-                    <small id="login-passwordError" class="error-message" aria-live="polite"></small>
-                </div>
+        <p class="register-link">
+          ¿No tienes una cuenta?
+          <a href="registros.html">Crear cuenta</a>
+        </p>
 
-                <button type="submit" id="loginButton" class="btn">
-                    Iniciar Sesión
-                </button>
-
-                <p id="loginMessage" class="form-message" aria-live="polite"></p>
-
-            </form>
-
-            <p class="register-link">
-                ¿No tienes una cuenta?
-                <a href="registros.html">Crear cuenta</a>
-            </p>
-
-            <a href="home.html" class="auth-volver">&larr; Volver a la tienda</a>
-
-        </section>
-
+        <a href="home.html" class="auth-volver">&larr; Volver a la tienda</a>
+      </section>
     </main>
 
     <!-- Supabase -->
@@ -78,6 +77,5 @@
 
     <!-- Lógica del Login -->
     <script src="../js/login.js"></script>
-
-</body>
+  </body>
 </html>
