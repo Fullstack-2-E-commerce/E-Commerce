@@ -1,12 +1,11 @@
-// Validación formulario contacto — solo memoria, sin Web Storage (decisión de seguridad).
 (function () {
   const form = document.getElementById("contactoForm");
   if (!form) return;
 
   const campos = {
     nombre: {
-      input: document.getElementById("nombre"),
-      error: document.getElementById("nombreError"),
+      input: document.getElementById("contactoNombre"),
+      error: document.getElementById("contactoNombreError"),
       validar: (v) => {
         if (!v) return "El nombre es obligatorio.";
         if (v.length > 50)
