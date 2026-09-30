@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&display=swap");
 
 /* ==========================================================================
    Sabores de Chile — sistema compartido
@@ -31,8 +31,8 @@
 
   --borde: #2c1810;
 
-  --display: 'Fraunces', Georgia, serif;
-  --cuerpo: 'DM Sans', system-ui, sans-serif;
+  --display: "Fraunces", Georgia, serif;
+  --cuerpo: "DM Sans", system-ui, sans-serif;
 
   --x: 0.25rem;
   --s: 0.5rem;
@@ -195,7 +195,7 @@ svg {
 
 /* Subrayado como subrayado a mano: creeps de 2 tintas desalineadas */
 .main-nav a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -261,6 +261,51 @@ svg {
   margin-bottom: var(--m);
 }
 
+/* --- Hero de las paginas interiores -----------------------------------------
+   Blogs, Contacto y Nosotros repiten el mismo hero: banda de kraft con borde
+   de tinta, entrada animada y placa ilustrada a la derecha. Estaban copiados
+   3 veces, byte a byte, en los tres CSS de pagina. Vive aqui una sola vez.
+   Lo que SI difiere por pagina (la raya ::after, las proporciones del grid y
+   el clamp del titulo) sigue en su propio CSS. */
+
+.blog-hero,
+.contacto-hero,
+.nosotros-hero,
+.productos-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+  background: var(--papel);
+  border-bottom: 3px solid var(--tinta);
+}
+
+.blog-hero-inner,
+.contacto-hero-inner,
+.nosotros-hero-inner,
+.productos-hero-inner {
+  animation: revelarFogon 0.8s var(--salida) both;
+}
+
+.blog-hero-placa,
+.contacto-hero-placa,
+.nosotros-hero-placa,
+.productos-hero-placa {
+  border: 2px solid var(--tinta);
+  background: var(--blanco);
+  box-shadow: 8px 8px 0 var(--tinta);
+  padding: var(--m);
+  display: grid;
+  place-items: center;
+}
+
+.blog-hero-placa svg,
+.contacto-hero-placa svg,
+.nosotros-hero-placa svg,
+.productos-hero-placa svg {
+  width: 100%;
+  height: auto;
+}
+
 .hero-title {
   max-width: 15ch;
   font-size: clamp(2.6rem, 8vw, 5.5rem);
@@ -292,7 +337,7 @@ svg {
 
 .hero-ornament::before,
 .hero-ornament::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -4px;
   width: 12px;
@@ -425,6 +470,15 @@ svg {
   height: auto;
 }
 
+/* La foto llena el marco 4:3 de la tarjeta. El svg de los posts se sigue
+   dibujando al 62% (regla de arriba). */
+.producto-img img,
+.post-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .producto-body,
 .post-body {
   display: flex;
@@ -481,7 +535,7 @@ svg {
 }
 
 .post-link::after {
-  content: '→';
+  content: "→";
   transition: transform 0.2s var(--salida);
 }
 
@@ -522,10 +576,16 @@ svg {
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--xl);
+  /* Cuatro columnas: la marca manda y después vienen los tres grupos de
+     servicio (Tienda, Cuenta, Visítanos). Antes eran 6 links sueltos en fila
+     sin decir a qué pertenecía cada uno. */
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: var(--l) var(--xl);
   align-items: start;
-  padding-bottom: var(--xl);
+  /* --l y no --xl: la barra .footer-bottom ya aporta su propio aire. Con --xl
+     quedaban 122px bajo el ultimo link contra 64px arriba y el pie se veía
+     cargado al fondo. */
+  padding-bottom: var(--l);
 }
 
 .footer-logo {
@@ -538,29 +598,51 @@ svg {
 
 .footer-tagline {
   font-style: italic;
-  max-width: 40ch;
+  max-width: 32ch;
   color: var(--papel);
 }
 
+/* Encabezado de cada grupo del pie */
+.footer-titulo {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--limon);
+  margin-bottom: var(--s);
+}
+
+/* Acá los links sí van apilados: el pie es el mapa de servicio del sitio,
+   no la navegación principal. Cada uno conserva su tap target de 44px. */
 .footer-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--s);
 }
 
-.footer-nav a {
+.footer-nav a,
+.footer-contacto a {
   color: var(--papel);
   min-height: 44px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   transition: color 0.2s ease;
 }
 
-.footer-nav a:hover {
+.footer-nav a:hover,
+.footer-contacto a:hover {
   color: var(--limon);
+}
+
+.footer-contacto address {
+  font-style: normal;
+}
+
+.footer-horario {
+  margin-top: var(--s);
+  color: var(--ocre);
+  font-size: 0.95rem;
+  font-style: italic;
 }
 
 .footer-bottom {
@@ -569,6 +651,41 @@ svg {
   text-align: center;
   font-size: 0.875rem;
   color: var(--papel);
+}
+
+/* Créditos de las fotografías (Wikimedia Commons, CC BY-SA / CC BY / CC0).
+   Van plegados: la atribución tiene que viajar con las fotos, pero no tiene
+   por qué cargar el pie a la vista. */
+.footer-creditos {
+  margin-top: var(--s);
+}
+
+.footer-creditos summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-creditos ul {
+  list-style: none;
+  margin: 0 auto var(--s);
+  padding: 0;
+  max-width: 66ch;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+/* El enlace a la licencia va en su propia línea y con tap target completo:
+   suelto dentro de la oración medía 18px de alto. */
+.footer-licencia {
+  margin-top: var(--x);
+}
+
+.footer-licencia a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* --- Revelado al hacer scroll --------------------------------------------- */
@@ -627,6 +744,13 @@ svg {
   }
 }
 
+@media (max-width: 900px) {
+  /* El pie pasa a 2x2 antes de caer a una sola columna */
+  .footer-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .header-inner {
     flex-direction: column;
@@ -634,8 +758,12 @@ svg {
     padding-block: var(--m);
   }
 
+  /* Con cinco links la fila mide 365px y no entra en los 312px de caja a
+     375px: envuelve en dos filas y quedan todos alcanzables. */
   .main-nav ul {
-    gap: var(--m);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s) var(--m);
   }
 
   .productos-head {

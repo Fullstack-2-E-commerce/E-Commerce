@@ -1,15 +1,8 @@
-/* Nosotros — Sabores de Chile. Reusa el sistema de home-styles.css */
-
-.nosotros-hero {
-  position: relative;
-  overflow: hidden;
-  padding-block: clamp(3.5rem, 8vw, 6rem);
-  background: var(--papel);
-  border-bottom: 3px solid var(--tinta);
-}
+/* Nosotros — Sabores de Chile. Reusa el sistema de home-styles.css
+   La base del hero y la placa viven en home-styles.css. */
 
 .nosotros-hero::after {
-  content: '';
+  content: "";
   position: absolute;
   inset-inline: 0;
   bottom: 0;
@@ -29,10 +22,6 @@
   grid-template-columns: 1.25fr 0.75fr;
   gap: var(--xl);
   align-items: center;
-}
-
-.nosotros-hero-inner {
-  animation: revelarFogon 0.8s var(--salida) both;
 }
 
 .nosotros-hero-kicker {
@@ -57,20 +46,6 @@
   max-width: 44ch;
   color: var(--tinta-2);
   font-size: 1.05rem;
-}
-
-.nosotros-hero-placa {
-  border: 2px solid var(--tinta);
-  background: var(--blanco);
-  box-shadow: 8px 8px 0 var(--tinta);
-  padding: var(--m);
-  display: grid;
-  place-items: center;
-}
-
-.nosotros-hero-placa svg {
-  width: 100%;
-  height: auto;
 }
 
 /* Historia */
