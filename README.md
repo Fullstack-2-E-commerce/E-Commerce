@@ -31,8 +31,8 @@ Todo el contenido (catálogo de productos, regiones/comunas, usuarios) se maneja
 
 ## Roles en el Equipo
 
-- **Integrante 1** — Módulo Tienda y Carrito (HTML/CSS del sitio, productos en arrays, carrito en memoria sin Web Storage, validaciones de contacto).
-- **Integrante 2** — Módulo Usuarios y Autenticación (Login/Registro, validaciones de RUT y correo, select de Regiones/Comunas).
+- **Integrante 1** — Módulo Usuarios y Autenticación (Login/Registro con Supabase Auth, validaciones de RUT y correo, select de Regiones/Comunas, maquetación de las páginas de auth).
+- **Integrante 2** — Módulo Tienda y Carrito (HTML/CSS del sitio, sistema de diseño, validaciones de contacto, productos en arrays, carrito en memoria sin Web Storage).
 - **Integrante 3** — Módulo Administrador y Roles (Dashboard, mantenedores, validaciones de productos, control de acceso por rol).
 
 Cada integrante trabaja en su rama y sube sus cambios con commits individuales para demostrar participación en el historial de Git.

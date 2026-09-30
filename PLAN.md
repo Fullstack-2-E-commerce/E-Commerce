@@ -127,30 +127,41 @@ Validar campos en formularios con JavaScript en tiempo real:
 
 ## 5. División de Trabajo (Equipo de 3 Integrantes)
 
-### Integrante 1 — Módulo: Tienda y Carrito
+### Integrante 1 — Módulo: Usuarios y Autenticación (Encargado Ernesto)
 
-| Responsabilidad Técnica                                                         | Responsabilidad Administrativa                                       |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Configurar el repositorio público de GitHub y gestionar las ramas    |
-| Lógica de productos mediante arrays en JS                                       | Redactar la **sección 1** del ERS (Introducción, Propósito y Ámbito) |
-| Implementación del Carrito de Compras en JS en memoria (sin Web Storage)         |                                                                      |
-| Validaciones JS del Formulario de Contacto                                      |                                                                      |
+| Responsabilidad Técnica | Estado |
+| --- | --- |
+| Maquetación HTML/CSS de Login y Registro de Usuarios | Pendiente: `auth-styles.css` está vacío |
+| Lógica de Login y Registro con Supabase Auth (confirmación de correo y reenvío) | Completado |
+| Validaciones de Login: dominio de correo (`@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com`) y largo de contraseña | Completado |
+| Validaciones de Registro/Mantenedor de Usuario: RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS | Completado |
 
-### Integrante 2 — Módulo: Usuarios y Autenticación (Encargado Ernesto)
+### Integrante 2 — Módulo: Tienda y Carrito
 
-| Responsabilidad Técnica                                                                                            | Responsabilidad Administrativa                                             |
-| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| Maquetación HTML/CSS de Login y Registro de Usuarios                                                               | Redactar la **sección 2** del ERS (Perspectiva, Funciones y Restricciones) |
-| Validaciones de Login: dominio de correo y largo de contraseña                                                     | Preparar la estructura de la diapositiva/presentación del proyecto         |
-| Validaciones de Registro/Mantenedor de Usuario: RUT, largo de campos, Select de Regiones y Comunas desde arrays JS |                                                                            |
+| Responsabilidad Técnica | Estado |
+| --- | --- |
+| Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Completado y rediseñado |
+| Sistema de diseño: design tokens, paleta, tipografías y texturas | Completado |
+| Validaciones JS del Formulario de Contacto (en tiempo real) | Completado |
+| Detalle Blogs | Pendiente: `blogs.html` ya lo enlaza, el archivo no existe |
+| Lógica de productos mediante arrays en JS | Pendiente |
+| Implementación del Carrito de Compras en JS en memoria (sin Web Storage) | Pendiente |
 
 ### Integrante 3 — Módulo: Administrador y Roles
 
-| Responsabilidad Técnica                                                           | Responsabilidad Administrativa                                                           |
-| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Maquetación HTML/CSS del Dashboard Administrador, listados y mantenedores         | Redactar la **sección 3** del ERS (Requisitos Específicos: Funcionales y No Funcionales) |
-| Validaciones del formulario Nuevo/Editar Producto                                 | Empaquetado final y verificación del envío del archivo comprimido                        |
-| Control de visualización según rol del sistema (Administrador, Vendedor, Cliente) |                                                                                          |
+| Responsabilidad Técnica | Estado |
+| --- | --- |
+| Maquetación HTML/CSS del Dashboard Administrador, listados y mantenedores | En desarrollo |
+| Validaciones del formulario Nuevo/Editar Producto (código, precios, stock entero, stock crítico, imágenes) | Pendiente |
+| Control de visualización según rol del sistema (Administrador, Vendedor, Cliente) | Pendiente: el perfil todavía no guarda el rol |
+
+### Responsabilidades administrativas
+
+| Integrante | Responsabilidad | Estado |
+| --- | --- | --- |
+| 1 | Configurar el repositorio público de GitHub y gestionar las ramas · Redactar la **sección 2** del ERS (Perspectiva, Funciones y Restricciones) | Repositorio creado; ERS sin empezar |
+| 2 | Redactar la **sección 1** del ERS (Introducción, Propósito y Ámbito) · Preparar la estructura de la diapositiva/presentación del proyecto | Sin empezar |
+| 3 | Redactar la **sección 3** del ERS (Requisitos Específicos: Funcionales y No Funcionales) · Empaquetado final y verificación del correcto envío del archivo comprimido | Sin empezar |
 
 ---
 
