@@ -16,7 +16,9 @@ Todo el contenido (catálogo de productos, regiones/comunas, usuarios) se maneja
 ## Características
 
 - Layout responsivo: menú global y pie de página consistentes en todo el sitio.
+- Sistema de diseño de afiche serigrafiado a 2 tintas: tinta plana, sombras duras, tokens CSS en `home-styles.css`.
 - Catálogo de productos renderizado dinámicamente desde arrays JS.
+- Video del catálogo en `productos.html` (`platos.webm`, VP8, loop, con póster).
 - Carrito de compras funcional: agregar, modificar cantidades y calcular total, mantenido en memoria durante la sesión (sin persistencia local por seguridad).
 - Validación de formularios (Login, Contacto, Usuarios, Productos), incluyendo RUT y dominios de correo restringidos.
 - Control de acceso según rol: **Administrador**, **Vendedor** y **Cliente**.
