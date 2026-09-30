@@ -2,7 +2,9 @@
 
 > **Asignatura:** DSY1104 (Fullstack 2)
 > **Proyecto:** E-commerce dedicado a restaurantes de comida casera chilena.
-> **Tecnologías:** HTML, CSS, JavaScript y React
+> **Tecnologías:** HTML, CSS, JavaScript y React, más Bootstrap.
+> **Estado del stack (2026-09-29):** el sitio que hay en el repo es HTML + CSS + JS puro, sin framework y sin build. React y Bootstrap son el siguiente paso, todavía no implementados: no hay `package.json` ni build. Ver §4, Fase 7.
+> **Estado del documento:** las listas de la §4 y la §5 se contrastaron contra el código el 2026-09-29.
 
 ---
 
@@ -57,30 +59,48 @@ Elementos: ilustraciones de ingredientes chilenos (ají, merkén, papas, choclo)
 
 ## 3. Estructura del Proyecto
 
+Todo cuelga de `src/`. La estructura pedida (`/css`, `/js`, `/assets`, `/pages`) existe, un nivel más abajo. **Abrir el sitio es servir la raíz del repo y entrar por `src/pages/`.**
+
 ```
 /
-├── index.html                # Home (página principal de la tienda)
-├── css/
-│   └── home-styles.css       # Styles globales del sitio
-├── js/
-│   ├── app.js                # Lógica general de la tienda (catálogo, render de productos)
-│   └── script.js             # Scripts adicionales
-├── pages/
-│   ├── home.html             # Home (alternativo)
-│   ├── nosotros.html         # Sobre nosotros / historia
-│   ├── blogs.html            # Listado de blogs
-│   ├── detalle-blog.html     # Detalle de un blog
-│   ├── contacto.html         # Formulario de contacto
-│   ├── login.html            # Inicio de sesión
-│   ├── registro.html         # Registro / mantenedor de usuarios
-│   ├── admin-dashboard.html  # Dashboard del administrador
-│   ├── admin-productos.html  # Mantenedor de productos
-│   └── admin-usuarios.html   # Mantenedor de usuarios
-├── assets/                   # Imágenes, íconos y recursos
+├── src/
+│   ├── pages/
+│   │   ├── home.html            # Home
+│   │   ├── nosotros.html        # Sobre nosotros / historia
+│   │   ├── blogs.html           # Listado de blogs
+│   │   ├── contacto.html        # Formulario de contacto
+│   │   ├── productos.html       # Catálogo completo
+│   │   ├── login.html           # Inicio de sesión
+│   │   └── registros.html       # Registro de usuarios
+│   ├── css/
+│   │   ├── home-styles.css      # Sistema de diseño compartido: tokens, header y footer
+│   │   ├── auth-styles.css
+│   │   ├── blogs-styles.css
+│   │   ├── contacto-styles.css
+│   │   ├── nosotros-styles.css
+│   │   └── productos-styles.css
+│   ├── js/
+│   │   ├── app.js               # Utilidades generales (reveal on scroll)
+│   │   ├── catalogo.js          # Arreglo CATALOGO con los 10 platos
+│   │   ├── tienda.js            # Render dinámico sobre [data-catalogo]
+│   │   ├── contacto.js          # Validación del formulario en tiempo real
+│   │   ├── auth-ui.js           # Modales de sesión
+│   │   ├── login.js
+│   │   ├── registro.js
+│   │   ├── regiones.js          # 16 regiones y sus comunas, select en cascada
+│   │   └── supabase.js          # Cliente de Supabase
+│   └── assets/
+│       ├── img/                 # Fotos .webp de los platos (licencia libre, atribución en el ERS)
+│       └── videos/              # Video del catálogo + póster
 ├── PLAN.md
 ├── README.md
-└── ERS.md                    # Especificación de Requisitos de Software (IEEE 830)
+├── COMMIT_GUIA.md
+└── Instrucciones_Fullstack2.md
 ```
+
+**Páginas y archivos que el plan exige y todavía no existen:** `index.html` en la raíz, `detalle-blog.html` (ya enlazado desde `blogs.html`), `admin-dashboard.html`, `admin-productos.html`, `admin-usuarios.html` y `ERS.md`.
+
+`src/js/script.js` está en 0 bytes: sobra, se puede borrar.
 
 ---
 
@@ -88,40 +108,51 @@ Elementos: ilustraciones de ingredientes chilenos (ají, merkén, papas, choclo)
 
 ### Fase 1 — Configuración inicial
 
-- [ ] Crear el repositorio público en GitHub.
-- [ ] Crear la estructura limpia de carpetas: `/css`, `/js`, `/assets`, `/pages`.
+- [x] Crear el repositorio público en GitHub.
+- [x] Crear la estructura limpia de carpetas: `/css`, `/js`, `/assets`, `/pages` (bajo `src/`).
 - [ ] Redactar la versión inicial (V1) del documento **ERS** (Especificación de Requisitos de Software) según la norma **IEEE 830** y la plantilla entregada.
 
 ### Fase 2 — Layout y vistas base (HTML/CSS)
 
-- [ ] Maquetar el menú global y pie de página adaptativo/responsivo para mantener consistencia en todo el sitio.
-- [ ] Crear la estructura HTML completa de las **Vistas de la Tienda** y las **Vistas del Administrador** basadas en los wireframes provistos.
-- [ ] Aplicar el sistema de diseño: design tokens (variables CSS), paleta terracota/crema/verde oliva, tipografías Fraunces + DM Sans.
+- [x] Maquetar el menú global y pie de página adaptativo/responsivo para mantener consistencia en todo el sitio. Presente en las 5 páginas de tienda; `login.html` y `registros.html` quedan sin header ni footer.
+- [ ] Crear la estructura HTML completa de las **Vistas de la Tienda** y las **Vistas del Administrador** basadas en los wireframes provistos. Tienda 6 de 7 (falta `detalle-blog.html`); Administrador 0 de 3.
+- [x] Aplicar el sistema de diseño: design tokens (variables CSS), paleta terracota/crema/verde oliva, tipografías Fraunces + DM Sans.
 
 ### Fase 3 — Lógica de productos y carrito (JavaScript)
 
-- [ ] Crear el arreglo JS con el catálogo de productos inicial.
-- [ ] Implementar el renderizado dinámico en la tienda y en la vista de detalle.
+- [x] Crear el arreglo JS con el catálogo de productos inicial (`src/js/catalogo.js`, 10 platos).
+- [ ] Implementar el renderizado dinámico en la tienda y en la vista de detalle. El render está hecho (`src/js/tienda.js` sobre `[data-catalogo]`); falta la vista de detalle de producto.
 - [ ] Programar las funciones del carrito (agregar, modificar cantidades, calcular total) mantenidas en memoria durante la sesión (sin Web Storage por seguridad).
 
 ### Fase 4 — Validaciones de formularios y reglas de negocio
 
 Validar campos en formularios con JavaScript en tiempo real:
 
-- [ ] Formulario de Inicio de Sesión (dominio de correo `@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com` y largo de contraseña).
-- [ ] Formulario de Contacto.
-- [ ] Formulario de Registro/Mantenedor de Usuarios (RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS).
-- [ ] Formulario de Nuevo/Editar Producto (código, precios, stock entero, stock crítico, imágenes).
+- [ ] Formulario de Inicio de Sesión (dominio de correo `@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com` y largo de contraseña). Valida en `submit`, no en tiempo real.
+- [x] Formulario de Contacto.
+- [ ] Formulario de Registro/Mantenedor de Usuarios (RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS). La lógica está completa y con las 16 regiones reales; falta pasarla a tiempo real.
+- [ ] Formulario de Nuevo/Editar Producto (código, precios, stock entero, stock crítico, imágenes). La vista no existe.
 
 ### Fase 5 — Control de accesos según rol
 
-- [ ] Implementar la lógica para restringir accesos según perfil: **Administrador**, **Vendedor**, **Cliente**.
+- [ ] Implementar la lógica para restringir accesos según perfil: **Administrador**, **Vendedor**, **Cliente**. El perfil todavía no guarda el rol.
 
 ### Fase 6 — Revisión, empaquetado y presentación
 
-- [ ] Verificar que todos los cambios estén reflejados con commits claros en GitHub.
+- [x] Verificar que todos los cambios estén reflejados con commits claros en GitHub. Salvedad: el historial tiene solo 2 autores, el Integrante 3 no tiene ningún commit.
 - [ ] Finalizar el documento ERS (Versión 1) y comprimir el código fuente para entrega.
 - [ ] Ensayar la presentación (15 min) y prepararse para la ronda de preguntas individuales.
+
+### Fase 7 — Migración a React y Bootstrap
+
+- [ ] Levantar el build: Vite + React, con `package.json` y estructura de componentes.
+- [ ] Portar `home`, `nosotros`, `blogs`, `detalle-blog`, `contacto`, `productos`, `login` y `registros` a componentes.
+- [ ] Portar el sistema de diseño: los tokens de `home-styles.css` pasan a variables CSS globales, y los tokens de Bootstrap se alinean con la paleta terracota/crema/verde oliva para que no pelen.
+- [ ] Migrar `catalogo.js` + `tienda.js` al estado de React: el catálogo pasa a ser la fuente de datos del render y de la vista de detalle.
+- [ ] Auth: `login.js`, `registro.js` y `auth-ui.js` pasan a ser hooks sobre el cliente de Supabase. Los modales `<dialog>` pasan a ser estado de React.
+- [ ] Carrito en memoria: contexto de React, nunca Web Storage.
+
+> Hoy el sitio es HTML + CSS + JS puro. Esta fase es la que convierte el "sin framework" en React; hasta que exista `package.json`, el repositorio sigue siendo estático.
 
 ---
 
@@ -131,10 +162,10 @@ Validar campos en formularios con JavaScript en tiempo real:
 
 | Responsabilidad Técnica | Estado |
 | --- | --- |
-| Maquetación HTML/CSS de Login y Registro de Usuarios | Pendiente: `auth-styles.css` está vacío |
+| Maquetación HTML/CSS de Login y Registro de Usuarios | Completado: `auth-styles.css` con los tokens del sitio. Falta decidir si estas 2 páginas llevan header y footer |
 | Lógica de Login y Registro con Supabase Auth (confirmación de correo y reenvío) | Completado |
-| Validaciones de Login: dominio de correo (`@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com`) y largo de contraseña | Completado |
-| Validaciones de Registro/Mantenedor de Usuario: RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS | Completado |
+| Validaciones de Login: dominio de correo (`@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com`) y largo de contraseña | Completado, pero solo al enviar el formulario, no en tiempo real |
+| Validaciones de Registro/Mantenedor de Usuario: RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS | Completado, con las 16 regiones y sus comunas reales. Falta pasarlo a tiempo real |
 
 ### Integrante 2 — Módulo: Tienda y Carrito
 
@@ -142,16 +173,18 @@ Validar campos en formularios con JavaScript en tiempo real:
 | --- | --- |
 | Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Completado y rediseñado |
 | Sistema de diseño: design tokens, paleta, tipografías y texturas | Completado |
+| Catálogo de 10 platos con fotos reales y video | Completado |
 | Validaciones JS del Formulario de Contacto (en tiempo real) | Completado |
 | Detalle Blogs | Pendiente: `blogs.html` ya lo enlaza, el archivo no existe |
-| Lógica de productos mediante arrays en JS | Pendiente |
-| Implementación del Carrito de Compras en JS en memoria (sin Web Storage) | Pendiente |
+| Lógica de productos mediante arrays en JS | Completado: catálogo en `catalogo.js`, render en `tienda.js` |
+| Render dinámico en la **vista de detalle** de producto | Pendiente: las tarjetas de `productos.html` todavía no son enlazables |
+| Implementación del Carrito de Compras en JS en memoria (sin Web Storage) | Pendiente, sin dueño asignado |
 
 ### Integrante 3 — Módulo: Administrador y Roles
 
 | Responsabilidad Técnica | Estado |
 | --- | --- |
-| Maquetación HTML/CSS del Dashboard Administrador, listados y mantenedores | En desarrollo |
+| Maquetación HTML/CSS del Dashboard Administrador, listados y mantenedores | Pendiente: no existe ninguna de las 3 páginas |
 | Validaciones del formulario Nuevo/Editar Producto (código, precios, stock entero, stock crítico, imágenes) | Pendiente |
 | Control de visualización según rol del sistema (Administrador, Vendedor, Cliente) | Pendiente: el perfil todavía no guarda el rol |
 
