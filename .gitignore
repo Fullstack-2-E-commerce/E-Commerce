@@ -24,7 +24,8 @@ dist/
 # Capturas y artefactos de pruebas
 .playwright-mcp/
 nosotros-desktop.png
-*.webp
+# NO ignorar *.webp: las fotos de src/assets/img/ son parte del sitio.
+# Si se ignoran, no entran al repo y la pagina se rompe al clonar.
 
 .investigacion-diseno-restaurante-chileno.md
 investigacion-diseno-restaurante-chileno.md

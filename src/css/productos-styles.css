@@ -1,0 +1,97 @@
+/* Productos — Sabores de Chile. Reusa el sistema de home-styles.css.
+   La base del hero, la placa y las tarjetas viven allá. Acá solo va lo que
+   es propio de esta página. */
+
+/* Hero: misma banda de afiche que Blogs y Nosotros, con la raya de tintas
+   rotada (ocre primero) para que no calce igual a ninguna otra página. */
+.productos-hero::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ocre) 0 28px,
+    var(--terracota) 28px 56px,
+    var(--oliva) 56px 84px
+  );
+}
+
+.productos-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--xl);
+  align-items: center;
+}
+
+.productos-hero-titulo {
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  text-shadow: 5px 5px 0 var(--ocre);
+}
+
+.productos-hero-titulo em {
+  color: var(--terracota-txt);
+  font-style: normal;
+}
+
+.productos-hero-lead {
+  margin-top: var(--m);
+  color: var(--tinta-2);
+  max-width: 46ch;
+}
+
+/* --- La cocina en movimiento ----------------------------------------------
+   El póster vive de fondo de la placa: tapa el flash negro mientras carga el
+   video, sirve de respaldo si el navegador no lee .webm y es lo único que se
+   ve cuando el sistema pide menos movimiento. */
+.cocina {
+  padding-block: var(--xxl) 0;
+}
+
+.cocina-head {
+  max-width: 48ch;
+  margin-bottom: var(--l);
+}
+
+.cocina-titulo {
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+}
+
+.cocina-placa {
+  aspect-ratio: 16 / 9;
+  border: 2px solid var(--tinta);
+  box-shadow: 10px 10px 0 var(--terracota);
+  overflow: hidden;
+  background: var(--carbon) url("../assets/videos/platos-poster.webp") center /
+    cover;
+}
+
+.cocina-placa video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .productos-hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--l);
+  }
+
+  .productos-hero-placa {
+    max-width: 260px;
+  }
+}
+
+/* El video es puro movimiento: para quien pidió quietud queda el póster de
+   fondo de .cocina-placa. Va acá y no en home-styles.css porque este archivo
+   carga después y la regla del display: block de arriba ganaría por orden. */
+@media (prefers-reduced-motion: reduce) {
+  .cocina-placa video {
+    display: none;
+  }
+}
