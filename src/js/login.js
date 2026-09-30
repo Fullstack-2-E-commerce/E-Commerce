@@ -3,11 +3,15 @@ const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  // Prefijo login-: en las páginas de la tienda el modal de registro usa los
+  // ids sin prefijo (los espera registro.js), asi que "email" y "password"
+  // ya existen en el documento. Sin prefijo, getElementById devolveria el
+  // campo del registro y el login leeria los datos equivocados.
+  const email = document.getElementById("login-email").value.trim();
+  const password = document.getElementById("login-password").value;
 
-  const emailError = document.getElementById("emailError");
-  const passwordError = document.getElementById("passwordError");
+  const emailError = document.getElementById("login-emailError");
+  const passwordError = document.getElementById("login-passwordError");
   const loginMessage = document.getElementById("loginMessage");
 
   // Limpiar mensajes anteriores

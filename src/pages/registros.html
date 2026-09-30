@@ -6,6 +6,7 @@
 
     <title>Crear Cuenta | Comida Chilena</title>
 
+    <link rel="stylesheet" href="../css/home-styles.css" />
     <link rel="stylesheet" href="../css/auth-styles.css" />
   </head>
 
@@ -119,11 +120,13 @@
             <small id="direccionError" class="error-message"></small>
           </div>
 
-          <button type="submit" id="registroButton">Crear Cuenta</button>
+          <button type="submit" id="registroButton" class="btn">
+            Crear Cuenta
+          </button>
 
-          <p id="registroMessage" class="form-message"></p>
+          <p id="registroMessage" class="form-message" aria-live="polite"></p>
 
-          <button type="button" id="reenviarCorreo">
+          <button type="button" id="reenviarCorreo" class="btn-texto">
             Reenviar correo de confirmación
           </button>
         </form>
@@ -132,6 +135,8 @@
           ¿Ya tienes una cuenta?
           <a href="login.html">Iniciar sesión</a>
         </p>
+
+        <a href="home.html" class="auth-volver">&larr; Volver a la tienda</a>
       </section>
     </main>
 

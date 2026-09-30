@@ -1,0 +1,336 @@
+/* ==========================================================================
+   Sabores de Chile — Login y Registro
+   Reusa los tokens de home-styles.css. Autocontenido: no modifica el sistema
+   compartido ni las clases que login.js / registro.js ya esperan.
+   Tinta plana, bordes duros, sin radio, sin sombras difusas.
+   ========================================================================== */
+
+/* --- Formularios ----------------------------------------------------------
+   Mismas reglas que .campo en contacto-styles.css. Los dos archivos nunca se
+   cargan juntos en una misma pagina, asi que no hay colision: cada CSS de
+   pagina lleva su formulario. */
+
+.form-group {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: var(--m);
+}
+
+.form-group label {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select {
+  font: inherit;
+  color: var(--tinta);
+  background: var(--crema);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  padding: 0.65rem 0.8rem;
+  width: 100%;
+  /* alto minimo tactil: el input es el tap target, no el label */
+  min-height: 44px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: 3px solid var(--ocre-2);
+  outline-offset: 1px;
+  background: var(--blanco);
+}
+
+.form-group select:disabled {
+  background: var(--papel);
+  color: var(--tinta-2);
+  cursor: not-allowed;
+}
+
+.form-group .error-message {
+  color: var(--terracota-2);
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-height: 1.1em;
+}
+
+.form-ayuda {
+  font-size: 0.85rem;
+  color: var(--tinta-2);
+}
+
+.form-message {
+  margin-top: var(--m);
+  font-weight: 500;
+}
+
+.form-message.exito {
+  color: var(--oliva-2);
+}
+
+.form-message.error {
+  color: var(--terracota-2);
+}
+
+.form-message:empty {
+  display: none;
+}
+
+/* Boton secundario: el mismo canto duro que .btn, sin relleno terracota */
+.btn-texto {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  transition:
+    background 0.15s var(--salida),
+    transform 0.15s var(--salida);
+}
+
+.btn-texto:hover {
+  background: var(--ocre);
+  color: var(--tinta);
+}
+
+.btn-texto:active {
+  transform: translate(2px, 2px);
+}
+
+.btn-texto[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* --- Pagina suelta: cartel pegado en la pared --------------------------------
+   login.html y registros.html no tienen header ni footer, asi que la tarjeta
+   lleva su propio camino de vuelta a la tienda. */
+
+.auth-container {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: var(--l) var(--m);
+}
+
+.auth-card {
+  width: min(480px, 100%);
+  background: var(--blanco);
+  border: 2px solid var(--tinta);
+  box-shadow: 8px 8px 0 var(--tinta);
+  padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.auth-card h1 {
+  /* el registro desalineado de la segunda tinta, igual que los heroes */
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  text-shadow: 4px 4px 0 var(--terracota);
+}
+
+.auth-subtitle {
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--terracota-txt);
+  margin: var(--s) 0 var(--l);
+}
+
+.auth-card .btn {
+  width: 100%;
+  margin-top: var(--s);
+}
+
+.register-link {
+  margin-top: var(--l);
+  padding-top: var(--m);
+  border-top: 2px solid var(--papel);
+  font-size: 0.95rem;
+  color: var(--tinta-2);
+}
+
+.register-link a {
+  font-weight: 500;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.auth-volver {
+  display: block;
+  margin-top: var(--m);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+/* --- Disparador en el header de la tienda ---------------------------------- */
+
+.auth-trigger {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: var(--terracota);
+  color: var(--blanco);
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 var(--tinta);
+  transition:
+    transform 0.15s var(--salida),
+    box-shadow 0.15s var(--salida);
+}
+
+.auth-trigger:hover {
+  background: var(--terracota-2);
+  color: var(--blanco);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.auth-trigger[hidden] {
+  display: none;
+}
+
+/* Sesion iniciada: el boton se vuelve etiqueta y aparece "Salir" */
+.auth-sesion {
+  display: none;
+  align-items: center;
+  gap: var(--s);
+}
+
+.auth-sesion.activa {
+  display: flex;
+}
+
+.auth-correo {
+  font-size: 0.9rem;
+  color: var(--tinta-2);
+  max-width: 22ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auth-salir {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--cuerpo);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s var(--salida);
+}
+
+.auth-salir:hover {
+  background: var(--terracota);
+  color: var(--blanco);
+}
+
+/* --- Modal -----------------------------------------------------------------
+   <dialog> nativo: da foco atrapado, Escape y capa superior sin JS. */
+
+.auth-modal {
+  width: min(520px, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  background: var(--blanco);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  box-shadow: 10px 10px 0 var(--tinta);
+}
+
+.auth-modal::backdrop {
+  background: rgba(28, 23, 20, 0.72);
+}
+
+.auth-modal-cabecera {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--m);
+  padding: var(--m) var(--m) var(--s);
+  background: var(--papel);
+  border-bottom: 3px solid var(--tinta);
+}
+
+.auth-modal-cabecera h2 {
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.auth-modal-cerrar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--tinta);
+  color: var(--crema);
+  font-size: 1.4rem;
+  line-height: 1;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.15s var(--salida);
+}
+
+.auth-modal-cerrar:hover {
+  background: var(--terracota);
+  color: var(--blanco);
+}
+
+.auth-modal-cuerpo {
+  padding: var(--m);
+  /* el registro tiene 9 campos: el cuerpo scrollea, el modal no crece */
+  overflow-y: auto;
+  max-height: calc(100dvh - 9rem);
+}
+
+.auth-modal .form-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.auth-modal .btn {
+  width: 100%;
+  margin-top: var(--m);
+}
+
+.auth-modal .form-message {
+  padding: var(--s) 0.8rem;
+  border-left: 4px solid currentColor;
+  background: var(--crema);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+  .auth-correo {
+    display: none;
+  }
+
+  .auth-modal {
+    width: calc(100vw - 1rem);
+  }
+}

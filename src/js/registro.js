@@ -151,9 +151,11 @@ registroForm.addEventListener("submit", async function (event) {
     "Cuenta creada correctamente. Revisa tu correo para confirmar tu cuenta.";
 });
 
+// El boton de reenviar solo existe en registros.html: dentro del modal de las
+// paginas de tienda no hay a que escuchar.
 const reenviarCorreo = document.getElementById("reenviarCorreo");
 
-reenviarCorreo.addEventListener("click", async function () {
+reenviarCorreo?.addEventListener("click", async function () {
   const email = document.getElementById("email").value.trim();
 
   if (email === "") {
