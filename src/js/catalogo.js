@@ -5,14 +5,6 @@
 
 const CATALOGO = [
   {
-    slug: "pastel-de-choclo",
-    nombre: "Pastel de choclo",
-    categoria: "Plato típico",
-    descripcion: "Choclo dulce con pino de carne, huevo y aceitunas.",
-    precio: 7990,
-    destacado: true,
-  },
-  {
     slug: "porotos-granados",
     nombre: "Porotos granados",
     categoria: "Guiso de temporada",
@@ -77,6 +69,14 @@ const CATALOGO = [
     categoria: "Dulce de verano",
     descripcion: "Mote y huesillo en su jugo, el refresco de la plaza.",
     precio: 2790,
+  },
+  {
+    slug: "pastel-de-choclo",
+    nombre: "Pastel de choclo",
+    categoria: "Plato típico",
+    descripcion: "Choclo dulce con pino de carne, huevo y aceitunas.",
+    precio: 7990,
+    destacado: true,
   },
 ];
 
