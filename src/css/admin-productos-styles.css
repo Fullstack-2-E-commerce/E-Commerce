@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Sabores de Chile — Mantenedor de Productos (Admin)
+   Alineado con el sistema de diseño estético "Cartel de fonda"
+   ========================================================================== */
+
+@import "./home-styles.css";
+
+.admin-container {
+  max-width: 1180px;
+  margin: var(--l) auto;
+  padding-inline: var(--l);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: var(--l);
+  align-items: start;
+}
+
+/* Tarjetas con estilo de placa impresa */
+.form-card,
+.list-card {
+  background: var(--blanco);
+  border: 2px solid var(--tinta);
+  box-shadow: 6px 6px 0 var(--tinta);
+  padding: var(--m);
+  border-radius: 0; /* Sin radio en superficies */
+}
+
+.form-card h2,
+.list-card h2 {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  color: var(--tinta);
+  margin-bottom: var(--m);
+  border-bottom: 2px solid var(--tinta);
+  padding-bottom: var(--s);
+}
+
+/* Formularios */
+.form-group {
+  margin-bottom: var(--m);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-family: var(--cuerpo);
+  font-weight: 500;
+  margin-bottom: var(--x);
+  font-size: 0.95rem;
+  color: var(--tinta);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: var(--cuerpo);
+  padding: 0.6rem;
+  background: var(--crema);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  font-size: 0.95rem;
+  color: var(--tinta);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--terracota);
+  background: var(--blanco);
+}
+
+.form-row {
+  display: flex;
+  gap: var(--m);
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Botón principal dentro del formulario (reutiliza el estilo .btn o este específico) */
+.form-card .btn {
+  width: 100%;
+  text-align: center;
+  margin-top: var(--s);
+}
+
+/* Tabla de productos */
+.table-container {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--s);
+  border: 2px solid var(--tinta);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid var(--tinta);
+  font-size: 0.9rem;
+}
+
+.admin-table th {
+  background-color: var(--papel);
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--tinta);
+  font-weight: 600;
+}
+
+.admin-table td {
+  background-color: var(--blanco);
+  color: var(--tinta);
+}
+
+/* Badges de Stock con paleta oficial */
+.stock-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--tinta);
+  font-family: var(--cuerpo);
+  font-weight: 500;
+  font-size: 0.8rem;
+  border-radius: 0;
+}
+
+.stock-normal {
+  background-color: var(--oliva);
+  color: var(--blanco);
+}
+
+.stock-critico {
+  background-color: var(--terracota);
+  color: var(--blanco);
+}
+
+/* Botones de acción de la tabla */
+.btn-edit,
+.btn-delete {
+  font-family: var(--cuerpo);
+  font-weight: 500;
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--tinta);
+  font-size: 0.85rem;
+  transition:
+    transform 0.15s var(--salida),
+    box-shadow 0.15s var(--salida);
+}
+
+.btn-edit {
+  background-color: var(--limon);
+  color: var(--tinta);
+  margin-right: 0.3rem;
+}
+
+.btn-edit:hover {
+  background-color: var(--ocre);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--tinta);
+}
+
+.btn-delete {
+  background-color: var(--terracota);
+  color: var(--blanco);
+}
+
+.btn-delete:hover {
+  background-color: var(--terracota-2);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--tinta);
+}
+
+/* Feedback/Mensajes de estado */
+#mensaje-feedback {
+  margin-top: var(--m);
+  padding: 0.75rem;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  display: none;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--tinta);
+}
+
+#mensaje-feedback.exito {
+  background-color: var(--papel);
+  color: var(--oliva-2);
+  border-color: var(--oliva-2);
+}
+
+#mensaje-feedback.error {
+  background-color: var(--papel);
+  color: var(--terracota-2);
+  border-color: var(--terracota-2);
+}
+
+@media (max-width: 850px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}

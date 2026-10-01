@@ -1,4 +1,4 @@
-/* Catálogo de la tienda. Única fuente de verdad de los platos: home.html
+/* Catálogo de la tienda. Única fuente de verdad de los platos: index.html
    muestra los destacados y productos.html el catálogo completo, las dos
    pintadas por tienda.js. Los precios van como número para no repetir el
    formato a mano. */

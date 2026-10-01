@@ -37,7 +37,7 @@ Todo cuelga de `src/`. La estructura pedida (`/css`, `/js`, `/assets`, `/pages`)
 └── assets     # Fotos .webp de los platos y video del catálogo
 ```
 
-Para ver el sitio, servir la raíz del repositorio y entrar por `src/pages/home.html`.
+Para ver el sitio, servir la raíz del repositorio y entrar por `src/pages/index.html`.
 
 ## Roles en el Equipo
 

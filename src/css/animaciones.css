@@ -1,0 +1,463 @@
+/* ==========================================================================
+   Indice
+     1. Tokens de movimiento
+     2. Barra de progreso de lectura
+     3. Titulos: sello de tinta al entrar en pantalla
+     4. Grillas: escalonado al revelar
+     5. Tarjetas: elevacion, inclinacion y foto con zoom
+     6. Botones: presion y brillo
+     7. Enlaces de contenido: subrayado que se dibuja
+     8. Campos de formulario: foco con tinta
+     9. Menu movil / nav: subrayado al enfocar
+    10. Marquesina: pausa al pasar el mouse
+    11. Modal de sesion: entrada con escala
+    12. prefers-reduced-motion
+   ========================================================================== */
+
+/* --- 1. Tokens de movimiento --------------------------------------------- */
+:root {
+  /* Se usan como transition-delay en cascada: 0.08s entre hermanos. */
+  --paso: 0.08s;
+  --t-fuego: 0.7s;
+  --t-sello: 0.5s;
+  --t-hover: 0.25s;
+  /* Giro leve al hover. Suficiente para que la tarjeta parezca suelta
+     sobre la mesa, no tanto para que se lea como tridimensional. */
+  --giro: -0.7deg;
+}
+
+/* --- 2. Barra de progreso de lectura -------------------------------------- */
+/* Se inyecta desde animaciones.js como <div class="barra-progreso">. Va fija
+   arriba, sobre el header, para que el avance se vea sin mover la pagina. */
+.barra-progreso {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  z-index: 60;
+  background: var(--terracota);
+  transform: scaleX(var(--avance, 0));
+  transform-origin: left center;
+  /* will-change: al ser la unica capa animada de forma continua, mantenerla
+     en su propia compositing evita repintados del resto al hacer scroll. */
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* --- 3. Titulos: sello de tinta -------------------------------------------- */
+/* Los estados ocultos viven bajo .anim-listo, que animaciones.js agrega a
+  <html> recien despues de armar todo. Si el JS no corre, ninguna regla de
+  este bloque aplica y el contenido se ve normal: el sitio no queda en
+  blanco por un script caido. */
+
+.anim-listo .sello,
+.anim-listo .sello-plano {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.anim-listo .sello.is-visible,
+.anim-listo .sello-plano.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* El ajuste de la segunda tinta va en su propio transition: aislarlo deja
+   el repintado limitado a la capa de texto durante el asentamiento. */
+.anim-listo .sello-titulo {
+  text-shadow: 10px 10px 0 var(--terracota);
+}
+
+.anim-listo .sello-titulo.is-visible {
+  text-shadow: 5px 5px 0 var(--terracota);
+}
+
+/* Titulo sobre pizarra: la segunda tinta tiene que ser clara, no terracota,
+   o desaparece. */
+.anim-listo .valores .sello-titulo,
+.anim-listo .blog-cta .sello-titulo {
+  text-shadow: 10px 10px 0 var(--ocre-2);
+}
+
+.anim-listo .valores .sello-titulo.is-visible,
+.anim-listo .blog-cta .sello-titulo.is-visible {
+  text-shadow: 5px 5px 0 var(--ocre-2);
+}
+
+.anim-listo .sello-izq {
+  opacity: 0;
+  transform: translateX(-22px);
+}
+
+.anim-listo .sello-izq.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.anim-listo .sello-der {
+  opacity: 0;
+  transform: translateX(22px);
+}
+
+.anim-listo .sello-der.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- 4. Grillas: escalonado al revelar ----------------------------------- */
+/* Las tarjetas del catalogo y los posts ya traen .revelar de app.js. Esta
+   regla solo les agrega retardo por posicion, sin cambiar su animacion. */
+.anim-listo .sello,
+.anim-listo .sello-plano,
+.anim-listo .sello-izq,
+.anim-listo .sello-der {
+  transition:
+    opacity var(--t-sello) var(--salida),
+    transform var(--t-sello) var(--salida),
+    text-shadow 0.9s var(--salida);
+}
+
+/* Escalonado: cada hijo espera su turno segun el indice que le pone el JS
+   en --i. Al capear en 8, una grilla de 10 no alarga la espera. */
+.escalonado > *,
+.escalonado-v > * {
+  transition-delay: calc(var(--paso) * min(var(--i, 0), 8));
+}
+
+/* --- 5. Tarjetas: elevacion, inclinacion y foto con zoom -------------------- */
+/* home-styles ya mueve la tarjeta 3px al hover (sombra dura). Esta capa
+   suma la inclinacion y una transicion mas larga para que se lea como
+   "tomar la tarjeta de la mesa". */
+.producto,
+.post,
+.ingrediente {
+  transition:
+    transform var(--t-hover) var(--salida),
+    box-shadow var(--t-hover) var(--salida);
+}
+
+.producto:hover,
+.post:hover,
+.ingrediente:hover {
+  transform: translate(3px, 3px) rotate(var(--giro));
+  box-shadow: 8px 8px 0 var(--terracota-2);
+}
+
+.producto:focus-within,
+.post:focus-within,
+.ingrediente:focus-within {
+  transform: translate(3px, 3px) rotate(var(--giro));
+  box-shadow: 8px 8px 0 var(--terracota-2);
+}
+
+/* La foto hace zoom dentro del marco 4:3. .producto-img ya tiene
+   overflow:hidden, asi que no se sale del borde de tinta. */
+.producto-img,
+.post-img {
+  overflow: hidden;
+}
+
+.producto-img img,
+.post-img img {
+  transition: transform 0.55s var(--salida);
+  will-change: transform;
+}
+
+.producto:hover .producto-img img,
+.post:hover .post-img img,
+.producto:focus-within .producto-img img,
+.post:focus-within .post-img img {
+  transform: scale(1.06);
+}
+
+/* El svg de las tarjetas ilustradas se agranda en vez de hacer zoom. */
+.producto:hover .producto-img svg,
+.post:hover .post-img svg {
+  transform: scale(1.05) rotate(-1.5deg);
+  transition: transform 0.55s var(--salida);
+}
+
+.producto-img svg,
+.post-img svg {
+  transition: transform 0.55s var(--salida);
+}
+
+/* La placa ilustrada del hero y de las paginas interiores. */
+.hero-placa:hover,
+.blog-hero-placa:hover,
+.contacto-hero-placa:hover,
+.nosotros-hero-placa:hover,
+.productos-hero-placa:hover {
+  transform: rotate(var(--giro)) translateY(-4px);
+}
+
+.hero-placa,
+.blog-hero-placa,
+.contacto-hero-placa,
+.nosotros-hero-placa,
+.productos-hero-placa,
+.cocina-placa {
+  transition: transform var(--t-hover) var(--salida);
+}
+
+/* --- 6. Botones: presion y brillo ------------------------------------------ */
+/* :active hunde el boton hasta borrar su propia sombra: el gesto de
+   estampar tinta a presion. */
+.btn {
+  transition:
+    transform 0.12s var(--salida),
+    box-shadow 0.12s var(--salida),
+    background-color 0.2s ease;
+}
+
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--tinta);
+}
+
+.btn:focus-visible {
+  animation: pulso-foco 0.45s var(--salida);
+}
+
+/* Al enfocar, el boton se hincha apenas; se nota sin mover el layout. */
+@keyframes pulso-foco {
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+/* El boton de texto de los formularios de sesion. */
+.btn-texto::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--terracota);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-hover) var(--salida);
+}
+
+.btn-texto {
+  position: relative;
+}
+
+.btn-texto:hover::after,
+.btn-texto:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* --- 7. Enlaces de contenido: subrayado que se dibuja --------------------- */
+/* Solo dentro del cuerpo del texto. Los links de nav y pie ya tienen su
+   propio subrayado y no se tocan. */
+.historia-texto a,
+.blog-listado a,
+.receta a,
+.info-lista a,
+.post-extracto a,
+.producto-desc a,
+.register-link a,
+.form-ayuda a {
+  position: relative;
+  background-image: linear-gradient(var(--terracota), var(--terracota));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition:
+    background-size var(--t-hover) var(--salida),
+    color 0.2s ease;
+}
+
+.historia-texto a:hover,
+.blog-listado a:hover,
+.receta a:hover,
+.info-lista a:hover,
+.post-extracto a:hover,
+.producto-desc a:hover,
+.register-link a:hover,
+.form-ayuda a:hover,
+.historia-texto a:focus-visible,
+.blog-listado a:focus-visible,
+.register-link a:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* --- 8. Campos de formulario: foco con tinta ------------------------------- */
+/* El borde se engorda y la sombra dura crece. Se anima con transition, no
+   con :focus-visible, porque aqui el foco llega por teclado o por mouse y
+   en ambos casos debe verse. */
+.campo input,
+.campo textarea,
+.campo select,
+.form-group input,
+.form-group select,
+.form-group textarea {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s var(--salida),
+    background-color 0.2s ease;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--terracota);
+  box-shadow: 4px 4px 0 var(--terracota);
+}
+
+/* El campo marcado como invalido tiembla una vez y se queda. La animacion
+   es de un solo disparo: al re-marcarse el campo (misma clase) no vuelve a
+   correr, salvo que se saque y se vuelva a poner. */
+@keyframes temblar {
+  20% {
+    transform: translateX(-5px);
+  }
+
+  40% {
+    transform: translateX(4px);
+  }
+
+  60% {
+    transform: translateX(-3px);
+  }
+
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+.campo.invalido input,
+.campo.invalido textarea,
+.campo.invalido select {
+  animation: temblar 0.4s var(--salida);
+}
+
+/* --- 9. Menu movil / nav: subrayado al enfocar ----------------------------- */
+/* El hover ya deforma el subrayado en home-styles. Falta el mismo gesto
+   cuando el link recibe teclado, que es el caso real de navegacion. */
+.main-nav a::after {
+  transition: transform var(--t-hover) var(--salida);
+}
+
+.main-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* La fila de la cabecera se separa del borde al hacer scroll. Se controla
+   con .scrolled desde animaciones.js; sin JS queda como esta. */
+.site-header {
+  transition: box-shadow 0.3s var(--salida);
+}
+
+.site-header.scrolled {
+  box-shadow: 0 4px 0 rgba(44, 24, 16, 0.12);
+}
+
+/* --- 10. Marquesina: pausa al pasar el mouse ------------------------------- */
+/* Es la unica animacion infinita de la pagina. Se detiene al pasar el mouse
+   para poder leer los nombres de los platos, y cuando recibe foco por
+   teclado. */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* --- 11. Modal de sesion: entrada con escala ------------------------------- */
+/* <dialog> abre y cierra display, asi que la transicion de entrada necesita
+   display y overlay como animables. Se anima con transition sobre el
+   elemento abierto; si el navegador no soporta transition-behavior, el
+   modal aparece sin escalar y no queda roto. */
+.auth-modal[open] {
+  animation: entra-modal 0.3s var(--salida);
+}
+
+@keyframes entra-modal {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.auth-modal::backdrop {
+  animation: entra-fondo 0.3s var(--salida);
+}
+
+@keyframes entra-fondo {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* El boton de cerrar gira un cuarto de vuelta al hover. */
+.auth-modal-cerrar {
+  transition:
+    transform var(--t-hover) var(--salida),
+    background-color 0.2s ease;
+}
+
+.auth-modal-cerrar:hover {
+  transform: rotate(90deg);
+}
+
+/* El boton de "iniciar sesion" de la cabecera. */
+.auth-trigger {
+  transition:
+    transform var(--t-hover) var(--salida),
+    background-color 0.2s ease,
+    box-shadow var(--t-hover) var(--salida);
+}
+
+.auth-trigger:hover {
+  transform: translateY(-2px);
+}
+
+/* --- 12. prefers-reduced-motion -------------------------------------------- */
+/* home-styles.css ya anula animation y transition en todo el sitio bajo
+   esta preferencia. Aqui solo seneutralizan las dos cosas que ese reset no
+   alcanza: el will-change (que reserva memoria sin motivo) y la inclinacion
+   al hover, que quedaria como un estado raro sin animacion que lo suavice. */
+@media (prefers-reduced-motion: reduce) {
+  .barra-progreso {
+    will-change: auto;
+  }
+
+  .sello,
+  .sello-plano,
+  .sello-izq,
+  .sello-der,
+  .producto-img img,
+  .post-img img {
+    will-change: auto;
+    opacity: 1;
+    transform: none;
+  }
+
+  .producto:hover,
+  .post:hover,
+  .ingrediente:hover,
+  .producto:focus-within,
+  .post:focus-within,
+  .ingrediente:focus-within,
+  .hero-placa:hover,
+  .blog-hero-placa:hover,
+  .contacto-hero-placa:hover,
+  .nosotros-hero-placa:hover,
+  .productos-hero-placa:hover {
+    transform: none;
+  }
+}
