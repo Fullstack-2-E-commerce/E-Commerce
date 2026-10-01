@@ -34,3 +34,4 @@ repomix-output.xml
 # Archivos locales y temporales
 repomix-output.xml
 .env.local
+.respaldo
