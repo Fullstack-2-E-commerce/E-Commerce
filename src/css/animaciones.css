@@ -1,13 +1,4 @@
 /* ==========================================================================
-   animaciones.css — capa extra de animacion sobre el sistema existente.
-   NO reemplaza ni edita home-styles.css: se carga DESPUES, asi que sus
-   reglas ganan solo cuando coinciden en especificidad. Para dejar el sitio
-   como estaba, basta con borrar este archivo y quitar su <link>.
-
-   Mismo registro visual que el resto del sitio (serigrafia a 2 tintas):
-   tinta plana, bordes duros, sin radio, sin sombras difusas. Todo se mueve
-   con transform y opacity para no disparar layout.
-
    Indice
      1. Tokens de movimiento
      2. Barra de progreso de lectura
