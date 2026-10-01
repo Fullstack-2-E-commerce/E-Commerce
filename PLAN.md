@@ -65,7 +65,7 @@ Todo cuelga de `src/`. La estructura pedida (`/css`, `/js`, `/assets`, `/pages`)
 /
 ├── src/
 │   ├── pages/
-│   │   ├── home.html            # Home
+│   │   ├── index.html           # Home
 │   │   ├── nosotros.html        # Sobre nosotros / historia
 │   │   ├── blogs.html           # Listado de blogs
 │   │   ├── contacto.html        # Formulario de contacto
@@ -160,41 +160,41 @@ Validar campos en formularios con JavaScript en tiempo real:
 
 ### Integrante 1 — Módulo: Usuarios y Autenticación (Encargado Ernesto)
 
-| Responsabilidad Técnica | Estado |
-| --- | --- |
-| Maquetación HTML/CSS de Login y Registro de Usuarios | Completado: `auth-styles.css` con los tokens del sitio. Falta decidir si estas 2 páginas llevan header y footer |
-| Lógica de Login y Registro con Supabase Auth (confirmación de correo y reenvío) | Completado |
-| Validaciones de Login: dominio de correo (`@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com`) y largo de contraseña | Completado, pero solo al enviar el formulario, no en tiempo real |
-| Validaciones de Registro/Mantenedor de Usuario: RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS | Completado, con las 16 regiones y sus comunas reales. Falta pasarlo a tiempo real |
+| Responsabilidad Técnica                                                                                                                | Estado                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Maquetación HTML/CSS de Login y Registro de Usuarios                                                                                   | Completado: `auth-styles.css` con los tokens del sitio. Falta decidir si estas 2 páginas llevan header y footer |
+| Lógica de Login y Registro con Supabase Auth (confirmación de correo y reenvío)                                                        | Completado                                                                                                      |
+| Validaciones de Login: dominio de correo (`@duoc.cl`, `@profesor.duoc.cl`, `@gmail.com`) y largo de contraseña                         | Completado, pero solo al enviar el formulario, no en tiempo real                                                |
+| Validaciones de Registro/Mantenedor de Usuario: RUT sin puntos ni guion, largo de campos, Select de Regiones y Comunas desde arrays JS | Completado, con las 16 regiones y sus comunas reales. Falta pasarlo a tiempo real                               |
 
 ### Integrante 2 — Módulo: Tienda y Carrito
 
-| Responsabilidad Técnica | Estado |
-| --- | --- |
-| Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Completado y rediseñado |
-| Sistema de diseño: design tokens, paleta, tipografías y texturas | Completado |
-| Catálogo de 10 platos con fotos reales y video | Completado |
-| Validaciones JS del Formulario de Contacto (en tiempo real) | Completado |
-| Detalle Blogs | Pendiente: `blogs.html` ya lo enlaza, el archivo no existe |
-| Lógica de productos mediante arrays en JS | Completado: catálogo en `catalogo.js`, render en `tienda.js` |
-| Render dinámico en la **vista de detalle** de producto | Pendiente: las tarjetas de `productos.html` todavía no son enlazables |
-| Implementación del Carrito de Compras en JS en memoria (sin Web Storage) | Pendiente, sin dueño asignado |
+| Responsabilidad Técnica                                                         | Estado                                                                |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Maquetación HTML/CSS de Tienda (Home, Nosotros, Blogs, Detalle Blogs, Contacto) | Completado y rediseñado                                               |
+| Sistema de diseño: design tokens, paleta, tipografías y texturas                | Completado                                                            |
+| Catálogo de 10 platos con fotos reales y video                                  | Completado                                                            |
+| Validaciones JS del Formulario de Contacto (en tiempo real)                     | Completado                                                            |
+| Detalle Blogs                                                                   | Pendiente: `blogs.html` ya lo enlaza, el archivo no existe            |
+| Lógica de productos mediante arrays en JS                                       | Completado: catálogo en `catalogo.js`, render en `tienda.js`          |
+| Render dinámico en la **vista de detalle** de producto                          | Pendiente: las tarjetas de `productos.html` todavía no son enlazables |
+| Implementación del Carrito de Compras en JS en memoria (sin Web Storage)        | Pendiente, sin dueño asignado                                         |
 
 ### Integrante 3 — Módulo: Administrador y Roles
 
-| Responsabilidad Técnica | Estado |
-| --- | --- |
-| Maquetación HTML/CSS del Dashboard Administrador, listados y mantenedores | Pendiente: no existe ninguna de las 3 páginas |
-| Validaciones del formulario Nuevo/Editar Producto (código, precios, stock entero, stock crítico, imágenes) | Pendiente |
-| Control de visualización según rol del sistema (Administrador, Vendedor, Cliente) | Pendiente: el perfil todavía no guarda el rol |
+| Responsabilidad Técnica                                                                                    | Estado                                        |
+| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| Maquetación HTML/CSS del Dashboard Administrador, listados y mantenedores                                  | Pendiente: no existe ninguna de las 3 páginas |
+| Validaciones del formulario Nuevo/Editar Producto (código, precios, stock entero, stock crítico, imágenes) | Pendiente                                     |
+| Control de visualización según rol del sistema (Administrador, Vendedor, Cliente)                          | Pendiente: el perfil todavía no guarda el rol |
 
 ### Responsabilidades administrativas
 
-| Integrante | Responsabilidad | Estado |
-| --- | --- | --- |
-| 1 | Configurar el repositorio público de GitHub y gestionar las ramas · Redactar la **sección 2** del ERS (Perspectiva, Funciones y Restricciones) | Repositorio creado; ERS sin empezar |
-| 2 | Redactar la **sección 1** del ERS (Introducción, Propósito y Ámbito) · Preparar la estructura de la diapositiva/presentación del proyecto | Sin empezar |
-| 3 | Redactar la **sección 3** del ERS (Requisitos Específicos: Funcionales y No Funcionales) · Empaquetado final y verificación del correcto envío del archivo comprimido | Sin empezar |
+| Integrante | Responsabilidad                                                                                                                                                       | Estado                              |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| 1          | Configurar el repositorio público de GitHub y gestionar las ramas · Redactar la **sección 2** del ERS (Perspectiva, Funciones y Restricciones)                        | Repositorio creado; ERS sin empezar |
+| 2          | Redactar la **sección 1** del ERS (Introducción, Propósito y Ámbito) · Preparar la estructura de la diapositiva/presentación del proyecto                             | Sin empezar                         |
+| 3          | Redactar la **sección 3** del ERS (Requisitos Específicos: Funcionales y No Funcionales) · Empaquetado final y verificación del correcto envío del archivo comprimido | Sin empezar                         |
 
 ---
 

@@ -89,6 +89,6 @@ loginForm.addEventListener("submit", async function (event) {
   }
 
   setTimeout(() => {
-    window.location.href = "home.html";
+    window.location.href = "index.html";
   }, 1000);
 });
