@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrador - Mantenedor de Productos | Sabores de Chile</title>
+    <!-- Estilos compartidos y de admin -->
+    <link rel="stylesheet" href="../css/home-styles.css" />
+    <link rel="stylesheet" href="../css/admin-productos-styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="./home.html" class="logo">
+          Sabores<span class="logo-em">.cl</span>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="./home.html">Ver Tienda</a></li>
+            <li>
+              <a href="./admin-productos.html" class="is-active"
+                >Mantenedor Productos</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="admin-container">
+      <h1 style="margin-bottom: var(--l)">
+        Panel de Administración — Gestión de Productos 🍲
+      </h1>
+
+      <div class="admin-grid">
+        <!-- FORMULARIO DE PRODUCTO -->
+        <section class="form-card">
+          <h2 id="form-title">Agregar Nuevo Producto</h2>
+
+          <form id="form-producto" novalidate>
+            <input type="hidden" id="prod-id" />
+
+            <div class="form-group">
+              <label for="prod-codigo">Código del Producto *</label>
+              <input
+                type="text"
+                id="prod-codigo"
+                placeholder="Ej: EMP-001"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="prod-nombre">Nombre *</label>
+              <input
+                type="text"
+                id="prod-nombre"
+                placeholder="Ej: Empanada de Pino"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="prod-categoria">Categoría *</label>
+              <select id="prod-categoria" required>
+                <option value="">-- Seleccionar --</option>
+                <option value="Platos Típicos">Platos Típicos</option>
+                <option value="Empanadas">Empanadas</option>
+                <option value="Postres">Postres</option>
+                <option value="Bebidas">Bebidas</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prod-precio">Precio ($) *</label>
+                <input
+                  type="number"
+                  id="prod-precio"
+                  min="0"
+                  placeholder="Ej: 3500"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="prod-stock">Stock *</label>
+                <input
+                  type="number"
+                  id="prod-stock"
+                  min="0"
+                  placeholder="Ej: 20"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prod-stock-critico">Stock Crítico</label>
+                <input
+                  type="number"
+                  id="prod-stock-critico"
+                  min="0"
+                  value="5"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prod-imagen">URL de la Imagen</label>
+              <input type="url" id="prod-imagen" placeholder="https://..." />
+            </div>
+
+            <div class="form-group">
+              <label for="prod-descripcion">Descripción</label>
+              <textarea
+                id="prod-descripcion"
+                rows="3"
+                placeholder="Descripción detallada del plato..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              id="btn-guardar"
+              class="btn"
+              style="width: 100%"
+            >
+              Guardar Producto
+            </button>
+            <button
+              type="button"
+              id="btn-cancelar"
+              class="btn"
+              style="
+                width: 100%;
+                margin-top: 0.5rem;
+                background-color: var(--tinta-2);
+                display: none;
+              "
+            >
+              Cancelar Edición
+            </button>
+          </form>
+
+          <div id="mensaje-feedback"></div>
+        </section>
+
+        <!-- TABLA DE PRODUCTOS -->
+        <section class="list-card">
+          <h2>Inventario de Productos</h2>
+          <div class="table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Producto</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-productos-body">
+                <!-- Carga dinámica vía JS/Supabase -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" style="margin-top: var(--xxl)">
+      <div class="container footer-bottom">
+        <p>&copy; 2026 Sabores de Chile. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- SDK de Supabase desde CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/admin-productos.js"></script>
+  </body>
+</html>
