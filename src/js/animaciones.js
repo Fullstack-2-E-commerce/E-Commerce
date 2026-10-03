@@ -70,28 +70,45 @@
     [".contacto-lead", "sello-plano"],
     [".nosotros-hero-lead", "sello-plano"],
     [".productos-hero-lead", "sello-plano"],
-    // Columnas de dos: entran desde su lado.
-    [".contacto-grid > *", "sello-izq"],
-    [".historia-grid > *", "sello-izq"],
+    [".hero-tagline", "sello-plano"],
+    // Kicker y tagline: la linea de entrada de cada bloque, arriba del titulo.
+    [".hero-kicker", "sello-plano"],
+    [".productos-kicker", "sello-plano"],
+    [".nosotros-hero-kicker", "sello-plano"],
     [".valores .receta > *", "sello-plano"],
   ];
+
+  /* El hero de la home y los de las paginas interiores. */
+  var HEROES =
+    ".hero, .productos-hero, .blog-hero, .contacto-hero, .nosotros-hero";
 
   function marcarSellos() {
     Sellos.forEach(function (par) {
       var sel = par[0];
       var clase = par[1];
 
-      document.querySelectorAll(sel).forEach(function (el, i) {
-        /* El hero queda arriba al cargar: no espera al scroll, entra
-           apenas la pagina esta lista. */
+      document.querySelectorAll(sel).forEach(function (el) {
         el.classList.add(...clase.split(" "));
 
-        if (el.closest(".hero")) {
-          /* Escalonado corto dentro del hero: kicker, titulo, lead. */
+        if (el.closest(HEROES)) {
+          /* Escalonado corto dentro del hero: kicker, titulo, lead. El
+             indice es la posicion entre los hijos del bloque, no el del
+             selector: ".productos-kicker" matchea en toda la pagina. */
+          var i = Array.prototype.indexOf.call(el.parentElement.children, el);
           el.style.transitionDelay = "calc(var(--paso) * " + Math.min(i, 3) + ")";
         }
       });
     });
+  }
+
+  /* Columnas de dos: la primera entra desde la izquierda y la segunda desde
+     la derecha. Con las dos desde el mismo lado se leian como un bloque. */
+  function marcarColumnas() {
+    document
+      .querySelectorAll(".contacto-grid > *, .historia-grid > *")
+      .forEach(function (el, i) {
+        el.classList.add(i % 2 === 0 ? "sello-izq" : "sello-der");
+      });
   }
 
   /* --- Observer de entrada en pantalla -------------------------------------- */
@@ -193,6 +210,7 @@
   function iniciar() {
     escalar();
     marcarSellos();
+    marcarColumnas();
     observar();
     barraProgreso();
     sombraCabecera();
@@ -203,9 +221,9 @@
     document.documentElement.classList.add("anim-listo");
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", iniciar);
-  } else {
-    iniciar();
-  }
+  /* Los scripts module se ejecutan con readyState "interactive", asi que el
+     readyState nunca dice "loading" aca y el DOM recien parseado todavia no
+     tiene las tarjetas que pinta tienda.js. DOMContentLoaded cae despues de
+     todos los modulos, en cualquier orden que arme el bundler. */
+  document.addEventListener("DOMContentLoaded", iniciar);
 })();

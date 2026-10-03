@@ -121,8 +121,18 @@
         </div>
       </section>
 
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
+      <div class="marquee">
+        <input
+          type="checkbox"
+          class="marquee-pausa"
+          id="marquee-pausa"
+        />
+        <label class="marquee-boton" for="marquee-pausa">
+          <span class="marquee-al-pausar">Pausar</span>
+          <span class="marquee-al-reanudar">Reanudar</span>
+        </label>
+
+        <div class="marquee-track" aria-hidden="true">
           <div class="marquee-segment">
             <span class="marquee-item">Pastel de choclo</span>
             <span class="marquee-item">Porotos granados</span>

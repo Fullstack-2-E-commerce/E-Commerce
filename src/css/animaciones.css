@@ -18,7 +18,6 @@
 :root {
   /* Se usan como transition-delay en cascada: 0.08s entre hermanos. */
   --paso: 0.08s;
-  --t-fuego: 0.7s;
   --t-sello: 0.5s;
   --t-hover: 0.25s;
   /* Giro leve al hover. Suficiente para que la tarjeta parezca suelta
@@ -118,37 +117,75 @@
     text-shadow 0.9s var(--salida);
 }
 
-/* Escalonado: cada hijo espera su turno segun el indice que le pone el JS
-   en --i. Al capear en 8, una grilla de 10 no alarga la espera. */
-.escalonado > *,
-.escalonado-v > * {
-  transition-delay: calc(var(--paso) * min(var(--i, 0), 8));
-}
-
-/* --- 5. Tarjetas: elevacion, inclinacion y foto con zoom -------------------- */
-/* home-styles ya mueve la tarjeta 3px al hover (sombra dura). Esta capa
-   suma la inclinacion y una transicion mas larga para que se lea como
-   "tomar la tarjeta de la mesa". */
+/* --- 5. Tarjetas: elevacion, inclinacion y foto con zoom-------------------- */
+/* La tarjeta es tambien un .revelar de home-styles, que anima opacity. Los
+   dos escriben transition y gana el ultimo: home-styles pone 0.6s para el
+   fade, aca va 0.25s para que el hover se sienta corto. Repeticion de la
+   regla con .revelar-listo para que pese igual y esta gane, en vez de
+   pelear por especificidad con un :not. */
 .producto,
 .post,
-.ingrediente {
+.ingrediente,
+.revelar-listo .producto,
+.revelar-listo .post,
+.revelar-listo .ingrediente {
   transition:
+    opacity 0.6s var(--salida),
     transform var(--t-hover) var(--salida),
     box-shadow var(--t-hover) var(--salida);
 }
 
+/* La inclinacion al hover compite con el transform:none de .revelar al
+   terminar de entrar. Con el gate, esa ultima regla pesa mas, asi que el
+   hover repite sus selectores con .revelar-listo para empatar y ganar por
+   orden de archivo. Sin gate, el reveal no escribe transform. */
 .producto:hover,
 .post:hover,
-.ingrediente:hover {
+.ingrediente:hover,
+.revelar-listo .producto:hover,
+.revelar-listo .post:hover,
+.revelar-listo .ingrediente:hover {
   transform: translate(3px, 3px) rotate(var(--giro));
   box-shadow: 8px 8px 0 var(--terracota-2);
 }
 
 .producto:focus-within,
 .post:focus-within,
-.ingrediente:focus-within {
+.ingrediente:focus-within,
+.revelar-listo .producto:focus-within,
+.revelar-listo .post:focus-within,
+.revelar-listo .ingrediente:focus-within {
   transform: translate(3px, 3px) rotate(var(--giro));
   box-shadow: 8px 8px 0 var(--terracota-2);
+}
+
+/* Escalonado: cada hijo espera su turno segun el indice que le pone el JS
+   en --i. Al capear en 8, una grilla de 10 no alarga la espera.
+
+   El selector apunta al hijo, que es donde animaciones.js deja la clase: un
+   ".escalonado > *" no matchea, porque la clase no esta en el padre. Bajo
+   .anim-listo para empatar en peso con el transition de las tarjetas, que
+   tambien resetea el retardo. */
+.anim-listo .escalonado,
+.anim-listo .escalonado-v {
+  transition-delay: calc(var(--paso) * min(var(--i, 0), 8));
+}
+
+/* El retardo es para la entrada, no para el hover: sin esto, la tarjeta 9 de
+   una grilla tarda 640 ms en inclinarse al pasar el mouse. */
+.producto:hover,
+.post:hover,
+.ingrediente:hover,
+.producto:focus-within,
+.post:focus-within,
+.ingrediente:focus-within,
+.revelar-listo .producto:hover,
+.revelar-listo .post:hover,
+.revelar-listo .ingrediente:hover,
+.revelar-listo .producto:focus-within,
+.revelar-listo .post:focus-within,
+.revelar-listo .ingrediente:focus-within {
+  transition-delay: 0s;
 }
 
 /* La foto hace zoom dentro del marco 4:3. .producto-img ya tiene
@@ -161,7 +198,6 @@
 .producto-img img,
 .post-img img {
   transition: transform 0.55s var(--salida);
-  will-change: transform;
 }
 
 .producto:hover .producto-img img,
@@ -359,12 +395,61 @@
   box-shadow: 0 4px 0 rgba(44, 24, 16, 0.12);
 }
 
-/* --- 10. Marquesina: pausa al pasar el mouse ------------------------------- */
-/* Es la unica animacion infinita de la pagina. Se detiene al pasar el mouse
-   para poder leer los nombres de los platos, y cuando recibe foco por
-   teclado. */
+/* --- 10. Marquesina: pausa operable ---------------------------------------- */
+/* Es la unica animacion infinita de la pagina. El hover no alcanza: sin
+   puntero no hay forma de frenarla, y 2.2.2 (A) exige pausa operable. El
+   checkbox es el control real, escondido; el label es lo que se ve y lo
+   que recibe el foco, asi que funciona con teclado sin JS. */
+.marquee {
+  position: relative;
+}
+
+.marquee-pausa {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.marquee-boton {
+  position: absolute;
+  top: 50%;
+  right: var(--s);
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0.1rem 0.5rem;
+  border: 2px solid var(--papel);
+  background: var(--tinta);
+  color: var(--papel);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.marquee-pausa:focus-visible + .marquee-boton {
+  outline: 2px solid var(--ocre-2);
+  outline-offset: 2px;
+}
+
+/* Los dos textos conviven en el DOM; display:none saca del arbol de
+   accesibilidad el que no va, asi que el boton siempre se anuncia entero. */
+.marquee-al-reanudar {
+  display: none;
+}
+
+.marquee-pausa:checked + .marquee-boton .marquee-al-pausar {
+  display: none;
+}
+
+.marquee-pausa:checked + .marquee-boton .marquee-al-reanudar {
+  display: inline;
+}
+
 .marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track {
+.marquee:focus-within .marquee-track,
+.marquee-pausa:checked ~ .marquee-track {
   animation-play-state: paused;
 }
 
@@ -447,6 +532,8 @@
     transform: none;
   }
 
+  /* El hover sin transicion deja el estado final puesto de golpe, y con la
+     inclinacion anulada el hover se reducia solo al brillo de la sombra. */
   .producto:hover,
   .post:hover,
   .ingrediente:hover,
@@ -458,6 +545,17 @@
   .contacto-hero-placa:hover,
   .nosotros-hero-placa:hover,
   .productos-hero-placa:hover {
+    transform: none;
+  }
+
+  .producto:hover .producto-img img,
+  .post:hover .post-img img,
+  .producto:hover .producto-img svg,
+  .post:hover .post-img svg,
+  .producto:focus-within .producto-img img,
+  .post:focus-within .post-img img,
+  .producto:focus-within .producto-img svg,
+  .post:focus-within .post-img svg {
     transform: none;
   }
 }

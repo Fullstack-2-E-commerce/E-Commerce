@@ -29,8 +29,6 @@
   --carbon: #1c1714;
   --blanco: #ffffff;
 
-  --borde: #2c1810;
-
   --display: "Fraunces", Georgia, serif;
   --cuerpo: "DM Sans", system-ui, sans-serif;
 
@@ -279,12 +277,9 @@ svg {
   border-bottom: 3px solid var(--tinta);
 }
 
-.blog-hero-inner,
-.contacto-hero-inner,
-.nosotros-hero-inner,
-.productos-hero-inner {
-  animation: revelarFogon 0.8s var(--salida) both;
-}
+/* Los heroes interiores ya entran por la capa de sellos de animaciones.css:
+   el h1 con su segunda tinta y el kicker y el lead con entrada simple. Esta
+   animacion sobre el wrapper sumaba un segundo desplazamiento al h1. */
 
 .blog-hero-placa,
 .contacto-hero-placa,
@@ -689,7 +684,10 @@ svg {
 }
 
 /* --- Revelado al hacer scroll --------------------------------------------- */
-.revelar {
+/* Igual que en animaciones.css, el estado oculto vive bajo una clase que el
+   JS agrega recien despues de armar el observer. Si app.js no corre, esta
+   regla no aplica y el contenido se ve normal en vez de quedar invisible. */
+.revelar-listo .revelar {
   opacity: 0;
   transform: translateY(24px);
   transition:
@@ -697,34 +695,13 @@ svg {
     transform 0.6s var(--salida);
 }
 
-.revelar.is-visible {
+.revelar-listo .revelar.is-visible {
   opacity: 1;
   transform: none;
 }
 
-.productos-grid .revelar:nth-child(2) {
-  transition-delay: 0.07s;
-}
-
-.productos-grid .revelar:nth-child(3) {
-  transition-delay: 0.14s;
-}
-
-.productos-grid .revelar:nth-child(4) {
-  transition-delay: 0.21s;
-}
-
-@keyframes revelarFogon {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
+/* El escalonado por posicion lo pone animaciones.css con --i, no con
+   :nth-child: asi los cubre a todos, no solo a los tres primeros. */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -738,7 +715,8 @@ svg {
     transition: none !important;
   }
 
-  .revelar {
+  .revelar,
+  .revelar-listo .revelar {
     opacity: 1;
     transform: none;
   }
