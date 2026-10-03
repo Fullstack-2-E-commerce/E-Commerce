@@ -6,9 +6,8 @@
 
     <title>Crear Cuenta | Comida Chilena</title>
 
-    <link rel="stylesheet" href="../css/home-styles.css" />
-    <link rel="stylesheet" href="../css/auth-styles.css" />
-    <link rel="stylesheet" href="../css/animaciones.css" />
+    <link rel="stylesheet" href="/src/css/home-styles.css" />
+    <link rel="stylesheet" href="/src/css/auth-styles.css" />
   </head>
 
   <body>
@@ -134,24 +133,20 @@
 
         <p class="register-link">
           ¿Ya tienes una cuenta?
-          <a href="login.html">Iniciar sesión</a>
+          <a href="/src/pages/login.html">Iniciar sesión</a>
         </p>
 
-        <a href="index.html" class="auth-volver">&larr; Volver a la tienda</a>
+        <a href="/" class="auth-volver">&larr; Volver a la tienda</a>
       </section>
     </main>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <!-- Configuración de Supabase -->
-    <script src="../js/supabase.js"></script>
+    <script type="module" src="/src/js/supabase.js"></script>
 
     <!-- Regiones y comunas -->
-    <script src="../js/regiones.js"></script>
+    <script type="module" src="/src/js/regiones.js"></script>
 
     <!-- Lógica del Registro -->
-    <script src="../js/registro.js"></script>
-    <script src="../js/animaciones.js"></script>
+    <script type="module" src="/src/js/registro.js"></script>
   </body>
 </html>

@@ -1,8 +1,10 @@
 // Configuración e Inicialización de Supabase
-const SUPABASE_URL = "https://TU_PROYECTO.supabase.co"; // Reemplazar con URL de Supabase
-const SUPABASE_ANON_KEY = "TU_ANON_KEY"; // Reemplazar con anon key de Supabase
+import { createClient } from "@supabase/supabase-js";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
+const SUPABASE_ANON_KEY = "TU_ANON_KEY";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Elementos del DOM
 const form = document.getElementById("form-producto");
@@ -10,28 +12,55 @@ const tablaBody = document.getElementById("tabla-productos-body");
 const feedbackEl = document.getElementById("mensaje-feedback");
 const btnCancelar = document.getElementById("btn-cancelar");
 const formTitle = document.getElementById("form-title");
+const btnSalir = document.getElementById("authSalir");
 
 let editandoId = null;
 
-// Cargar productos al iniciar la página
+// Inicialización de la vista
 document.addEventListener("DOMContentLoaded", () => {
   obtenerProductos();
+  configurarEventos();
 });
 
-// FUNCIÓN: Mostrar mensajes dinámicos en pantalla
-function mostrarFeedback(mensaje, tipo) {
-  feedbackEl.style.display = "block";
-  feedbackEl.textContent = mensaje;
-
-  if (tipo === "error") {
-    feedbackEl.style.backgroundColor = "#f8d7da";
-    feedbackEl.style.color = "#721c24";
-    feedbackEl.style.border = "1px solid #f5c6cb";
-  } else {
-    feedbackEl.style.backgroundColor = "#d4edda";
-    feedbackEl.style.color = "#155724";
-    feedbackEl.style.border = "1px solid #c3e6cb";
+// Configuración de listeners globales de la página
+function configurarEventos() {
+  // Evento Cierre de Sesión (Admin Logout)
+  if (btnSalir) {
+    btnSalir.addEventListener("click", async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        mostrarFeedback("Error al cerrar sesión: " + error.message, "error");
+        return;
+      }
+      // Redirección al Home tras salir
+      window.location.href = "/";
+    });
   }
+
+  // Listener para el botón cancelar edición
+  btnCancelar.addEventListener("click", resetearFormulario);
+
+  // Delegación de eventos en la tabla para botones de editar y eliminar
+  tablaBody.addEventListener("click", (e) => {
+    const btnEdit = e.target.closest(".btn-edit");
+    const btnDelete = e.target.closest(".btn-delete");
+
+    if (btnEdit) {
+      const id = btnEdit.dataset.id;
+      prepararEdicion(id);
+    } else if (btnDelete) {
+      const id = btnDelete.dataset.id;
+      eliminarProducto(id);
+    }
+  });
+}
+
+// FUNCIÓN: Mostrar mensajes dinámicos usando clases CSS
+function mostrarFeedback(mensaje, tipo) {
+  feedbackEl.className = ""; // Limpiar clases previas
+  feedbackEl.classList.add(tipo === "error" ? "error" : "exito");
+  feedbackEl.textContent = mensaje;
+  feedbackEl.style.display = "block";
 }
 
 // FUNCIÓN: Obtener y Listar Productos desde Supabase
@@ -68,8 +97,8 @@ async function obtenerProductos() {
       <td>$${Number(prod.precio).toLocaleString("es-CL")}</td>
       <td><span class="stock-badge ${badgeClass}">${badgeTexto}</span></td>
       <td>
-        <button class="btn-edit" onclick="prepararEdicion(${prod.id})">✏️</button>
-        <button class="btn-delete" onclick="eliminarProducto(${prod.id})">🗑️</button>
+        <button class="btn-edit" data-id="${prod.id}" title="Editar">✏️</button>
+        <button class="btn-delete" data-id="${prod.id}" title="Eliminar">🗑️</button>
       </td>
     `;
     tablaBody.appendChild(tr);
@@ -81,7 +110,7 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   feedbackEl.style.display = "none";
 
-  // Capturar y sanitizar datos
+  // Capturar datos
   const codigo = document.getElementById("prod-codigo").value.trim();
   const nombre = document.getElementById("prod-nombre").value.trim();
   const categoria = document.getElementById("prod-categoria").value;
@@ -97,7 +126,7 @@ form.addEventListener("submit", async (e) => {
   const stock = Number(stockInput);
   const stockCritico = stockCriticoInput !== "" ? Number(stockCriticoInput) : 5;
 
-  // VALIDACIONES (Requerimiento R.9)
+  // VALIDACIONES
   if (codigo.length < 3) {
     mostrarFeedback("El código debe tener al menos 3 caracteres.", "error");
     return;
@@ -151,6 +180,7 @@ form.addEventListener("submit", async (e) => {
       .from("productos")
       .update(payload)
       .eq("id", editandoId);
+
     if (error) {
       mostrarFeedback("Error al actualizar: " + error.message, "error");
     } else {
@@ -161,6 +191,7 @@ form.addEventListener("submit", async (e) => {
   } else {
     // CREAR PRODUCTO
     const { error } = await supabase.from("productos").insert([payload]);
+
     if (error) {
       mostrarFeedback("Error al guardar: " + error.message, "error");
     } else {
@@ -191,6 +222,7 @@ async function prepararEdicion(id) {
     .select("*")
     .eq("id", id)
     .single();
+
   if (error) return;
 
   editandoId = id;
@@ -204,14 +236,12 @@ async function prepararEdicion(id) {
   document.getElementById("prod-descripcion").value = prod.descripcion || "";
 
   formTitle.textContent = "Editar Producto";
-  btnCancelar.style.display = "block";
+  btnCancelar.classList.remove("is-hidden");
 }
 
 function resetearFormulario() {
   editandoId = null;
   form.reset();
   formTitle.textContent = "Agregar Nuevo Producto";
-  btnCancelar.style.display = "none";
+  btnCancelar.classList.add("is-hidden");
 }
-
-btnCancelar.addEventListener("click", resetearFormulario);

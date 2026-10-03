@@ -4,23 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sabores de Chile | Cocina casera chilena</title>
-    <link rel="stylesheet" href="../css/home-styles.css" />
-    <link rel="stylesheet" href="../css/auth-styles.css" />
-    <link rel="stylesheet" href="../css/animaciones.css" />
+    <link rel="stylesheet" href="/src/css/home-styles.css" />
+    <link rel="stylesheet" href="/src/css/auth-styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a href="./index.html" class="logo"
+        <a href="/" class="logo"
           >Sabores de <span class="logo-em"> Chile</span></a
         >
         <nav class="main-nav" aria-label="Navegación principal">
           <ul>
-            <li><a href="./index.html" class="nav-link is-active">Home</a></li>
-            <li><a href="./productos.html" class="nav-link">Productos</a></li>
-            <li><a href="./blogs.html" class="nav-link">Blogs</a></li>
-            <li><a href="./nosotros.html" class="nav-link">Nosotros</a></li>
-            <li><a href="./contacto.html" class="nav-link">Contacto</a></li>
+            <li><a href="/" class="nav-link is-active">Home</a></li>
+            <li>
+              <a href="/src/pages/productos.html" class="nav-link">Productos</a>
+            </li>
+            <li><a href="/src/pages/blogs.html" class="nav-link">Blogs</a></li>
+            <li>
+              <a href="/src/pages/nosotros.html" class="nav-link">Nosotros</a>
+            </li>
+            <li>
+              <a href="/src/pages/contacto.html" class="nav-link">Contacto</a>
+            </li>
           </ul>
         </nav>
 
@@ -49,7 +54,7 @@
               Platos de temporada, recetas heredadas y el sabor de la mesa
               familiar chilena.
             </p>
-            <a href="./productos.html" class="btn">Ver los platos</a>
+            <a href="/src/pages/productos.html" class="btn">Ver los platos</a>
           </div>
 
           <figure class="hero-placa">
@@ -167,19 +172,19 @@
         <nav class="footer-nav" aria-label="Tienda">
           <h2 class="footer-titulo">Tienda</h2>
           <ul>
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./productos.html">Productos</a></li>
-            <li><a href="./blogs.html">Blogs</a></li>
-            <li><a href="./nosotros.html">Nosotros</a></li>
-            <li><a href="./contacto.html">Contacto</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/src/pages/productos.html">Productos</a></li>
+            <li><a href="/src/pages/blogs.html">Blogs</a></li>
+            <li><a href="/src/pages/nosotros.html">Nosotros</a></li>
+            <li><a href="/src/pages/contacto.html">Contacto</a></li>
           </ul>
         </nav>
 
         <nav class="footer-nav" aria-label="Cuenta">
           <h2 class="footer-titulo">Cuenta</h2>
           <ul>
-            <li><a href="./login.html">Iniciar sesión</a></li>
-            <li><a href="./registros.html">Crear cuenta</a></li>
+            <li><a href="/src/pages/login.html">Iniciar sesión</a></li>
+            <li><a href="/src/pages/registros.html">Crear cuenta</a></li>
           </ul>
         </nav>
 
@@ -222,9 +227,9 @@
 
     <!-- El catalogo va antes de app.js: ese archivo arma el
          scroll-reveal al ejecutarse y necesita las tarjetas ya en el DOM. -->
-    <script src="../js/catalogo.js"></script>
-    <script src="../js/tienda.js"></script>
-    <script src="../js/app.js"></script>
+    <script type="module" src="/src/js/catalogo.js"></script>
+    <script type="module" src="/src/js/tienda.js"></script>
+    <script type="module" src="/src/js/app.js"></script>
     <!-- Modales de autenticacion. El bloque es identico en las cinco paginas
          de la tienda: se pega a mano, sin build, igual que header y footer. -->
     <dialog
@@ -285,7 +290,9 @@
 
           <p class="register-link">
             ¿No tienes una cuenta?
-            <a href="registros.html" data-auth-ir="registro">Crear cuenta</a>
+            <a href="/src/pages/registros.html" data-auth-ir="registro"
+              >Crear cuenta</a
+            >
           </p>
         </form>
       </div>
@@ -458,18 +465,18 @@
 
           <p class="register-link">
             ¿Ya tienes una cuenta?
-            <a href="login.html" data-auth-ir="login">Iniciar sesión</a>
+            <a href="/src/pages/login.html" data-auth-ir="login"
+              >Iniciar sesión</a
+            >
           </p>
         </form>
       </div>
     </dialog>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/supabase.js"></script>
-    <script src="../js/regiones.js"></script>
-    <script src="../js/registro.js"></script>
-    <script src="../js/login.js"></script>
-    <script src="../js/auth-ui.js"></script>
-    <script src="../js/animaciones.js"></script>
+    <script type="module" src="/src/js/supabase.js"></script>
+    <script type="module" src="/src/js/regiones.js"></script>
+    <script type="module" src="/src/js/registro.js"></script>
+    <script type="module" src="/src/js/login.js"></script>
+    <script type="module" src="/src/js/auth-ui.js"></script>
   </body>
 </html>

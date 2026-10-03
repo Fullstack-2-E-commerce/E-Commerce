@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Administrador - Mantenedor de Productos | Sabores de Chile</title>
     <!-- Estilos compartidos y de admin -->
-    <link rel="stylesheet" href="../css/home-styles.css" />
-    <link rel="stylesheet" href="../css/admin-productos-styles.css" />
-    <link rel="stylesheet" href="../css/animaciones.css" />
+    <link rel="stylesheet" href="/src/css/home-styles.css" />
+    <link rel="stylesheet" href="/src/css/admin-productos-styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a href="./home.html" class="logo">
-          Sabores<span class="logo-em">.cl</span>
-        </a>
+        <p class="logo">Sabores de <span class="logo-em"> Chile</span></p>
         <nav class="main-nav">
           <ul>
-            <li><a href="./home.html">Ver Tienda</a></li>
+            <li><a href="/">Ir a Tienda</a></li>
             <li>
-              <a href="./admin-productos.html" class="is-active"
+              <a href="/src/pages/admin-productos.html" class="is-active"
                 >Mantenedor Productos</a
               >
+            </li>
+            <li>
+              <button type="button" class="auth-salir" id="authSalir">
+                Cerrar sesión
+              </button>
             </li>
           </ul>
         </nav>
@@ -29,7 +31,7 @@
     </header>
 
     <main class="admin-container">
-      <h1 style="margin-bottom: var(--l)">
+      <h1 class="admin-title">
         Panel de Administración — Gestión de Productos 🍲
       </h1>
 
@@ -122,24 +124,13 @@
               ></textarea>
             </div>
 
-            <button
-              type="submit"
-              id="btn-guardar"
-              class="btn"
-              style="width: 100%"
-            >
+            <button type="submit" id="btn-guardar" class="btn btn-block">
               Guardar Producto
             </button>
             <button
               type="button"
               id="btn-cancelar"
-              class="btn"
-              style="
-                width: 100%;
-                margin-top: 0.5rem;
-                background-color: var(--tinta-2);
-                display: none;
-              "
+              class="btn btn-block btn-cancelar is-hidden"
             >
               Cancelar Edición
             </button>
@@ -172,15 +163,11 @@
       </div>
     </main>
 
-    <footer class="site-footer" style="margin-top: var(--xxl)">
+    <footer class="site-footer admin-footer">
       <div class="container footer-bottom">
         <p>&copy; 2026 Sabores de Chile. Todos los derechos reservados.</p>
       </div>
     </footer>
-
-    <!-- SDK de Supabase desde CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../js/admin-productos.js"></script>
-    <script src="../js/animaciones.js"></script>
+    <script type="module" src="/src/js/admin-productos.js"></script>
   </body>
 </html>

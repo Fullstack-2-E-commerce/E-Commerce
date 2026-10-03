@@ -6,9 +6,8 @@
 
     <title>Iniciar Sesión | Comida Chilena</title>
 
-    <link rel="stylesheet" href="../css/home-styles.css" />
-    <link rel="stylesheet" href="../css/auth-styles.css" />
-    <link rel="stylesheet" href="../css/animaciones.css" />
+    <link rel="stylesheet" href="/src/css/home-styles.css" />
+    <link rel="stylesheet" href="/src/css/auth-styles.css" />
   </head>
 
   <body>
@@ -63,21 +62,17 @@
 
         <p class="register-link">
           ¿No tienes una cuenta?
-          <a href="registros.html">Crear cuenta</a>
+          <a href="/src/pages/registros.html">Crear cuenta</a>
         </p>
 
-        <a href="index.html" class="auth-volver">&larr; Volver a la tienda</a>
+        <a href="/" class="auth-volver">&larr; Volver a la tienda</a>
       </section>
     </main>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <!-- Configuración de Supabase -->
-    <script src="../js/supabase.js"></script>
+    <script type="module" src="/src/js/supabase.js"></script>
 
     <!-- Lógica del Login -->
-    <script src="../js/login.js"></script>
-    <script src="../js/animaciones.js"></script>
+    <script type="module" src="/src/js/login.js"></script>
   </body>
 </html>

@@ -11,6 +11,11 @@
   padding-inline: var(--l);
 }
 
+/* Título principal del panel */
+.admin-title {
+  margin-bottom: var(--l);
+}
+
 .admin-grid {
   display: grid;
   grid-template-columns: 1fr 1.8fr;
@@ -83,11 +88,24 @@
   flex: 1;
 }
 
-/* Botón principal dentro del formulario (reutiliza el estilo .btn o este específico) */
-.form-card .btn {
+/* Botones del formulario */
+.btn-block {
   width: 100%;
   text-align: center;
+}
+
+.form-card .btn-block {
   margin-top: var(--s);
+}
+
+.btn-cancelar {
+  margin-top: 0.5rem;
+  background-color: var(--tinta-2);
+}
+
+/* Clase global para ocultar elementos dinámicos */
+.is-hidden {
+  display: none !important;
 }
 
 /* Tabla de productos */
@@ -183,6 +201,11 @@
   box-shadow: 1px 1px 0 var(--tinta);
 }
 
+/* Footer específico para vista admin */
+.admin-footer {
+  margin-top: var(--xxl);
+}
+
 /* Feedback/Mensajes de estado */
 #mensaje-feedback {
   margin-top: var(--m);
@@ -211,4 +234,26 @@
   .admin-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Botón Cerrar sesión */
+
+.auth-salir {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  background: var(--terracota);
+  color: var(--blanco);
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 var(--tinta);
+  transition:
+    transform 0.15s var(--salida),
+    box-shadow 0.15s var(--salida);
 }
