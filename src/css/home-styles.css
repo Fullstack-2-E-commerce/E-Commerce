@@ -664,6 +664,38 @@ html {
   padding-inline: var(--l);
 }
 
+/* La banda se desplaza con el scroll, no sola: la pista avanza lo que lleva
+   leido el lector, asi que las fotos van pasando por el marco como una fila
+   de polaroids despegandose. Al ser movida por el scroll no hay ninguna
+   animacion infinita, y por lo tanto no necesita control de pausa.
+
+   Sin scroll timeline la pista se queda quieta, que es como estaba antes: no
+   hay estado que dependa de una animacion que el navegador no corre.
+
+   En movil la banda ya es un carrusel con scroll propio (abajo, en el
+   breakpoint de 768px), asi que el arrastre se apaga ahi para no pelearse con
+   el dedo. */
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 769px) {
+    .fotos-banda-pista {
+      animation: correr-fotos linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes correr-fotos {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    /* La serie va duplicada en el HTML, asi que media pista alcanza para
+       dejar la ultima foto cubriendo el borde derecho del viewport. */
+    transform: translateX(-50%);
+  }
+}
+
 .foto {
   margin: 0;
   flex: 0 0 auto;
@@ -807,28 +839,57 @@ html {
 
 .cifra {
   list-style: none;
-  padding: var(--l);
+  padding: var(--l) var(--m);
   display: flex;
   flex-direction: column;
   gap: var(--x);
   /* La linea que separa las celdas es el mismo borde de tinta del resto del
      sistema, no un gris. */
   border-right: 2px solid var(--tinta);
+  /* El valor se mide contra SU celda y no contra el viewport. Sin esto el dato
+     es el mismo para todos y la palabra mas larga ("Providencia", que a
+     tamano de cartel pide 314px) se sale de la celda de 212px y se come a la
+     columna vecina. cqi permite que el texto se ajuste solo, sin tocar el
+     HTML ni pedirle a un script que mida nada. */
+  container-type: inline-size;
+  transition: background-color var(--t-hover) var(--salida);
 }
 
 .cifra:last-child {
   border-right: 0;
 }
 
+/* La celda responde al puntero: el dato se levanta y el papel se tensa. El
+   gesto es el mismo de las tarjetas, porque es el mismo sistema impreso. */
+.cifra:hover {
+  background: var(--papel);
+}
+
 .cifra-valor {
   font-family: var(--display);
+  /* Red de seguridad para navegadores sin container queries: el valor se
+     parte por guion antes que desbordar la celda. */
   font-size: clamp(2.2rem, 5vw, 3.4rem);
+  hyphens: auto;
+  overflow-wrap: break-word;
+  /* 16cqi deja a "Providencia" en 225px dentro de 244px de celda, con aire.
+     El tope de 3.4rem se alcanza recien con 340px de celda, y ahi el dato
+     sigue entrando (314px), asi que el clamp nunca desborda. */
+  font-size: clamp(1.5rem, 16cqi, 3.4rem);
   font-weight: 700;
   line-height: 1;
   color: var(--terracota);
   /* Cifras de ancho fijo, no variable: las lineas de un bloque de numeros
      tienen que alinearse al entrar, como en un cartel impreso. */
   font-variant-numeric: tabular-nums;
+  transition:
+    transform var(--t-hover) var(--salida),
+    color var(--t-hover) var(--salida);
+}
+
+.cifra:hover .cifra-valor {
+  transform: translateY(-3px);
+  color: var(--terracota-2);
 }
 
 .cifra-etiqueta {
