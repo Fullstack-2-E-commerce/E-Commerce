@@ -1,5 +1,7 @@
 // Estado de sesión y apertura de los modales de login y registro.
 // Solo se activa en páginas que traen el bloque de auth en el header.
+import { supabaseClient } from "./supabase.js";
+
 (function () {
   const entrar = document.getElementById("authEntrar");
   const salir = document.getElementById("authSalir");

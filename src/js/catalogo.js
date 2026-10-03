@@ -3,7 +3,7 @@
    pintadas por tienda.js. Los precios van como número para no repetir el
    formato a mano. */
 
-const CATALOGO = [
+export const CATALOGO = [
   {
     slug: "porotos-granados",
     nombre: "Porotos granados",
@@ -81,6 +81,6 @@ const CATALOGO = [
 ];
 
 /** 7990 -> "$7.990" */
-function precioCLP(valor) {
+export function precioCLP(valor) {
   return "$" + valor.toLocaleString("es-CL");
 }

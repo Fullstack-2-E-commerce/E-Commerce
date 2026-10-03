@@ -6,11 +6,13 @@
    data-catalogo="destacados" -> solo los platos marcados en CATALOGO
    data-catalogo="todos"      -> el catálogo completo */
 
+import { CATALOGO, precioCLP } from "./catalogo.js";
+
 const PLANTILLA_PRODUCTO = (p) => `
   <article class="producto revelar">
     <figure class="producto-img">
       <img
-        src="../assets/img/${p.slug}.webp"
+        src="/assets/img/${p.slug}.webp"
         alt="${p.nombre}"
         width="800"
         height="600"

@@ -1,4 +1,4 @@
-const regiones = [
+export const regiones = [
   {
     nombre: "Arica y Parinacota",
     comunas: ["Arica", "Camarones", "General Lagos", "Putre"],

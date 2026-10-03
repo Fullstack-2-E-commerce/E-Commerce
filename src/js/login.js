@@ -1,3 +1,5 @@
+import { supabaseClient } from "./supabase.js";
+
 const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", async function (event) {

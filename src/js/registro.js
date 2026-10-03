@@ -1,3 +1,6 @@
+import { supabaseClient } from "./supabase.js";
+import { regiones } from "./regiones.js";
+
 const registroForm = document.getElementById("registroForm");
 
 registroForm.addEventListener("submit", async function (event) {
