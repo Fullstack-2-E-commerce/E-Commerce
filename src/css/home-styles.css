@@ -109,6 +109,44 @@ svg {
   outline-offset: 3px;
 }
 
+/* --- Superficies del navegador ---------------------------------------------
+   La seleccion, el cursor y la barra de scroll son las piezas que el navegador
+   dibuja y que ningun sistema de diseno cubre. Van con tinta del cartel para
+   que la pagina se vea armada y no ensamblada. */
+::selection {
+  background: var(--terracota);
+  color: var(--blanco);
+}
+
+input,
+textarea,
+select,
+[contenteditable] {
+  caret-color: var(--terracota);
+}
+
+html {
+  scrollbar-color: var(--terracota) var(--papel);
+  /* Reserva el hueco de la barra siempre: sin esto la pagina salta de ancho
+     al aparecer la barra en el primer scroll. */
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--papel);
+  border-left: 2px solid var(--tinta);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--terracota);
+  border: 2px solid var(--tinta);
+}
+
 .container {
   width: min(1180px, 100%);
   margin-inline: auto;
@@ -237,8 +275,11 @@ svg {
   z-index: 1;
 }
 
-/* Placa ilustrada: bloque impreso con marco de tinta */
+/* Placa del hero: la foto real entra en el mismo marco de tinta que usaba la
+   ilustracion. La ilustracion SVG pasa a las paginas interiores, donde el
+   sistema de placas ya la tenia; arriba va la comida de verdad. */
 .hero-placa {
+  position: relative;
   margin: 0;
   background: var(--blanco);
   border: 2px solid var(--tinta);
@@ -251,12 +292,77 @@ svg {
   height: auto;
 }
 
-.hero-kicker {
+/* La foto llena el marco. Sin alto fijo y con aspect-ratio: la caja se
+   acomoda al ancho disponible y no hay salto de layout al cargar. */
+.hero-foto {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border: 2px solid var(--tinta);
+}
+
+/* Sello de papel pegado sobre la foto, en diagonal. Es el lugar donde la
+   pagina dice que es, sin gastar un kicker arriba del titulo. */
+.hero-sello {
+  position: absolute;
+  left: calc(-1 * var(--s));
+  bottom: var(--l);
+  display: flex;
+  gap: var(--x);
+  padding: var(--s) var(--m);
+  background: var(--papel);
+  border: 2px solid var(--tinta);
+  box-shadow: 4px 4px 0 var(--tinta);
   font-family: var(--display);
   font-style: italic;
-  font-size: 1.1rem;
-  color: var(--ocre-2);
-  margin-bottom: var(--m);
+  font-size: 1.05rem;
+  color: var(--tinta);
+  transform: rotate(-3deg);
+}
+
+.hero-sello-palabra {
+  display: inline-block;
+}
+
+/* Las dos acciones del hero: el boton de tinta y el enlace de texto al lado.
+   El conjunto se alinea abajo y envuelve en pantallas chicas. */
+.hero-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--m);
+}
+
+.hero-acciones .btn-texto {
+  position: relative;
+  font-weight: 500;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--tinta);
+}
+
+.hero-acciones .btn-texto::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 2px;
+  background: var(--terracota);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--t-hover) var(--salida);
+}
+
+.hero-acciones .btn-texto:hover,
+.hero-acciones .btn-texto:focus-visible {
+  color: var(--terracota-2);
+}
+
+.hero-acciones .btn-texto:hover::after,
+.hero-acciones .btn-texto:focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* --- Hero de las paginas interiores -----------------------------------------
@@ -326,7 +432,9 @@ svg {
   position: relative;
   width: 90px;
   height: 4px;
-  margin: var(--l) auto;
+  /* Sin auto: el hero entero esta alineado a la izquierda y un adorno
+     centrado rompe el eje contra el titulo y contra el boton. */
+  margin: var(--l) 0;
   background: var(--tinta);
 }
 
@@ -350,7 +458,7 @@ svg {
 
 .hero-tagline {
   max-width: 44ch;
-  margin: 0 auto var(--l);
+  margin: 0 0 var(--l);
   color: var(--tinta-2);
   font-size: 1.05rem;
 }
@@ -538,6 +646,197 @@ svg {
   transform: translateX(4px);
 }
 
+/* --- Banda de fotos: la cocina en papel -----------------------------------
+   Rompe el contenedor a sangre completa y pega las fotos como polaroids
+   despegados de la pizarra: cada una con su inclinacion y su sombra de tinta.
+   El marco y el fondo pasan a la foto, no al revés. */
+.fotos-banda {
+  padding-block: var(--xl);
+  background: var(--carbon);
+  border-block: 3px solid var(--tinta);
+  overflow: hidden;
+}
+
+.fotos-banda-pista {
+  display: flex;
+  gap: var(--l);
+  width: max-content;
+  padding-inline: var(--l);
+}
+
+.foto {
+  margin: 0;
+  flex: 0 0 auto;
+  width: clamp(180px, 22vw, 260px);
+  padding: var(--s);
+  background: var(--blanco);
+  border: 2px solid var(--tinta);
+  box-shadow: 6px 6px 0 var(--tinta);
+  /* La inclinacion es propia de cada foto: --giro se sobrescribe por nth-child
+     mas abajo. Sin ellas todas las etiquetas se verian como una repeticion. */
+  transform: rotate(var(--giro, -1deg));
+  transition: transform 0.3s var(--salida), box-shadow 0.3s var(--salida);
+}
+
+.foto:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 10px 12px 0 var(--terracota);
+}
+
+.foto img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--tinta);
+}
+
+.foto figcaption {
+  padding-top: var(--s);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--tinta);
+  text-align: center;
+}
+
+.foto:nth-child(2n) {
+  --giro: 1.4deg;
+}
+
+.foto:nth-child(3n) {
+  --giro: -2deg;
+}
+
+.foto:nth-child(4n) {
+  --giro: 0.8deg;
+}
+
+/* --- Manifiesto: la frase que se estampa al hacer scroll -------------------
+   El momento focal del sitio. Una banda de pizarra con la frase partida en
+   palabras; cada palabra se entinta segun el avance del scroll, no por
+   tiempo. Es el gesto de elhoyo.cl traducido a tinta plana: la frase se
+   imprime sola mientras baja el lector.
+
+   Todo el bloque vive bajo @supports: si el navegador no tiene
+   animation-timeline, las palabras se ven desde el inicio y no hay nada que
+   ejecutar. Por eso no hace falta que un script esconda nada. */
+@supports (animation-timeline: view()) {
+  .manifiesto {
+    view-timeline-name: --manifiesto;
+    view-timeline-axis: block;
+  }
+
+  .manifiesto-frase {
+    /* Cada palabra entra en su propia ventana de avance. El retardo sale de
+       --i, que animaciones.js deja como indice: la palabra 9 no espera a que
+       terminen las ocho anteriores, solo ocupa una franja mas adelante. */
+    animation-name: estampa-palabra;
+    animation-duration: 1ms;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-timeline: --manifiesto;
+    animation-range: entry calc(12% + var(--i, 0) * 4.5%)
+      entry calc(48% + var(--i, 0) * 4.5%);
+  }
+}
+
+@keyframes estampa-palabra {
+  from {
+    opacity: 0.06;
+    transform: translateY(0.22em);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* La banda es el unico lugar donde el texto puede pasar de 6rem: es el
+   manifiesto, no un titulo de seccion. El clamp corta antes de que el
+   mas largo desborde el viewport. */
+.manifiesto {
+  padding-block: clamp(3rem, 9vw, 7rem);
+  background: var(--carbon);
+  color: var(--limon);
+  border-block: 3px solid var(--tinta);
+  text-align: center;
+}
+
+.manifiesto-frase {
+  max-width: 22ch;
+  margin-inline: auto;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7.5vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.manifiesto-frase em {
+  font-style: italic;
+  color: var(--terracota);
+}
+
+/* El filtro va en su propia regla para que el navegador lo mantenga en una capa
+   aparte y no repinte el resto de la banda en cada paso del scroll. */
+.manifiesto-palabra {
+  display: inline-block;
+}
+
+/* --- Cifras: el dato, no el adorno ----------------------------------------
+   Cuatro datos que ya estan en el sitio (direccion, horarios, el catalogo y
+   la cocina). Sin redaccion: no son promesas, son los hechos de la fonda. */
+.cifras {
+  padding-block: var(--xxl);
+}
+
+.cifras-rejilla {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  border: 2px solid var(--tinta);
+  box-shadow: 8px 8px 0 var(--tinta);
+  background: var(--blanco);
+}
+
+.cifra {
+  list-style: none;
+  padding: var(--l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--x);
+  /* La linea que separa las celdas es el mismo borde de tinta del resto del
+     sistema, no un gris. */
+  border-right: 2px solid var(--tinta);
+}
+
+.cifra:last-child {
+  border-right: 0;
+}
+
+.cifra-valor {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--terracota);
+  /* Cifras de ancho fijo, no variable: las lineas de un bloque de numeros
+     tienen que alinearse al entrar, como en un cartel impreso. */
+  font-variant-numeric: tabular-nums;
+}
+
+.cifra-etiqueta {
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--tinta-2);
+}
+
 /* --- Pizarra: secciones oscuras de acento ---------------------------------- */
 .valores,
 .blog-cta {
@@ -720,12 +1019,32 @@ svg {
     opacity: 1;
     transform: none;
   }
+
+  /* El manifiesto pierde el estado de partida porque lo gana con la
+     animacion: sin ella las palabras tienen que quedar en su estado final.
+     La frasese sigue viendose entera, solo deja de estamparse al bajar. */
+  .manifiesto-palabra {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .foto:hover {
+    transform: rotate(var(--giro, -1deg));
+    box-shadow: 6px 6px 0 var(--tinta);
+  }
 }
 
 @media (max-width: 900px) {
   /* El pie pasa a 2x2 antes de caer a una sola columna */
   .footer-inner {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* El marco de la foto baja a algo manejable en tablet: al 100% de ancho la
+     caja queda de 700px y la foto compite con el texto. */
+  .hero-placa {
+    max-width: 420px;
   }
 }
 
@@ -754,6 +1073,34 @@ svg {
     grid-template-columns: 1fr;
     gap: var(--l);
   }
+
+  /* La banda de fotos no puede correr a la vista en movil: la pista es mas
+     ancha que la pantalla y sin este recorte la ultima foto queda cortada a
+     la mitad sin avisar. */
+  .fotos-banda {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .foto {
+    width: 200px;
+  }
+
+  /* Las cifras pasan a 2x2 antes que a una sola columna, para que los
+     divisores de tinta sigan cerrando la caja. */
+  .cifra {
+    border-right: 2px solid var(--tinta);
+    border-bottom: 2px solid var(--tinta);
+  }
+
+  .cifra:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .cifra:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -765,5 +1112,26 @@ svg {
 
   .logo {
     font-size: 1.25rem;
+  }
+
+  /* A una columna el borde derecho de la ultima cifra sobra y el de abajo
+     tambien: la caja queda cerrada por el borde del contenedor. */
+  .cifra,
+  .cifra:nth-child(2n),
+  .cifra:nth-last-child(-n + 2) {
+    border-right: 0;
+    border-bottom: 2px solid var(--tinta);
+  }
+
+  .cifra:last-child {
+    border-bottom: 0;
+  }
+
+  /* El sello se pega al borde de la foto y a 375px tapaba media imagen.
+     Adentro, en diagonal, sigue leyendose como etiqueta. */
+  .hero-sello {
+    left: var(--m);
+    bottom: calc(var(--xl) - 0.5rem);
+    font-size: 0.95rem;
   }
 }

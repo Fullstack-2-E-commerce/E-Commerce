@@ -17,6 +17,68 @@
 
   var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* --- Manifiesto: partir la frase en palabras ------------------------------
+     El bloque .manifiesto-frase se lee en el HTML como una frase normal. Este
+     la parte en <span class="manifiesto-palabra"> y le pasa el indice a --i,
+     que la regla @supports de animaciones.css usa para escalonar la entrada.
+
+     No se oculta nada: si el script no corre, o si el navegador no tiene
+     animation-timeline, la frase se lee entera y quieta. El manifiesto es el
+     unico bloque que depende del texto ya partido, asi que la comprobacion va
+     aca y no en un gate global. */
+  function partirManifiesto() {
+    var frases = document.querySelectorAll(".manifiesto-frase");
+
+    if (!frases.length) return;
+
+    var soporta =
+      CSS.supports("animation-timeline: view()") ||
+      CSS.supports("animation-timeline: scroll()");
+
+    if (reducido || !soporta) return;
+
+    frases.forEach(function (frase) {
+      /* Se recorre nodo por nodo, no con textContent: partir el innerHTML
+         perderia el <em> del medio y el texto quedaria sin la segunda tinta.
+
+         childNodes se copia antes: es una lista viva, y sacar nodos mientras
+         se recorre hace que el forEach se salte el que sigue. */
+      Array.prototype.slice.call(frase.childNodes).forEach(function (nodo) {
+        if (nodo.nodeType !== 3) return; /* texto plano nomas; los <em> se dejan */
+
+        /* Todo el nodo se arma aparte y se pega de una. Insertar con
+           nodo.after() en el bucle meteria cada palabra pegada al original,
+           delante de la anterior, y la frase saldria al reves. */
+        var pedazo = document.createDocumentFragment();
+
+        nodo.textContent.split(/(\s+)/).forEach(function (trozo) {
+          if (!trozo.trim()) {
+            /* El espacio entre palabras tambien tiene que sobrevivir, si no
+               todas las palabras quedan pegadas. */
+            pedazo.append(document.createTextNode(trozo));
+            return;
+          }
+
+          var palabra = document.createElement("span");
+          palabra.className = "manifiesto-palabra";
+          palabra.textContent = trozo;
+          pedazo.append(palabra);
+        });
+
+        nodo.replaceWith(pedazo);
+      });
+
+      /* El indice se reparte despues de partir, sobre el orden real del DOM:
+         contar antes daria el numero de nodos de texto, no el de palabras. */
+      Array.prototype.forEach.call(
+        frase.querySelectorAll(".manifiesto-palabra"),
+        function (palabra, i) {
+          palabra.style.setProperty("--i", i);
+        },
+      );
+    });
+  }
+
   /* --- Contenedores que se escalonan por posicion -------------------------- */
   /* Los hijos reciben --i con su indice. min() en el CSS cape a 8. */
   var Escalonados = [
@@ -208,6 +270,7 @@
 
   /* --- Arranque -------------------------------------------------------------- */
   function iniciar() {
+    partirManifiesto();
     escalar();
     marcarSellos();
     marcarColumnas();
