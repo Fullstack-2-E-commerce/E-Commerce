@@ -65,7 +65,7 @@
   border: 2px solid var(--tinta);
   box-shadow: 10px 10px 0 var(--terracota);
   overflow: hidden;
-  background: var(--carbon) url("../assets/videos/platos-poster.webp") center /
+  background: var(--carbon) url("/assets/videos/platos-poster.webp") center /
     cover;
 }
 
