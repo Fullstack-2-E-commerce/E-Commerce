@@ -1,3 +1,5 @@
+import { errorCorreo } from "./validaciones.js";
+
 (function () {
   const form = document.getElementById("contactoForm");
   if (!form) return;
@@ -16,18 +18,7 @@
     correo: {
       input: document.getElementById("correo"),
       error: document.getElementById("correoError"),
-      validar: (v) => {
-        if (!v) return "El correo es obligatorio.";
-        if (v.length > 100)
-          return "El correo no puede superar los 100 caracteres.";
-        const ok =
-          v.endsWith("@duoc.cl") ||
-          v.endsWith("@profesor.duoc.cl") ||
-          v.endsWith("@gmail.com");
-        if (!ok)
-          return "Solo se permiten correos @duoc.cl, @profesor.duoc.cl o @gmail.com.";
-        return "";
-      },
+      validar: (v) => errorCorreo(v),
     },
     asunto: {
       input: document.getElementById("asunto"),

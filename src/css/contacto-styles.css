@@ -131,9 +131,10 @@
 .campo input:focus,
 .campo textarea:focus,
 .campo select:focus {
-  outline: 3px solid var(--ocre-2);
-  outline-offset: 1px;
+  border-color: var(--terracota);
+  box-shadow: 4px 4px 0 var(--terracota);
   background: var(--blanco);
+  outline: none;
 }
 
 .campo .error-message {

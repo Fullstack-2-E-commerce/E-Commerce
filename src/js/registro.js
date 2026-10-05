@@ -1,5 +1,6 @@
 import { supabaseClient } from "./supabase.js";
 import { regiones } from "./regiones.js";
+import { errorCorreo } from "./validaciones.js";
 
 const registroForm = document.getElementById("registroForm");
 
@@ -67,24 +68,10 @@ registroForm.addEventListener("submit", async function (event) {
   }
 
   // Correo
-  if (email === "") {
-    emailError.textContent = "El correo es obligatorio.";
+  const msgCorreo = errorCorreo(email);
+  if (msgCorreo) {
+    emailError.textContent = msgCorreo;
     valido = false;
-  } else if (email.length > 100) {
-    emailError.textContent = "El correo no puede superar los 100 caracteres.";
-    valido = false;
-  } else {
-    const correoValido =
-      email.endsWith("@duoc.cl") ||
-      email.endsWith("@duocuc.cl") ||
-      email.endsWith("@profesor.duoc.cl") ||
-      email.endsWith("@gmail.com");
-
-    if (!correoValido) {
-      emailError.textContent =
-        "Solo se permiten correos @duoc.cl, @duocuc.cl, @profesor.duoc.cl o @gmail.com.";
-      valido = false;
-    }
   }
 
   // Contraseña

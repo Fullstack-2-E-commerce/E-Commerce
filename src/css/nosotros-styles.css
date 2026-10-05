@@ -63,6 +63,8 @@
   margin-top: var(--m);
   color: var(--tinta-2);
   font-size: 1.05rem;
+  max-width: 68ch;
+  text-wrap: pretty;
 }
 
 .valores-head {
@@ -82,11 +84,11 @@
   gap: var(--l);
 }
 
-/* Pilares: fichas de papel kraft sobre la pizarra */
+/* Pilares: fichas de papel kraft sobre la pizarra, misma sombra del sistema */
 .ingrediente {
   background: var(--papel);
   border: 2px solid var(--tinta);
-  box-shadow: 5px 5px 0 var(--terracota);
+  box-shadow: 6px 6px 0 var(--tinta);
   padding: var(--l);
   display: flex;
   flex-direction: column;

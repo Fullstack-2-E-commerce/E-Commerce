@@ -43,7 +43,7 @@
 
 /* Listado */
 .blog-listado {
-  padding-block: var(--xxl) 0;
+  padding-block: var(--xxl);
 }
 
 .blog-grid {
@@ -58,9 +58,22 @@
 
 .post-titulo {
   font-size: 1.4rem;
+  text-wrap: pretty;
 }
 
-/* Llamada final: bloque de tinta */
+/* La ilustración llena más marco: al 62% heredado la tarjeta queda
+   medio vacía frente a las fotos de producto que llenan el 4:3. */
+.post-img svg {
+  width: 78%;
+}
+
+.post-extracto {
+  max-width: 48ch;
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+/* Llamada final: bloque de tinta con presencia de tarjeta */
 .blog-cta {
   margin-top: var(--xxl);
   padding: clamp(1.5rem, 4vw, 2.5rem);
@@ -69,7 +82,9 @@
   gap: var(--m);
   align-items: center;
   justify-content: space-between;
+  border: 2px solid var(--tinta);
   border-top: 3px solid var(--terracota);
+  box-shadow: 8px 8px 0 var(--tinta);
 }
 
 .blog-cta h2 {
