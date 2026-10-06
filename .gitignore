@@ -34,6 +34,7 @@ repomix-output.xml
 # Archivos locales y temporales
 repomix-output.xml
 .env.local
+.env
 .respaldo
 revision-home-completa.png
 .impeccable/before-home-desktop.png

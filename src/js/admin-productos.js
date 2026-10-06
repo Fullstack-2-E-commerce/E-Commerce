@@ -1,10 +1,17 @@
 // Configuración e Inicialización de Supabase
 import { createClient } from "@supabase/supabase-js";
 
-const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
-const SUPABASE_ANON_KEY = "TU_ANON_KEY";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Validación opcional para detectar credenciales faltantes durante desarrollo
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error(
+    " Error: Las variables de entorno de Supabase no están definidas en .env.local",
+  );
+}
 
 // Elementos del DOM
 const form = document.getElementById("form-producto");

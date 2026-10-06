@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 import { supabaseClient } from "./supabase.js";
 import { regiones } from "./regiones.js";
 import { errorCorreo } from "./validaciones.js";
+=======
+// Importar cliente de Supabase y regiones
+import { supabase } from "./supabase.js";
+import { regiones } from "./regiones.js";
+>>>>>>> Stashed changes
 
 const registroForm = document.getElementById("registroForm");
 
@@ -39,7 +45,7 @@ registroForm.addEventListener("submit", async function (event) {
 
   let valido = true;
 
-  // RUT
+  // Validación de RUT
   if (rut === "") {
     rutError.textContent = "El RUT es obligatorio.";
     valido = false;
@@ -48,7 +54,7 @@ registroForm.addEventListener("submit", async function (event) {
     valido = false;
   }
 
-  // Nombre
+  // Validación de Nombre
   if (nombre === "") {
     nombreError.textContent = "El nombre es obligatorio.";
     valido = false;
@@ -57,7 +63,7 @@ registroForm.addEventListener("submit", async function (event) {
     valido = false;
   }
 
-  // Apellidos
+  // Validación de Apellidos
   if (apellidos === "") {
     apellidosError.textContent = "Los apellidos son obligatorios.";
     valido = false;
@@ -67,14 +73,20 @@ registroForm.addEventListener("submit", async function (event) {
     valido = false;
   }
 
+<<<<<<< Updated upstream
   // Correo
   const msgCorreo = errorCorreo(email);
   if (msgCorreo) {
     emailError.textContent = msgCorreo;
+=======
+  // Validación de Correo
+  if (email === "") {
+    emailError.textContent = "El correo es obligatorio.";
+>>>>>>> Stashed changes
     valido = false;
   }
 
-  // Contraseña
+  // Validación de Contraseña
   if (password === "") {
     passwordError.textContent = "La contraseña es obligatoria.";
     valido = false;
@@ -106,15 +118,23 @@ registroForm.addEventListener("submit", async function (event) {
     valido = false;
   }
 
-  if (!valido) {
-    return;
-  }
+  if (!valido) return;
 
-  const { data, error } = await supabaseClient.auth.signUp({
+  // Cambiado a supabase (el cliente importado)
+  const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
     options: {
-      emailRedirectTo: "http://127.0.0.3:5500/src/pages/login.html",
+      emailRedirectTo: `${window.location.origin}/src/pages/login.html`,
+      data: {
+        rut: rut,
+        nombre: nombre,
+        apellidos: apellidos,
+        fecha_nacimiento: fechaNacimiento || null,
+        region: regiones[region]?.nombre || region,
+        comuna: comuna,
+        direccion: direccion,
+      },
     },
   });
 
@@ -123,30 +143,16 @@ registroForm.addEventListener("submit", async function (event) {
     return;
   }
 
-  const datosUsuario = {
-    id: data.user.id,
-    rut: rut,
-    nombre: nombre,
-    apellidos: apellidos,
-    email: email,
-    fecha_nacimiento: fechaNacimiento || null,
-    region: regiones[region].nombre,
-    comuna: comuna,
-    direccion: direccion,
-  };
-
-  localStorage.setItem("datosUsuarioPendiente", JSON.stringify(datosUsuario));
-
   registroMessage.textContent =
     "Cuenta creada correctamente. Revisa tu correo para confirmar tu cuenta.";
 });
 
-// El boton de reenviar solo existe en registros.html: dentro del modal de las
-// paginas de tienda no hay a que escuchar.
+// Reenviar correo
 const reenviarCorreo = document.getElementById("reenviarCorreo");
 
 reenviarCorreo?.addEventListener("click", async function () {
   const email = document.getElementById("email").value.trim();
+  const registroMessage = document.getElementById("registroMessage");
 
   if (email === "") {
     registroMessage.textContent =
@@ -154,7 +160,7 @@ reenviarCorreo?.addEventListener("click", async function () {
     return;
   }
 
-  const { error } = await supabaseClient.auth.resend({
+  const { error } = await supabase.auth.resend({
     type: "signup",
     email: email,
   });
