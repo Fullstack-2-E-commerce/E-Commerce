@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
-import { supabaseClient } from "./supabase.js";
-import { regiones } from "./regiones.js";
-import { errorCorreo } from "./validaciones.js";
-=======
-// Importar cliente de Supabase y regiones
 import { supabase } from "./supabase.js";
 import { regiones } from "./regiones.js";
->>>>>>> Stashed changes
+import { errorCorreo } from "./validaciones.js";
 
 const registroForm = document.getElementById("registroForm");
 
@@ -73,16 +67,10 @@ registroForm.addEventListener("submit", async function (event) {
     valido = false;
   }
 
-<<<<<<< Updated upstream
   // Correo
   const msgCorreo = errorCorreo(email);
   if (msgCorreo) {
     emailError.textContent = msgCorreo;
-=======
-  // Validación de Correo
-  if (email === "") {
-    emailError.textContent = "El correo es obligatorio.";
->>>>>>> Stashed changes
     valido = false;
   }
 
