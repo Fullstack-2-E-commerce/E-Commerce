@@ -91,7 +91,7 @@ Todo cuelga de `src/`. La estructura pedida (`/css`, `/js`, `/assets`, `/pages`)
 │   │   └── supabase.js          # Cliente de Supabase
 │   └── assets/
 │       ├── img/                 # Fotos .webp de los platos (licencia libre, atribución en el ERS)
-│       └── videos/              # Video del catálogo (platos.webm: VP8, 720p, 12,5 s a 24 fps, ~1,7 MB, cinta de nombres estática) + póster
+│       └── videos/              # Video del catálogo (platos.webm: VP8, 720p, 11,25 s a 24 fps, ~1,1 MB, nueve platos, cinta de nombres estática) + póster
 ├── PLAN.md
 ├── README.md
 ├── COMMIT_GUIA.md
