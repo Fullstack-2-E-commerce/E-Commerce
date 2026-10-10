@@ -12,43 +12,11 @@
     <link rel="stylesheet" href="/src/css/auth-styles.css" />
     <link rel="stylesheet" href="/src/css/animaciones.css" />
     <link rel="stylesheet" href="/src/css/contacto-styles.css" />
+    <script type="module" src="/src/js/components/navbar.js"></script>
+    <script type="module" src="/src/js/components/footer.js"></script>
   </head>
   <body>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="/" class="logo"
-          >Sabores de<span class="logo-em">Chile</span></a
-        >
-        <nav class="main-nav" aria-label="Navegación principal">
-          <ul>
-            <li><a href="/" class="nav-link">Home</a></li>
-            <li>
-              <a href="/src/pages/productos.html" class="nav-link">Productos</a>
-            </li>
-            <li><a href="/src/pages/blogs.html" class="nav-link">Blogs</a></li>
-            <li>
-              <a href="/src/pages/nosotros.html" class="nav-link">Nosotros</a>
-            </li>
-            <li>
-              <a
-                href="/src/pages/contacto.html"
-                class="nav-link is-active"
-                aria-current="page"
-                >Contacto</a
-              >
-            </li>
-          </ul>
-        </nav>
-
-        <div class="auth-sesion" id="authSesion">
-          <span class="auth-correo" id="authCorreo"></span>
-          <button type="button" class="auth-salir" id="authSalir">Salir</button>
-        </div>
-        <button type="button" class="auth-trigger" id="authEntrar">
-          Iniciar sesión
-        </button>
-      </div>
-    </header>
+    <site-navbar></site-navbar>
 
     <main>
       <section class="contacto-hero">
@@ -140,7 +108,10 @@
           </div>
         </aside>
 
-        <section class="contacto-form-card revelar" aria-labelledby="titulo-form">
+        <section
+          class="contacto-form-card revelar"
+          aria-labelledby="titulo-form"
+        >
           <p class="productos-kicker">Carta a la cocina</p>
           <h2 id="titulo-form" class="productos-titulo">
             Formulario de contacto
@@ -228,70 +199,7 @@
       </div>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div class="footer-marca">
-          <p class="footer-logo">Sabores de Chile</p>
-          <p class="footer-tagline">
-            Cocina casera hecha con cariño, del campo a tu mesa.
-          </p>
-        </div>
-
-        <nav class="footer-nav" aria-label="Tienda">
-          <h2 class="footer-titulo">Tienda</h2>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/src/pages/productos.html">Productos</a></li>
-            <li><a href="/src/pages/blogs.html">Blogs</a></li>
-            <li><a href="/src/pages/nosotros.html">Nosotros</a></li>
-            <li><a href="/src/pages/contacto.html">Contacto</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer-nav" aria-label="Cuenta">
-          <h2 class="footer-titulo">Cuenta</h2>
-          <ul>
-            <li><a href="/src/pages/login.html">Iniciar sesión</a></li>
-            <li><a href="/src/pages/registros.html">Crear cuenta</a></li>
-          </ul>
-        </nav>
-
-        <div class="footer-contacto">
-          <h2 class="footer-titulo">Visítanos</h2>
-          <address>
-            Av. Providencia 1234, Santiago
-            <a href="tel:+56912345678">+56 9 1234 5678</a>
-            <a href="mailto:hola@saboresdechile.cl">hola@saboresdechile.cl</a>
-          </address>
-          <p class="footer-horario">Martes a domingo, 11:00 a 20:00</p>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 Sabores de Chile. Todos los derechos reservados.</p>
-        <details class="footer-creditos">
-          <summary>Créditos de las fotografías</summary>
-          <ul>
-            <li>Pastel de choclo — Foofine (CC BY-SA 4.0)</li>
-            <li>Porotos granados — Pachanka (CC BY-SA 4.0)</li>
-            <li>Cazuela de vacuno — TUTOXIC (CC BY-SA 4.0)</li>
-            <li>Empanada de pino — J. B. (CC BY 2.0)</li>
-            <li>Charquicán — Pablo Lobos Ovalle (CC BY-SA 4.0)</li>
-            <li>Sopaipillas — Warko (CC BY-SA 3.0)</li>
-            <li>Completo italiano — Bárb Santelices (CC0)</li>
-            <li>Pan amasado — Alanis Galaz (CC BY-SA 3.0)</li>
-            <li>Terremoto — Dirick91 (CC BY-SA 4.0)</li>
-            <li>Mote con huesillo — Shadowmaster ra (CC BY-SA 4.0)</li>
-          </ul>
-          <p>Fotografías de Wikimedia Commons, publicadas bajo licencia:</p>
-          <p class="footer-licencia">
-            <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es"
-              >Creative Commons BY-SA 4.0</a
-            >
-          </p>
-        </details>
-      </div>
-    </footer>
+    <site-footer></site-footer>
 
     <dialog
       class="auth-modal"
