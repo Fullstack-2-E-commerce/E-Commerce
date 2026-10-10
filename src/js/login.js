@@ -1,4 +1,4 @@
-import { supabaseClient } from "./supabase.js";
+import { supabase } from "./supabase.js";
 import { errorCorreo } from "./validaciones.js";
 
 const loginForm = document.getElementById("loginForm");
@@ -47,7 +47,7 @@ loginForm.addEventListener("submit", async function (event) {
   }
 
   // Intentar iniciar sesión con Supabase
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
   });
@@ -66,7 +66,7 @@ loginForm.addEventListener("submit", async function (event) {
 
     datosUsuario.id = data.user.id;
 
-    const { error: errorPerfil } = await supabaseClient
+    const { error: errorPerfil } = await supabase
       .from("usuarios")
       .insert([datosUsuario]);
 

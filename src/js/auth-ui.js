@@ -1,6 +1,6 @@
 // Estado de sesión y apertura de los modales de login y registro.
 // Solo se activa en páginas que traen el bloque de auth en el header.
-import { supabaseClient } from "./supabase.js";
+import { supabase } from "./supabase.js";
 
 (function () {
   const entrar = document.getElementById("authEntrar");
@@ -39,7 +39,7 @@ import { supabaseClient } from "./supabase.js";
   entrar.addEventListener("click", () => abrir("login"));
 
   salir.addEventListener("click", async () => {
-    await supabaseClient.auth.signOut();
+    await supabase.auth.signOut();
   });
 
   document.querySelectorAll("[data-auth-abrir]").forEach((boton) => {
@@ -67,6 +67,6 @@ import { supabaseClient } from "./supabase.js";
     });
   });
 
-  supabaseClient.auth.getSession().then(({ data }) => pintar(data.session));
-  supabaseClient.auth.onAuthStateChange((_evento, estado) => pintar(estado));
+  supabase.auth.getSession().then(({ data }) => pintar(data.session));
+  supabase.auth.onAuthStateChange((_evento, estado) => pintar(estado));
 })();

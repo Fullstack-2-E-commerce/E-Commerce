@@ -44,7 +44,8 @@
          childNodes se copia antes: es una lista viva, y sacar nodos mientras
          se recorre hace que el forEach se salte el que sigue. */
       Array.prototype.slice.call(frase.childNodes).forEach(function (nodo) {
-        if (nodo.nodeType !== 3) return; /* texto plano nomas; los <em> se dejan */
+        if (nodo.nodeType !== 3)
+          return; /* texto plano nomas; los <em> se dejan */
 
         /* Todo el nodo se arma aparte y se pega de una. Insertar con
            nodo.after() en el bucle meteria cada palabra pegada al original,
@@ -93,13 +94,10 @@
   function escalar() {
     Escalonados.forEach(function (sel) {
       document.querySelectorAll(sel).forEach(function (contenedor) {
-        Array.prototype.forEach.call(
-          contenedor.children,
-          function (hijo, i) {
-            hijo.style.setProperty("--i", i);
-            hijo.classList.add("escalonado");
-          },
-        );
+        Array.prototype.forEach.call(contenedor.children, function (hijo, i) {
+          hijo.style.setProperty("--i", i);
+          hijo.classList.add("escalonado");
+        });
       });
     });
 
@@ -157,7 +155,8 @@
              indice es la posicion entre los hijos del bloque, no el del
              selector: ".productos-kicker" matchea en toda la pagina. */
           var i = Array.prototype.indexOf.call(el.parentElement.children, el);
-          el.style.transitionDelay = "calc(var(--paso) * " + Math.min(i, 3) + ")";
+          el.style.transitionDelay =
+            "calc(var(--paso) * " + Math.min(i, 3) + ")";
         }
       });
     });
