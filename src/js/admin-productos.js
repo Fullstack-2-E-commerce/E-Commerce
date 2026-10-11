@@ -1,17 +1,4 @@
-// Configuración e Inicialización de Supabase
-import { createClient } from "@supabase/supabase-js";
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Validación opcional para detectar credenciales faltantes durante desarrollo
-if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  console.error(
-    " Error: Las variables de entorno de Supabase no están definidas en .env.local",
-  );
-}
+import { supabase } from "./supabase.js";
 
 // Elementos del DOM
 const form = document.getElementById("form-producto");
@@ -23,15 +10,49 @@ const btnSalir = document.getElementById("authSalir");
 
 let editandoId = null;
 
-// Inicialización de la vista
-document.addEventListener("DOMContentLoaded", () => {
+// Inicialización con protección de ruta (RBAC)
+document.addEventListener("DOMContentLoaded", async () => {
+  const tieneAcceso = await verificarAccesoAdmin();
+  if (!tieneAcceso) return;
+
   obtenerProductos();
   configurarEventos();
 });
 
+// GUARDIA DE RUTA: Verificar que el usuario tenga rol Administrador o Vendedor
+async function verificarAccesoAdmin() {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    alert("Debes iniciar sesión para acceder al panel de administración.");
+    window.location.href = "/src/pages/login.html";
+    return false;
+  }
+
+  // Consultar el rol en public.usuarios
+  const { data: usuario, error } = await supabase
+    .from("usuarios")
+    .select("rol")
+    .eq("id", session.user.id)
+    .single();
+
+  if (
+    error ||
+    !usuario ||
+    !["Administrador", "Vendedor"].includes(usuario.rol)
+  ) {
+    alert("Acceso denegado: No tienes permisos para gestionar productos.");
+    window.location.href = "/";
+    return false;
+  }
+
+  return true;
+}
+
 // Configuración de listeners globales de la página
 function configurarEventos() {
-  // Evento Cierre de Sesión (Admin Logout)
   if (btnSalir) {
     btnSalir.addEventListener("click", async () => {
       const { error } = await supabase.auth.signOut();
@@ -39,15 +60,12 @@ function configurarEventos() {
         mostrarFeedback("Error al cerrar sesión: " + error.message, "error");
         return;
       }
-      // Redirección al Home tras salir
       window.location.href = "/";
     });
   }
 
-  // Listener para el botón cancelar edición
   btnCancelar.addEventListener("click", resetearFormulario);
 
-  // Delegación de eventos en la tabla para botones de editar y eliminar
   tablaBody.addEventListener("click", (e) => {
     const btnEdit = e.target.closest(".btn-edit");
     const btnDelete = e.target.closest(".btn-delete");
@@ -62,15 +80,14 @@ function configurarEventos() {
   });
 }
 
-// FUNCIÓN: Mostrar mensajes dinámicos usando clases CSS
 function mostrarFeedback(mensaje, tipo) {
-  feedbackEl.className = ""; // Limpiar clases previas
+  feedbackEl.className = "";
   feedbackEl.classList.add(tipo === "error" ? "error" : "exito");
   feedbackEl.textContent = mensaje;
   feedbackEl.style.display = "block";
 }
 
-// FUNCIÓN: Obtener y Listar Productos desde Supabase
+// Obtener y Listar Productos desde Supabase
 async function obtenerProductos() {
   tablaBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Cargando inventario...</td></tr>`;
 
@@ -86,7 +103,7 @@ async function obtenerProductos() {
 
   tablaBody.innerHTML = "";
 
-  if (productos.length === 0) {
+  if (!productos || productos.length === 0) {
     tablaBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No hay productos registrados.</td></tr>`;
     return;
   }
@@ -112,12 +129,11 @@ async function obtenerProductos() {
   });
 }
 
-// MANEJO DEL FORMULARIO (Crear / Editar con Validaciones)
+// MANEJO DEL FORMULARIO (Crear / Editar)
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   feedbackEl.style.display = "none";
 
-  // Capturar datos
   const codigo = document.getElementById("prod-codigo").value.trim();
   const nombre = document.getElementById("prod-nombre").value.trim();
   const categoria = document.getElementById("prod-categoria").value;
@@ -133,7 +149,6 @@ form.addEventListener("submit", async (e) => {
   const stock = Number(stockInput);
   const stockCritico = stockCriticoInput !== "" ? Number(stockCriticoInput) : 5;
 
-  // VALIDACIONES
   if (codigo.length < 3) {
     mostrarFeedback("El código debe tener al menos 3 caracteres.", "error");
     return;
@@ -182,25 +197,26 @@ form.addEventListener("submit", async (e) => {
   };
 
   if (editandoId) {
-    // ACTUALIZAR PRODUCTO
     const { error } = await supabase
       .from("productos")
       .update(payload)
       .eq("id", editandoId);
 
     if (error) {
-      mostrarFeedback("Error al actualizar: " + error.message, "error");
+      mostrarFeedback(
+        "Error al actualizar producto: " + error.message,
+        "error",
+      );
     } else {
       mostrarFeedback("¡Producto actualizado con éxito!", "exito");
       resetearFormulario();
       obtenerProductos();
     }
   } else {
-    // CREAR PRODUCTO
     const { error } = await supabase.from("productos").insert([payload]);
 
     if (error) {
-      mostrarFeedback("Error al guardar: " + error.message, "error");
+      mostrarFeedback("Error al guardar producto: " + error.message, "error");
     } else {
       mostrarFeedback("¡Producto creado con éxito!", "exito");
       resetearFormulario();
@@ -209,7 +225,7 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// FUNCIÓN: Eliminar Producto
+// Eliminar Producto
 async function eliminarProducto(id) {
   if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
     const { error } = await supabase.from("productos").delete().eq("id", id);
@@ -222,7 +238,7 @@ async function eliminarProducto(id) {
   }
 }
 
-// FUNCIÓN: Cargar datos en el formulario para editar
+// Preparar edición
 async function prepararEdicion(id) {
   const { data: prod, error } = await supabase
     .from("productos")
@@ -230,7 +246,13 @@ async function prepararEdicion(id) {
     .eq("id", id)
     .single();
 
-  if (error) return;
+  if (error) {
+    mostrarFeedback(
+      "No se pudo obtener el producto: " + error.message,
+      "error",
+    );
+    return;
+  }
 
   editandoId = id;
   document.getElementById("prod-codigo").value = prod.codigo;
