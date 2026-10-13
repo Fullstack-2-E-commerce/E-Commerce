@@ -613,6 +613,16 @@ html {
   color: var(--tinta-2);
 }
 
+/* Las descripciones salen de la BD y son párrafos largos: se recortan a 3
+   líneas para que las tarjetas queden parejas. Solo .producto-desc: los
+   extractos de blog siguen completos. */
+.producto-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 .precio {
   font-family: var(--display);
   font-size: 1.35rem;
@@ -707,7 +717,9 @@ html {
   /* La inclinacion es propia de cada foto: --giro se sobrescribe por nth-child
      mas abajo. Sin ellas todas las etiquetas se verian como una repeticion. */
   transform: rotate(var(--giro, -1deg));
-  transition: transform 0.3s var(--salida), box-shadow 0.3s var(--salida);
+  transition:
+    transform 0.3s var(--salida),
+    box-shadow 0.3s var(--salida);
 }
 
 .foto:hover {
@@ -767,8 +779,8 @@ html {
     animation-fill-mode: both;
     animation-timing-function: linear;
     animation-timeline: --manifiesto;
-    animation-range: entry calc(12% + var(--i, 0) * 4.5%)
-      entry calc(48% + var(--i, 0) * 4.5%);
+    animation-range: entry calc(12% + var(--i, 0) * 4.5%) entry
+      calc(48% + var(--i, 0) * 4.5%);
   }
 }
 

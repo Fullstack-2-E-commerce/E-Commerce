@@ -27,7 +27,10 @@ function revelarEnScroll() {
   elementos.forEach((el) => observador.observe(el));
 }
 
-/* Al cargar, la grilla de productos todavia no existe: la pinta tienda.js al
-   ejecutarse. Si el observer se arma antes, las tarjetas nunca entran en
-   pantalla y quedan en opacity 0 para siempre. */
+/* Al cargar, la grilla de productos todavia no existe: la pinta tienda.js
+   con un fetch a Supabase, DESPUES del DOMContentLoaded. Ese archivo avisa
+   con `catalogo-listo` y acá se rearma el observer para las tarjetas nuevas.
+   Si el aviso llega antes que este listener, el DOMContentLoaded igual las
+   encuentra porque ya están en el DOM. */
 document.addEventListener("DOMContentLoaded", revelarEnScroll);
+document.addEventListener("catalogo-listo", revelarEnScroll);

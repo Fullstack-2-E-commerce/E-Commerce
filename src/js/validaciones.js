@@ -15,3 +15,8 @@ export function errorCorreo(v) {
     return "Solo se permiten correos @duoc.cl, @duocuc.cl, @profesor.duoc.cl o @gmail.com.";
   return "";
 }
+
+/** 7990 -> "$7.990" */
+export function precioCLP(valor) {
+  return "$" + Number(valor).toLocaleString("es-CL");
+}

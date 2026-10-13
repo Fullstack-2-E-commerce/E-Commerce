@@ -115,12 +115,10 @@
               <p class="productos-kicker">Catálogo completo</p>
               <h2 class="productos-titulo">Los diez platos</h2>
             </div>
-            <p class="productos-lead">
-              Todo se prepara el mismo día. Los precios son por porción.
-            </p>
+            <p class="productos-lead">Todo se prepara el mismo día.</p>
           </header>
 
-          <!-- Las tarjetas las pinta tienda.js desde catalogo.js. -->
+          <!-- Las tarjetas las pinta tienda.js desde Supabase. -->
           <div class="productos-grid" data-catalogo="todos"></div>
         </div>
       </section>
@@ -130,7 +128,6 @@
 
     <!-- El catalogo va antes de app.js: ese archivo arma el
          scroll-reveal al ejecutarse y necesita las tarjetas ya en el DOM. -->
-    <script type="module" src="/src/js/catalogo.js"></script>
     <script type="module" src="/src/js/tienda.js"></script>
     <script type="module" src="/src/js/app.js"></script>
     <script type="module" src="/src/js/animaciones.js"></script>
