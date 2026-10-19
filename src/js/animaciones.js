@@ -122,6 +122,8 @@
     [".productos-hero-titulo", "sello-titulo sello"],
     [".valores-head h2", "sello-titulo sello"],
     [".hero-title", "sello-titulo sello"],
+    // Paginas de carrito y checkout.
+    [".pedido-titulo", "sello-titulo sello"],
     // Bloques de apoyo: entran sin segunda tinta para no competes con el
     // titulo de su propia seccion.
     [".valores-head .valores-lead", "sello-plano"],
@@ -131,6 +133,7 @@
     [".nosotros-hero-lead", "sello-plano"],
     [".productos-hero-lead", "sello-plano"],
     [".hero-tagline", "sello-plano"],
+    [".pedido-lead", "sello-plano"],
     // Kicker y tagline: la linea de entrada de cada bloque, arriba del titulo.
     [".hero-kicker", "sello-plano"],
     [".productos-kicker", "sello-plano"],

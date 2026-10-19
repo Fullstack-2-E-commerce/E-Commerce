@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito | Sabores de Chile</title>
+    <meta
+      name="description"
+      content="Revisa los platos que agregaste al carrito y continúa con tu pedido en Sabores de Chile."
+    />
+    <link rel="stylesheet" href="/src/css/home-styles.css" />
+    <link rel="stylesheet" href="/src/css/auth-styles.css" />
+    <link rel="stylesheet" href="/src/css/animaciones.css" />
+    <script type="module" src="/src/js/components/navbar.js"></script>
+    <script type="module" src="/src/js/components/footer.js"></script>
+  </head>
+  <body>
+    <site-navbar></site-navbar>
+
+    <main>
+      <section class="pedido-hero">
+        <div class="container">
+          <h1 class="pedido-titulo">Tu carrito</h1>
+          <p class="pedido-lead">
+            Revisa los platos y las cantidades. Puedes cambiarlos acá mismo.
+          </p>
+        </div>
+      </section>
+
+      <section class="pedido-seccion">
+        <div class="container pedido-grid">
+          <!-- Las líneas las pinta carrito.js desde localStorage. -->
+          <div
+            class="cart-lineas"
+            data-carrito-lineas
+            tabindex="-1"
+            aria-label="Platos en el carrito"
+          ></div>
+
+          <aside class="pedido-resumen" data-carrito-pie>
+            <h2 class="pedido-resumen-titulo">Resumen</h2>
+
+            <div class="cart-total">
+              <span class="cart-total-etiqueta">Total</span>
+              <strong class="cart-total-monto" data-carrito-total>$0</strong>
+            </div>
+
+            <div class="pedido-acciones">
+              <p class="pedido-nota">
+                Todavía no hay pagos en línea: al confirmar, el pedido queda
+                guardado en este navegador.
+              </p>
+
+              <a
+                class="cart-btn cart-btn--primario"
+                href="/src/pages/checkout.html"
+              >
+                Continuar con el pedido
+              </a>
+              <a
+                class="cart-btn cart-btn--fantasma"
+                href="/src/pages/productos.html"
+              >
+                Seguir comprando
+              </a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <script type="module" src="/src/js/carrito.js"></script>
+    <script type="module" src="/src/js/app.js"></script>
+    <script type="module" src="/src/js/animaciones.js"></script>
+    <script type="module" src="/src/js/auth-ui.js"></script>
+  </body>
+</html>

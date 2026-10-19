@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar pedido | Sabores de Chile</title>
+    <meta
+      name="description"
+      content="Confirma tu pedido en Sabores de Chile: deja los datos de entrega y guarda el pedido en tu navegador."
+    />
+    <link rel="stylesheet" href="/src/css/home-styles.css" />
+    <link rel="stylesheet" href="/src/css/auth-styles.css" />
+    <link rel="stylesheet" href="/src/css/animaciones.css" />
+    <script type="module" src="/src/js/components/navbar.js"></script>
+    <script type="module" src="/src/js/components/footer.js"></script>
+  </head>
+  <body>
+    <site-navbar></site-navbar>
+
+    <main>
+      <section class="pedido-hero">
+        <div class="container">
+          <h1 class="pedido-titulo">Confirmar pedido</h1>
+          <p class="pedido-lead">
+            Déjanos los datos de entrega. Los usamos para armar el pedido y no
+            quedan guardados en el navegador.
+          </p>
+        </div>
+      </section>
+
+      <section class="pedido-seccion">
+        <div class="container pedido-grid">
+          <form id="checkoutForm" class="pedido-form" novalidate>
+            <h2 class="pedido-form-titulo">Datos de quien recibe</h2>
+
+            <p class="pedido-nota">
+              ¿Tienes cuenta?
+              <a href="#" data-auth-abrir="login">Inicia sesión</a> y completamos
+              el formulario con tus datos.
+            </p>
+            <p class="pedido-nota" id="checkoutNota" hidden>
+              Completamos el formulario con los datos de tu cuenta. Puedes
+              corregir lo que haga falta.
+            </p>
+
+            <div class="form-group">
+              <label for="pedidoNombre">Nombre</label>
+              <input
+                type="text"
+                id="pedidoNombre"
+                name="nombre"
+                placeholder="Tu nombre"
+                maxlength="50"
+                autocomplete="name"
+                required
+              />
+              <small
+                id="pedidoNombreError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="pedidoRut">RUT</label>
+              <input
+                type="text"
+                id="pedidoRut"
+                name="rut"
+                placeholder="11111111-1"
+                maxlength="12"
+                autocomplete="off"
+                required
+              />
+              <small
+                id="pedidoRutError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="pedidoCorreo">Correo electrónico</label>
+              <input
+                type="email"
+                id="pedidoCorreo"
+                name="correo"
+                placeholder="ejemplo@gmail.com"
+                maxlength="100"
+                autocomplete="email"
+                required
+              />
+              <small
+                id="pedidoCorreoError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="pedidoRegion">Región</label>
+              <select id="pedidoRegion" name="region" required>
+                <option value="">Selecciona una región</option>
+              </select>
+              <small
+                id="pedidoRegionError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="pedidoComuna">Comuna</label>
+              <select id="pedidoComuna" name="comuna" disabled required>
+                <option value="">Selecciona una comuna</option>
+              </select>
+              <small
+                id="pedidoComunaError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="pedidoDireccion">Dirección</label>
+              <input
+                type="text"
+                id="pedidoDireccion"
+                name="direccion"
+                placeholder="Calle y número"
+                maxlength="300"
+                autocomplete="street-address"
+                required
+              />
+              <small
+                id="pedidoDireccionError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <button type="submit" class="btn" id="checkoutButton">
+              Confirmar pedido
+            </button>
+
+            <p
+              id="checkoutMessage"
+              class="form-message"
+              aria-live="polite"
+            ></p>
+          </form>
+
+          <aside
+            class="pedido-resumen"
+            data-carrito-pie
+            aria-labelledby="pedidoResumenTitulo"
+          >
+            <h2 class="pedido-resumen-titulo" id="pedidoResumenTitulo">
+              Tu pedido
+            </h2>
+
+            <div
+              class="cart-lineas"
+              data-carrito-lineas
+              tabindex="-1"
+            ></div>
+
+            <div class="cart-total">
+              <span class="cart-total-etiqueta">Total</span>
+              <strong class="cart-total-monto" data-carrito-total>$0</strong>
+            </div>
+
+            <p class="pedido-nota">
+              Sin pagos en línea por ahora: el pedido queda guardado en este
+              navegador.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <site-footer></site-footer>
+
+    <dialog class="auth-modal" id="pedidoModal" aria-labelledby="pedidoTitulo">
+      <div class="auth-modal-cabecera">
+        <h2 id="pedidoTitulo">Pedido confirmado</h2>
+        <button
+          type="button"
+          class="auth-modal-cerrar"
+          data-pedido-cerrar
+          aria-label="Cerrar"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="auth-modal-cuerpo">
+        <p class="cart-total">
+          <span class="cart-total-etiqueta">Folio</span>
+          <strong class="cart-total-monto" id="pedidoFolio">—</strong>
+        </p>
+
+        <p class="pedido-nota" id="pedidoResumenFinal"></p>
+
+        <p class="pedido-nota">
+          El pedido quedó guardado en este navegador. Los datos de quien recibe
+          no se guardaron.
+        </p>
+
+        <a
+          class="cart-btn cart-btn--primario"
+          href="/src/pages/productos.html"
+          data-pedido-cerrar
+        >
+          Volver a la carta
+        </a>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/js/checkout.js"></script>
+    <script type="module" src="/src/js/app.js"></script>
+    <script type="module" src="/src/js/animaciones.js"></script>
+    <script type="module" src="/src/js/registro.js"></script>
+    <script type="module" src="/src/js/login.js"></script>
+    <script type="module" src="/src/js/auth-ui.js"></script>
+  </body>
+</html>

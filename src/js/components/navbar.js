@@ -205,15 +205,264 @@ export class SiteNavbar extends HTMLElement {
             <button
               type="button"
               class="cart-btn cart-btn--fantasma cart-vaciar"
-              id="cartVaciar"
             >
               Vaciar carrito
             </button>
 
-            <button type="button" class="cart-btn cart-btn--primario" id="cartContinuar">
+            <a
+              class="cart-btn cart-btn--primario"
+              href="/src/pages/checkout.html"
+            >
               Continuar compra
-            </button>
+            </a>
           </div>
+
+          <a class="cart-ver-pagina" href="/src/pages/carrito.html">
+            Ver el carrito completo
+          </a>
+        </div>
+      </dialog>
+
+      <!-- Los modales de sesion viajan con el header: cualquier pagina con
+           navbar tiene login y registro sin copiar el bloque. -->
+          <dialog
+        class="auth-modal"
+        id="authModalLogin"
+        aria-labelledby="authTituloLogin"
+      >
+        <div class="auth-modal-cabecera">
+          <h2 id="authTituloLogin">Iniciar sesión</h2>
+          <button
+            type="button"
+            class="auth-modal-cerrar"
+            data-auth-cerrar
+            aria-label="Cerrar"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="auth-modal-cuerpo">
+          <form id="loginForm" novalidate>
+            <div class="form-group">
+              <label for="login-email">Correo electrónico</label>
+              <input
+                type="email"
+                id="login-email"
+                name="email"
+                maxlength="100"
+                placeholder="ejemplo@gmail.com"
+                autocomplete="email"
+                required
+              />
+              <small
+                id="login-emailError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Contraseña</label>
+              <input
+                type="password"
+                id="login-password"
+                name="password"
+                placeholder="Entre 4 y 10 caracteres"
+                autocomplete="current-password"
+                required
+              />
+              <small
+                id="login-passwordError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <button type="submit" class="btn">Iniciar sesión</button>
+            <p id="loginMessage" class="form-message" aria-live="polite"></p>
+
+            <p class="register-link">
+              ¿No tienes una cuenta?
+              <a href="/src/pages/registros.html" data-auth-ir="registro"
+                >Crear cuenta</a
+              >
+            </p>
+          </form>
+        </div>
+      </dialog>
+
+      <dialog
+        class="auth-modal"
+        id="authModalRegistro"
+        aria-labelledby="authTituloRegistro"
+      >
+        <div class="auth-modal-cabecera">
+          <h2 id="authTituloRegistro">Crear cuenta</h2>
+          <button
+            type="button"
+            class="auth-modal-cerrar"
+            data-auth-cerrar
+            aria-label="Cerrar"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="auth-modal-cuerpo">
+          <form id="registroForm" novalidate>
+            <div class="form-group">
+              <label for="rut">RUT</label>
+              <input
+                type="text"
+                id="rut"
+                name="rut"
+                placeholder="11111111-1"
+                maxlength="10"
+                required
+              />
+              <small
+                id="rutError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Tu nombre"
+                maxlength="50"
+                autocomplete="name"
+                required
+              />
+              <small
+                id="nombreError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="apellidos">Apellidos</label>
+              <input
+                type="text"
+                id="apellidos"
+                name="apellidos"
+                placeholder="Tus apellidos"
+                maxlength="100"
+                required
+              />
+              <small
+                id="apellidosError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                maxlength="100"
+                placeholder="ejemplo@gmail.com"
+                autocomplete="email"
+                required
+              />
+              <small
+                id="emailError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Entre 4 y 10 caracteres"
+                autocomplete="new-password"
+                required
+              />
+              <small
+                id="passwordError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="fechaNacimiento">Fecha de nacimiento</label>
+              <input
+                type="date"
+                id="fechaNacimiento"
+                name="fechaNacimiento"
+                autocomplete="bday"
+              />
+              <small
+                id="fechaNacimientoError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="region">Región</label>
+              <select id="region" name="region" required>
+                <option value="">Selecciona una región</option>
+              </select>
+              <small
+                id="regionError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="comuna">Comuna</label>
+              <select id="comuna" name="comuna" disabled required>
+                <option value="">Selecciona una comuna</option>
+              </select>
+              <small
+                id="comunaError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <div class="form-group">
+              <label for="direccion">Dirección</label>
+              <input
+                type="text"
+                id="direccion"
+                name="direccion"
+                placeholder="Calle y número"
+                maxlength="300"
+                autocomplete="street-address"
+                required
+              />
+              <small
+                id="direccionError"
+                class="error-message"
+                aria-live="polite"
+              ></small>
+            </div>
+
+            <button type="submit" class="btn">Crear cuenta</button>
+            <p id="registroMessage" class="form-message" aria-live="polite"></p>
+
+            <p class="register-link">
+              ¿Ya tienes una cuenta?
+              <a href="/src/pages/login.html" data-auth-ir="login"
+                >Iniciar sesión</a
+              >
+            </p>
+          </form>
         </div>
       </dialog>
     `;

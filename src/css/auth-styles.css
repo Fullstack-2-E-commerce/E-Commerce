@@ -639,8 +639,9 @@ body:has(.cart-modal[open]) {
   border-top: 3px solid var(--tinta);
 }
 
-/* El atributo hidden lo escribe auth-ui.js cuando el carrito está vacío. */
-.cart-pie[hidden] {
+/* El atributo hidden lo escribe carrito.js cuando el carrito está vacío. Vale
+   para el pie del panel y para los bloques equivalentes de las páginas. */
+[data-carrito-pie][hidden] {
   display: none;
 }
 
@@ -670,6 +671,14 @@ body:has(.cart-modal[open]) {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--s);
+}
+
+/* Salida a la página del carrito, para cuando el panel queda chico. */
+.cart-ver-pagina {
+  justify-self: center;
+  font-size: 0.85rem;
+  color: var(--terracota-txt);
+  text-underline-offset: 0.2em;
 }
 
 .cart-btn {
@@ -791,5 +800,105 @@ body:has(.cart-modal[open]) {
   /* Con el nav plegado, 32 px de relleno vertical no aportan nada. */
   .header-inner {
     padding-block: 0.75rem;
+  }
+}
+
+/* --- Páginas de pedido ----------------------------------------------------- */
+/* carrito.html y checkout.html comparten el esqueleto: hero con regla y dos
+   columnas, la lista o el formulario y el resumen. Las líneas de producto y
+   los botones se reusan del panel del carrito. */
+
+.pedido-hero {
+  padding-block: var(--xl) var(--l);
+  background: var(--papel);
+  border-bottom: 3px solid var(--tinta);
+}
+
+.pedido-titulo {
+  font-size: clamp(2.2rem, 7vw, 3.6rem);
+  line-height: 1;
+}
+
+.pedido-lead {
+  max-width: 58ch;
+  margin: var(--s) 0 0;
+  color: var(--tinta-2);
+}
+
+.pedido-seccion {
+  padding-block: var(--l) var(--xxl);
+}
+
+.pedido-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+  gap: var(--l);
+  align-items: start;
+}
+
+.pedido-resumen,
+.pedido-form {
+  display: grid;
+  gap: var(--m);
+  padding: var(--m);
+  background: var(--crema);
+  border: 2px solid var(--tinta);
+}
+
+.pedido-resumen {
+  box-shadow: 6px 6px 0 var(--tinta);
+}
+
+.pedido-resumen-titulo,
+.pedido-form-titulo {
+  font-size: 1.3rem;
+  line-height: 1.1;
+  padding-bottom: var(--s);
+  border-bottom: 2px solid var(--tinta);
+}
+
+/* La última línea no cierra con regla: la caja ya tiene borde. */
+.pedido-resumen .cart-item:last-child,
+.pedido-form .cart-item:last-child {
+  border-bottom: 0;
+}
+
+.pedido-nota {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--tinta-2);
+}
+
+.pedido-acciones {
+  display: grid;
+  gap: var(--s);
+}
+
+.pedido-acciones .cart-btn,
+.pedido-form > .btn {
+  width: 100%;
+}
+
+/* La lista del carrito no se estira a lo ancho de la pantalla: con 40rem la
+   línea queda como una cuenta y no como dos extremos separados. */
+.pedido-grid > .cart-lineas {
+  max-width: 40rem;
+}
+
+.pedido-form .form-group {
+  margin: 0;
+}
+
+/* Campo con error: borde terracota además del mensaje debajo. */
+.form-group input[aria-invalid="true"],
+.form-group select[aria-invalid="true"] {
+  border-color: var(--terracota);
+  background: var(--blanco);
+}
+
+@media (max-width: 900px) {
+  .pedido-grid {
+    grid-template-columns: 1fr;
   }
 }

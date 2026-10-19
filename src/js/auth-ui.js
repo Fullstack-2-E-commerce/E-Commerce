@@ -14,7 +14,6 @@ import { pintar } from "./carrito.js";
   const cartTrigger = document.getElementById("cartTrigger");
   const cartModal = document.getElementById("cartModal");
   const cartCerrar = document.getElementById("cartCerrar");
-  const cartContinuar = document.getElementById("cartContinuar");
 
   // Página sin el bloque de autenticación.
   if (!entrar || !salir || !sesion || !correo) return;
@@ -75,13 +74,6 @@ import { pintar } from "./carrito.js";
   // Cerrar carrito.
   if (cartCerrar && cartModal) {
     cartCerrar.addEventListener("click", () => {
-      cartModal.close();
-    });
-  }
-
-  // Continuar comprando.
-  if (cartContinuar && cartModal) {
-    cartContinuar.addEventListener("click", () => {
       cartModal.close();
     });
   }
