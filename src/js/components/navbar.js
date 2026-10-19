@@ -68,60 +68,111 @@ export class SiteNavbar extends HTMLElement {
             </ul>
           </nav>
 
-          <div class="auth-sesion" id="authSesion">
-            <span class="auth-correo" id="authCorreo"></span>
+          <div class="header-acciones">
+            <div class="auth-sesion" id="authSesion">
+              <span class="auth-correo" id="authCorreo"></span>
 
-            <button type="button" class="auth-salir" id="authSalir">
-              Salir
+              <button type="button" class="auth-salir" id="authSalir">
+                Salir
+              </button>
+            </div>
+
+            <button
+              type="button"
+              class="auth-trigger auth-trigger--linea"
+              id="authEntrar"
+            >
+              Iniciar sesión
+            </button>
+
+            <button
+              type="button"
+              class="auth-trigger"
+              id="authRegistrar"
+              data-auth-abrir="registro"
+            >
+              Registrarse
+            </button>
+
+            <button
+              type="button"
+              class="auth-trigger auth-trigger--carrito"
+              id="cartTrigger"
+              aria-haspopup="dialog"
+            >
+              <svg
+                class="icono-carrito"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                stroke-linecap="square"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M3 4h2.4l2.6 10.4h9.6L20 7.2H6.2" />
+                <circle cx="9.6" cy="19" r="1.5" />
+                <circle cx="17" cy="19" r="1.5" />
+              </svg>
+
+              <span class="cart-trigger-texto">Carrito</span>
+              <span class="cart-count" id="cartCount" aria-live="polite"
+                >0</span
+              >
             </button>
           </div>
-
-        <button type="button" class="auth-trigger" id="authEntrar">
-          Iniciar sesión
-        </button>
-
-        <button type="button" class="auth-trigger" id="cartTrigger">
-          Carrito (<span id="cartCount">0</span>)
-        </button>
-
         </div>
       </header>
 
-      <dialog class="cart-modal" id="cartModal">
-        <div class="cart-modal-cabecera">
-          <h2>Mi carrito</h2>
+      <dialog class="cart-modal" id="cartModal" aria-labelledby="cartTitulo">
+        <div class="cart-cabecera">
+          <h2 class="cart-titulo" id="cartTitulo">Mi carrito</h2>
 
           <button
             type="button"
             id="cartCerrar"
-            class="cart-modal-cerrar"
+            class="cart-cerrar"
             aria-label="Cerrar carrito"
           >
-            &times;
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="square"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 5l14 14M19 5L5 19" />
+            </svg>
           </button>
         </div>
 
-        <div class="cart-modal-cuerpo">
+        <div class="cart-cuerpo">
+          <div id="cartItems" class="cart-lineas">
+            <p class="cart-vacio-texto">Tu carrito está vacío.</p>
+          </div>
+        </div>
 
-          <div id="cartItems">
-            <p>Tu carrito está vacío.</p>
+        <div class="cart-pie" id="cartPie">
+          <div class="cart-total">
+            <span class="cart-total-etiqueta">Total</span>
+            <strong class="cart-total-monto" id="cartTotal">$0</strong>
           </div>
 
-          <div class="cart-modal-total">
-            <strong>Total:</strong>
-            <span id="cartTotal">$0</span>
-          </div>
-
-          <div class="cart-modal-acciones">
-            <button type="button" id="cartVaciar">
+          <div class="cart-acciones">
+            <button type="button" class="cart-btn cart-btn--fantasma" id="cartVaciar">
               Vaciar carrito
             </button>
 
-            <button type="button" id="cartContinuar">
+            <button type="button" class="cart-btn cart-btn--primario" id="cartContinuar">
               Continuar compra
             </button>
           </div>
-
         </div>
       </dialog>
     `;

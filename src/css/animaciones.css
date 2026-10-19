@@ -499,7 +499,8 @@
   transform: rotate(90deg);
 }
 
-/* El boton de "iniciar sesion" de la cabecera. */
+/* El boton de "iniciar sesion" de la cabecera. El desplazamiento al hover lo
+   define auth-styles.css (hundirse en el papel); acá solo se suaviza. */
 .auth-trigger {
   transition:
     transform var(--t-hover) var(--salida),
@@ -507,11 +508,50 @@
     box-shadow var(--t-hover) var(--salida);
 }
 
-.auth-trigger:hover {
-  transform: translateY(-2px);
+/* --- 12. Carrito: panel lateral ------------------------------------------- */
+/* El panel entra deslizando desde el borde derecho. <dialog> abre y cierra
+   display, así que la salida necesita display y overlay como animables; si el
+   navegador no soporta transition-behavior, entra sin deslizar y no se rompe. */
+.cart-modal {
+  opacity: 0;
+  transform: translateX(100%);
+  transition:
+    opacity 0.3s var(--salida),
+    transform 0.34s var(--salida),
+    display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete;
 }
 
-/* --- 12. prefers-reduced-motion -------------------------------------------- */
+.cart-modal[open] {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .cart-modal[open] {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.cart-modal[open]::backdrop {
+  animation: entra-fondo 0.3s var(--salida);
+}
+
+/* El contador del header late al sumar: es el único aviso del alta. */
+@keyframes late-contador {
+  50% {
+    transform: scale(1.3);
+    background: var(--terracota);
+    color: var(--blanco);
+  }
+}
+
+.cart-count--late {
+  animation: late-contador 0.4s var(--salida);
+}
+
+/* --- 13. prefers-reduced-motion -------------------------------------------- */
 /* home-styles.css ya anula animation y transition en todo el sitio bajo
    esta preferencia. Aqui solo seneutralizan las dos cosas que ese reset no
    alcanza: el will-change (que reserva memoria sin motivo) y la inclinacion

@@ -334,3 +334,443 @@
     width: calc(100vw - 1rem);
   }
 }
+
+/* ==========================================================================
+   Carrito de compras — disparadores del header y panel lateral
+   Vive acá porque el carrito es hermano de los botones de sesión: los dos son
+   piezas del header compartido. Mismo mundo de afiche: tinta plana, borde de
+   2px, sombra dura, radio 0.
+   ========================================================================== */
+
+.header-acciones {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  /* Sin encoger: cuando falta ancho, el header baja piezas enteras de fila
+     (logo / nav / botones) en vez de partir el grupo de botones. */
+  flex-shrink: 0;
+  gap: var(--s);
+}
+
+/* Iniciar sesión: contorno. Registrarse usa la base .auth-trigger: relleno. */
+.auth-trigger--linea {
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.auth-trigger--linea:hover {
+  background: var(--blanco);
+  color: var(--tinta);
+}
+
+/* Carrito: ocre con contador de carbón y limón. */
+.auth-trigger--carrito {
+  gap: var(--s);
+  background: var(--ocre);
+  color: var(--tinta);
+}
+
+.auth-trigger--carrito:hover {
+  background: var(--ocre-2);
+  color: var(--blanco);
+}
+
+.icono-carrito {
+  flex: 0 0 auto;
+}
+
+.cart-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  padding-inline: 0.25rem;
+  background: var(--carbon);
+  color: var(--limon);
+  border: 2px solid var(--tinta);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* --- El panel ------------------------------------------------------------- */
+
+.cart-modal {
+  display: none;
+  position: fixed;
+  inset: 0 0 0 auto;
+  margin: 0;
+  width: min(26rem, 100%);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  color: var(--tinta);
+  background-color: var(--crema);
+  background-image: var(--fibra), var(--grano);
+  border: 0;
+  border-left: 3px solid var(--tinta);
+  border-radius: 0;
+}
+
+.cart-modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-modal::backdrop {
+  background: rgba(28, 23, 20, 0.62);
+}
+
+/* Con el panel abierto el fondo no corre. */
+body:has(.cart-modal[open]) {
+  overflow: hidden;
+}
+
+.cart-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--m);
+  padding: var(--m);
+  background: var(--papel);
+  border-bottom: 3px solid var(--tinta);
+}
+
+.cart-titulo {
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.cart-cerrar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  background: var(--crema);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cart-cerrar:hover {
+  background: var(--terracota);
+  color: var(--blanco);
+}
+
+.cart-cuerpo {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--m);
+  scrollbar-color: var(--tinta-2) var(--papel);
+  scrollbar-width: thin;
+}
+
+/* Con el carrito vacío el cuerpo se centra: un bloque suelto arriba deja
+   medio panel en blanco. */
+.cart-cuerpo:has(.cart-vacio) {
+  display: grid;
+  align-content: center;
+}
+
+/* --- Líneas de producto --------------------------------------------------- */
+
+.cart-lineas {
+  display: grid;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "datos eliminar"
+    "stepper subtotal";
+  align-items: center;
+  gap: var(--s) var(--m);
+  padding-block: var(--m);
+  border-bottom: 2px solid var(--tinta);
+}
+
+.cart-item-datos {
+  grid-area: datos;
+  min-width: 0;
+}
+
+.cart-item-nombre {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+/* 5.2:1 sobre crema: alcanza AA como texto secundario. */
+.cart-item-unitario {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--tinta-2);
+}
+
+.cart-eliminar {
+  grid-area: eliminar;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--papel);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cart-eliminar:hover {
+  background: var(--terracota);
+  color: var(--blanco);
+}
+
+/* Control de cantidad: un bloque con dos tapas cuadradas. */
+.cart-stepper {
+  grid-area: stepper;
+  display: inline-flex;
+  align-items: stretch;
+  justify-self: start;
+  background: var(--blanco);
+  border: 2px solid var(--tinta);
+}
+
+.cart-paso {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: var(--papel);
+  color: var(--tinta);
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.cart-paso:hover:not(:disabled) {
+  background: var(--ocre);
+}
+
+.cart-paso:disabled {
+  background: var(--crema);
+  color: var(--tinta-2);
+  cursor: not-allowed;
+}
+
+.cart-cantidad {
+  display: grid;
+  place-items: center;
+  min-width: 2.6rem;
+  padding-inline: var(--s);
+  border-inline: 2px solid var(--tinta);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-subtotal {
+  grid-area: subtotal;
+  justify-self: end;
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--terracota-txt);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Carrito vacío -------------------------------------------------------- */
+
+.cart-vacio {
+  display: grid;
+  justify-items: center;
+  gap: var(--s);
+  padding-block: var(--xl);
+  text-align: center;
+}
+
+/* El plato se dibuja a 2 tintas: el aro en terracota, el resto en tinta. */
+.cart-vacio-icono {
+  margin-bottom: var(--s);
+  color: var(--tinta-2);
+}
+
+.cart-vacio-aro {
+  stroke: var(--terracota);
+}
+
+.cart-vacio-titulo {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cart-vacio-texto {
+  margin: 0;
+  max-width: 28ch;
+  font-size: 0.95rem;
+  color: var(--tinta-2);
+}
+
+.cart-vacio .cart-btn {
+  margin-top: var(--s);
+}
+
+/* --- Pie: total y salidas ------------------------------------------------- */
+
+.cart-pie {
+  display: grid;
+  gap: var(--m);
+  padding: var(--m);
+  background: var(--papel);
+  border-top: 3px solid var(--tinta);
+}
+
+/* El atributo hidden lo escribe auth-ui.js cuando el carrito está vacío. */
+.cart-pie[hidden] {
+  display: none;
+}
+
+.cart-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--m);
+}
+
+.cart-total-etiqueta {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tinta-2);
+}
+
+.cart-total-monto {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-acciones {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s);
+}
+
+.cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--tinta);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.15s var(--salida),
+    box-shadow 0.15s var(--salida),
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cart-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.cart-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--tinta);
+}
+
+.cart-btn--fantasma {
+  background: var(--crema);
+  color: var(--tinta);
+}
+
+.cart-btn--fantasma:hover {
+  background: var(--blanco);
+}
+
+.cart-btn--primario {
+  background: var(--terracota);
+  color: var(--blanco);
+}
+
+.cart-btn--primario:hover {
+  background: var(--terracota-2);
+}
+
+@media (max-width: 768px) {
+  /* El header pasa a columna: los botones se centran como el nav. */
+  .header-acciones {
+    justify-content: center;
+  }
+}
+
+/* --- Header estrecho: 769 a 1179 px --------------------------------------- */
+/* Entre el corte móvil y el ancho de escritorio, el logo + los cinco enlaces +
+   los tres botones no entran en una fila (unos 1050 px de contenido) y las
+   piezas caen donde alcancen, con el header subiendo de 70 a 174 px. Acá el nav
+   baja a su propia fila —centrado y completo— y arriba quedan el logo y los
+   botones. Además, hasta 1024 px la etiqueta "Carrito" pasa a texto solo para
+   lectores de pantalla, que no ocupa lugar. */
+@media (min-width: 769px) and (max-width: 1179px) {
+  .header-inner {
+    flex-wrap: wrap;
+    row-gap: var(--s);
+  }
+
+  .main-nav {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .main-nav ul {
+    justify-content: center;
+    gap: var(--m);
+  }
+}
+
+@media (max-width: 1024px) {
+  .header-acciones {
+    gap: 0.35rem;
+  }
+
+  .auth-trigger {
+    padding-inline: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .cart-trigger-texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+}

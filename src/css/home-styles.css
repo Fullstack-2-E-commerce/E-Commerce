@@ -192,7 +192,9 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--m);
+  row-gap: var(--s);
   padding-block: 0.7rem;
 }
 
@@ -628,6 +630,51 @@ html {
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--terracota);
+}
+
+/* Alta al carrito desde la tarjeta. Mismo lenguaje que los botones del
+   header: tinta plana, borde de 2px, sombra dura que se hunde al pulsar. */
+.btn-agregar-carrito {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: var(--s);
+  padding: 0.6rem 1rem;
+  background: var(--ocre);
+  color: var(--tinta);
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--tinta);
+  cursor: pointer;
+  transition:
+    transform 0.15s var(--salida),
+    box-shadow 0.15s var(--salida),
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn-agregar-carrito:hover {
+  background: var(--ocre-2);
+  color: var(--blanco);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.btn-agregar-carrito:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--tinta);
+}
+
+/* Confirmación del alta: verde oliva oscuro, texto blanco (7:1). */
+.btn-agregar-carrito.is-agregado,
+.btn-agregar-carrito.is-agregado:hover {
+  background: var(--oliva-2);
+  color: var(--blanco);
 }
 
 .post-meta {

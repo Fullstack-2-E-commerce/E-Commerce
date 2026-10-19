@@ -64,8 +64,9 @@ const PLANTILLA_PRODUCTO = (p) => `
         data-producto-id="${esc(p.id)}"
         data-producto-nombre="${esc(p.nombre)}"
         data-producto-precio="${p.precio}"
+        aria-label="Agregar ${esc(p.nombre)} al carrito"
       >
-        Agregar al carrito
+        <span class="btn-agregar-texto">Agregar al carrito</span>
       </button>
     </div>
   </article>
@@ -117,6 +118,23 @@ function actualizarContadorCarrito() {
   cartCount.textContent = cantidadTotal;
 }
 
+// El botón confirma el alta un instante antes de volver a su estado normal.
+function marcarAgregado(boton) {
+  const etiqueta = boton.querySelector(".btn-agregar-texto");
+
+  if (!etiqueta) return;
+
+  clearTimeout(boton.temporizadorTexto);
+
+  boton.classList.add("is-agregado");
+  etiqueta.textContent = "Agregado";
+
+  boton.temporizadorTexto = setTimeout(() => {
+    boton.classList.remove("is-agregado");
+    etiqueta.textContent = "Agregar al carrito";
+  }, 1200);
+}
+
 // Agregar productos al carrito
 document.addEventListener("click", (evento) => {
   const boton = evento.target.closest(".btn-agregar-carrito");
@@ -153,10 +171,9 @@ document.addEventListener("click", (evento) => {
 
   guardarCarrito();
   actualizarContadorCarrito();
+  marcarAgregado(boton);
 
   document.dispatchEvent(new Event("carrito-actualizado"));
-
-  console.log("Carrito actual:", window.carrito);
 });
 
 // Actualizar el contador al cargar la página
