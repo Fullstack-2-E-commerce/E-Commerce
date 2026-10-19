@@ -146,7 +146,11 @@ export class SiteNavbar extends HTMLElement {
               </svg>
 
               <span class="cart-trigger-texto">Carrito</span>
-              <span class="cart-count" id="cartCount" aria-live="polite"
+              <span
+                class="cart-count"
+                id="cartCount"
+                data-carrito-count
+                aria-live="polite"
                 >0</span
               >
             </button>
@@ -181,19 +185,28 @@ export class SiteNavbar extends HTMLElement {
         </div>
 
         <div class="cart-cuerpo">
-          <div id="cartItems" class="cart-lineas">
-            <p class="cart-vacio-texto">Tu carrito está vacío.</p>
-          </div>
+          <div
+            id="cartItems"
+            class="cart-lineas"
+            data-carrito-lineas
+            tabindex="-1"
+          ></div>
         </div>
 
-        <div class="cart-pie" id="cartPie">
+        <div class="cart-pie" id="cartPie" data-carrito-pie>
           <div class="cart-total">
             <span class="cart-total-etiqueta">Total</span>
-            <strong class="cart-total-monto" id="cartTotal">$0</strong>
+            <strong class="cart-total-monto" id="cartTotal" data-carrito-total
+              >$0</strong
+            >
           </div>
 
           <div class="cart-acciones">
-            <button type="button" class="cart-btn cart-btn--fantasma" id="cartVaciar">
+            <button
+              type="button"
+              class="cart-btn cart-btn--fantasma cart-vaciar"
+              id="cartVaciar"
+            >
               Vaciar carrito
             </button>
 
