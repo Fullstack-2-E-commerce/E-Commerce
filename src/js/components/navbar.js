@@ -267,7 +267,7 @@ export class SiteNavbar extends HTMLElement {
                 type="password"
                 id="login-password"
                 name="password"
-                placeholder="Entre 6 y 10 caracteres"
+                placeholder="Mínimo 6 caracteres"
                 autocomplete="current-password"
                 required
               />
@@ -385,7 +385,7 @@ export class SiteNavbar extends HTMLElement {
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Entre 6 y 10 caracteres"
+                placeholder="Mínimo 6 caracteres"
                 autocomplete="new-password"
                 required
               />

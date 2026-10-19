@@ -83,10 +83,10 @@ if (!registroForm) {
       if (passwordError)
         passwordError.textContent = "La contraseña es obligatoria.";
       valido = false;
-    } else if (password.length < 6 || password.length > 10) {
+    } else if (password.length < 6) {
       if (passwordError)
         passwordError.textContent =
-          "La contraseña debe tener entre 6 y 10 caracteres.";
+          "La contraseña debe tener al menos 6 caracteres.";
       valido = false;
     }
 
