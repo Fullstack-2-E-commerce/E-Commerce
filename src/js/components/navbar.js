@@ -267,7 +267,7 @@ export class SiteNavbar extends HTMLElement {
                 type="password"
                 id="login-password"
                 name="password"
-                placeholder="Entre 4 y 10 caracteres"
+                placeholder="Entre 6 y 10 caracteres"
                 autocomplete="current-password"
                 required
               />
@@ -385,7 +385,7 @@ export class SiteNavbar extends HTMLElement {
                 type="password"
                 id="password"
                 name="password"
-                placeholder="Entre 4 y 10 caracteres"
+                placeholder="Entre 6 y 10 caracteres"
                 autocomplete="new-password"
                 required
               />
@@ -453,7 +453,9 @@ export class SiteNavbar extends HTMLElement {
               ></small>
             </div>
 
-            <button type="submit" class="btn">Crear cuenta</button>
+            <button type="submit" id="registroButton" class="btn">
+              Crear cuenta
+            </button>
             <p id="registroMessage" class="form-message" aria-live="polite"></p>
 
             <p class="register-link">

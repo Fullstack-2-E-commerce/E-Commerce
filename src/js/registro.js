@@ -83,10 +83,10 @@ if (!registroForm) {
       if (passwordError)
         passwordError.textContent = "La contraseña es obligatoria.";
       valido = false;
-    } else if (password.length < 4 || password.length > 10) {
+    } else if (password.length < 6 || password.length > 10) {
       if (passwordError)
         passwordError.textContent =
-          "La contraseña debe tener entre 4 y 10 caracteres.";
+          "La contraseña debe tener entre 6 y 10 caracteres.";
       valido = false;
     }
 
@@ -148,12 +148,18 @@ if (!registroForm) {
 
       console.log("Usuario registrado con éxito en Auth:", data);
 
+      // Con la confirmación por correo apagada en el panel de Supabase, el
+      // alta ya devuelve sesión: no hay correo que esperar y el modal sobra.
+      const conSesion = Boolean(data.session);
+
       if (registroMessage) {
-        registroMessage.textContent =
-          "Cuenta creada correctamente. Revisa tu correo para confirmarla.";
+        registroMessage.textContent = conSesion
+          ? "Cuenta creada. Sesión iniciada como " + email + "."
+          : "Cuenta creada correctamente. Revisa tu correo para confirmarla.";
       }
 
       registroForm.reset();
+      if (conSesion) registroForm.closest("dialog")?.close();
     } catch (err) {
       console.error("Error inesperado en la ejecución del submit:", err);
       if (registroMessage) {
