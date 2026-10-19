@@ -1,6 +1,12 @@
 import { supabase } from "./supabase.js";
-import { regiones } from "./regiones.js";
+import { poblarRegiones, regiones } from "./regiones.js";
 import { errorCorreo } from "./validaciones.js";
+
+// El formulario de registro de cada página es este mismo, con o sin navbar.
+poblarRegiones(
+  document.getElementById("region"),
+  document.getElementById("comuna"),
+);
 
 console.log(" Script registro.js cargado correctamente");
 

@@ -400,39 +400,38 @@ export const regiones = [
   },
 ];
 
-const regionSelect = document.getElementById("region");
-const comunaSelect = document.getElementById("comuna");
+/* Rellena un par de selects: el primero con las regiones y el segundo con las
+   comunas de la región elegida. Llegan por parámetro porque en cada página los
+   ids son distintos (el formulario de registro, el del checkout). */
+export function poblarRegiones(regionSelect, comunaSelect) {
+  if (!regionSelect || !comunaSelect) return;
 
-// Cargar regiones
-regiones.forEach((region, index) => {
-  const option = document.createElement("option");
-
-  option.value = index;
-  option.textContent = region.nombre;
-
-  regionSelect.appendChild(option);
-});
-
-// Cambiar comunas al seleccionar una región
-regionSelect.addEventListener("change", function () {
-  comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
-
-  comunaSelect.disabled = true;
-
-  if (this.value === "") {
-    return;
-  }
-
-  const regionSeleccionada = regiones[this.value];
-
-  regionSeleccionada.comunas.forEach((comuna) => {
+  regiones.forEach((region, index) => {
     const option = document.createElement("option");
 
-    option.value = comuna;
-    option.textContent = comuna;
+    option.value = index;
+    option.textContent = region.nombre;
 
-    comunaSelect.appendChild(option);
+    regionSelect.appendChild(option);
   });
 
-  comunaSelect.disabled = false;
-});
+  regionSelect.addEventListener("change", function () {
+    comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+    comunaSelect.disabled = true;
+
+    const regionSeleccionada = regiones[this.value];
+
+    if (!regionSeleccionada) return;
+
+    regionSeleccionada.comunas.forEach((comuna) => {
+      const option = document.createElement("option");
+
+      option.value = comuna;
+      option.textContent = comuna;
+
+      comunaSelect.appendChild(option);
+    });
+
+    comunaSelect.disabled = false;
+  });
+}
