@@ -599,3 +599,19 @@
     transform: none;
   }
 }
+
+/* --- 14. Titulos en movil -------------------------------------------------- */
+/* A 37-42 px el desplazamiento de 5 px de la segunda tinta ensucia la
+   lectura: las letras dobladas se leen como texto borroso. Abajo de 480 px
+   el titulo queda a una sola tinta; el afiche conserva el color en las lineas
+   y en las palabras en ocre. */
+@media (max-width: 480px) {
+  .anim-listo .sello-titulo,
+  .anim-listo .sello-titulo.is-visible,
+  .anim-listo .valores .sello-titulo,
+  .anim-listo .valores .sello-titulo.is-visible,
+  .anim-listo .blog-cta .sello-titulo,
+  .anim-listo .blog-cta .sello-titulo.is-visible {
+    text-shadow: none;
+  }
+}

@@ -774,3 +774,22 @@ body:has(.cart-modal[open]) {
     border: 0;
   }
 }
+
+/* --- Header angosto: ≤480 px ---------------------------------------------- */
+/* Los tres botones tienen que entrar en una fila a 375 px: con el relleno de
+   escritorio pedían 315 px y la caja mide 312. Va después del corte de 1024
+   porque las dos reglas tienen la misma especificidad. */
+@media (max-width: 480px) {
+  .auth-trigger {
+    padding-inline: 0.5rem;
+  }
+
+  .header-acciones {
+    gap: 0.25rem;
+  }
+
+  /* Con el nav plegado, 32 px de relleno vertical no aportan nada. */
+  .header-inner {
+    padding-block: 0.75rem;
+  }
+}

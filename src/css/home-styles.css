@@ -208,6 +208,9 @@ html {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  /* display: flex descarta el espacio final del nodo de texto: "Sabores de"
+     y "Chile" quedaban pegados como "deChile". */
+  gap: 0.25em;
 }
 
 .logo-em {
@@ -256,6 +259,26 @@ html {
 
 .main-nav a.is-active {
   color: var(--terracota-txt);
+}
+
+/* Botón de menú: existe solo bajo 768 px, donde el nav no cabe. */
+.nav-toggle {
+  display: none;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  background: var(--crema);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--tinta);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.nav-toggle:hover {
+  background: var(--ocre);
 }
 
 /* --- Hero de portada: afiche --------------------------------------------- */
@@ -1169,10 +1192,43 @@ html {
 }
 
 @media (max-width: 768px) {
+  /* Header de movil en tres filas: marca y menu, acciones, y el nav plegado.
+     Antes el nav ocupaba dos filas fijas y el header medía 288 px; ahora
+     queda en ~110 px y el nav se abre a demanda. */
   .header-inner {
-    flex-direction: column;
-    gap: var(--s);
+    flex-wrap: wrap;
+    row-gap: var(--s);
     padding-block: var(--m);
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .nav-toggle {
+    order: 2;
+    display: grid;
+  }
+
+  .header-acciones {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .main-nav {
+    order: 4;
+    flex-basis: 100%;
+    display: none;
+  }
+
+  .header-inner.nav-abierta .main-nav {
+    display: block;
+    padding-top: var(--s);
+    border-top: 2px solid var(--tinta);
+  }
+
+  .header-inner.nav-abierta .nav-toggle {
+    background: var(--ocre);
   }
 
   /* Con cinco links la fila mide 365px y no entra en los 312px de caja a
@@ -1181,6 +1237,13 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--s) var(--m);
+  }
+
+  /* El hero pasa a una columna: en dos, el titulo quedaba con 172 px de
+     ancho (seis lineas) y la foto en una tira vertical. */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--l);
   }
 
   .productos-head {
@@ -1232,6 +1295,19 @@ html {
 
   .logo {
     font-size: 1.25rem;
+  }
+
+  /* Cinco lineas del titulo a 41,6 px: 1,05 de interlineado las pega. El
+     desplazamiento de la segunda tinta se apaga en animaciones.css, que es
+     donde vive ese tratamiento. */
+  .hero-title {
+    line-height: 1.12;
+  }
+
+  /* La linea en ocre lleva su propio desplazamiento y a este cuerpo tambien
+     se le apaga: el ocre oscuro sobre terracota no se lee. */
+  .hero-line--ocre {
+    text-shadow: none;
   }
 
   /* A una columna el borde derecho de la ultima cifra sobra y el de abajo

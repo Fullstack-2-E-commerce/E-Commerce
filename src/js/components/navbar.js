@@ -11,7 +11,35 @@ export class SiteNavbar extends HTMLElement {
             Sabores de <span class="logo-em">Chile</span>
           </a>
 
-          <nav class="main-nav" aria-label="Navegación principal">
+          <!-- Solo bajo 768 px: el nav ocupa dos filas y empuja el resto. -->
+          <button
+            type="button"
+            class="nav-toggle"
+            id="navToggle"
+            aria-expanded="false"
+            aria-controls="navPrincipal"
+            aria-label="Abrir menú"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="square"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          </button>
+
+          <nav
+            class="main-nav"
+            id="navPrincipal"
+            aria-label="Navegación principal"
+          >
             <ul>
               <li>
                 <a
@@ -176,6 +204,23 @@ export class SiteNavbar extends HTMLElement {
         </div>
       </dialog>
     `;
+
+    // Menú móvil: el nav se pliega bajo 768 px. Arriba el botón no existe
+    // (display: none), así que el estado no importa.
+    const botonMenu = this.querySelector("#navToggle");
+    const cabecera = this.querySelector(".header-inner");
+
+    if (botonMenu && cabecera) {
+      botonMenu.addEventListener("click", () => {
+        const abierto = cabecera.classList.toggle("nav-abierta");
+
+        botonMenu.setAttribute("aria-expanded", String(abierto));
+        botonMenu.setAttribute(
+          "aria-label",
+          abierto ? "Cerrar menú" : "Abrir menú",
+        );
+      });
+    }
   }
 }
 
