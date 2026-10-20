@@ -54,9 +54,6 @@ if (loginForm) {
       return;
     }
 
-    if (loginMessage)
-      loginMessage.textContent = "Inicio de sesión exitoso. Redirigiendo...";
-
     // 2. Obtener el rol del usuario desde la tabla public.usuarios
     const { data: perfil, error: errorPerfil } = await supabase
       .from("usuarios")
@@ -68,14 +65,32 @@ if (loginForm) {
       console.error("Error al consultar el rol del usuario:", errorPerfil);
     }
 
-    // 3. Redirección basada en Rol
+    // 3. Redirección según el rol y el origen.
+    //    Un comprador que inicia sesión desde el modal de otra página (el
+    //    checkout, por ejemplo) se queda donde está: sacarlo al home perdería
+    //    el pedido que venía armando.
+    const rol = perfil?.rol;
+    const esAdmin = rol === "Administrador" || rol === "Vendedor";
+    const vieneDeLogin = window.location.pathname.endsWith("/login.html");
+
+    if (loginMessage) {
+      loginMessage.textContent =
+        esAdmin || vieneDeLogin
+          ? "Inicio de sesión exitoso. Redirigiendo..."
+          : "Sesión iniciada.";
+    }
+
+    if (!esAdmin && !vieneDeLogin) {
+      document
+        .querySelectorAll("dialog[open]")
+        .forEach((ventana) => ventana.close());
+      return;
+    }
+
     setTimeout(() => {
-      const rol = perfil?.rol;
-      if (rol === "Administrador" || rol === "Vendedor") {
-        window.location.href = "/src/pages/admin-productos.html";
-      } else {
-        window.location.href = "/index.html";
-      }
+      window.location.href = esAdmin
+        ? "/src/pages/admin-productos.html"
+        : "/index.html";
     }, 800);
   });
 }

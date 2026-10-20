@@ -120,7 +120,11 @@ if (form) {
   // Con sesión abierta el formulario llega con los datos de la cuenta: son un
   // atajo, no un candado, y se pueden corregir.
   function completarConCuenta(sesion) {
-    if (!sesion) return;
+    if (!sesion) {
+      // Al cerrar sesión no se dejan los datos de la cuenta en pantalla.
+      limpiarFormulario();
+      return;
+    }
 
     const datos = sesion.user.user_metadata || {};
 
@@ -195,11 +199,44 @@ if (form) {
     });
   });
 
-  supabase.auth.getSession().then(({ data }) => completarConCuenta(data.session));
+  // Paso previo: sin sesión se elige entre entrar o comprar de invitado. Con
+  // sesión abierta, o con el carrito vacío, se va directo al formulario.
+  const opciones = document.getElementById("checkoutOpciones");
+  const botonInvitado = document.getElementById("checkoutInvitado");
+  const invitacion = document.getElementById("checkoutInvitacion");
+  const carritoVacio = carrito.length === 0;
 
-  supabase.auth.onAuthStateChange((_evento, sesion) =>
-    completarConCuenta(sesion),
-  );
+  function resolverPaso(sesion) {
+    // Con sesión la invitación a entrar sobra.
+    if (invitacion) invitacion.hidden = Boolean(sesion);
 
-  if (carrito.length === 0) avisarCarritoVacio();
+    if (!opciones || carritoVacio || sesion) {
+      if (opciones) opciones.hidden = true;
+      form.hidden = false;
+      return;
+    }
+
+    opciones.hidden = false;
+    form.hidden = true;
+  }
+
+  if (botonInvitado) {
+    botonInvitado.addEventListener("click", () => {
+      if (opciones) opciones.hidden = true;
+      form.hidden = false;
+      campos.nombre.input.focus();
+    });
+  }
+
+  supabase.auth.getSession().then(({ data }) => {
+    completarConCuenta(data.session);
+    resolverPaso(data.session);
+  });
+
+  supabase.auth.onAuthStateChange((_evento, sesion) => {
+    completarConCuenta(sesion);
+    resolverPaso(sesion);
+  });
+
+  if (carritoVacio) avisarCarritoVacio();
 }

@@ -1058,7 +1058,8 @@ html {
 }
 
 .footer-nav a,
-.footer-contacto a {
+.footer-contacto a,
+.footer-enlace {
   color: var(--papel);
   min-height: 44px;
   display: flex;
@@ -1066,8 +1067,17 @@ html {
   transition: color 0.2s ease;
 }
 
+.footer-enlace {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
 .footer-nav a:hover,
-.footer-contacto a:hover {
+.footer-contacto a:hover,
+.footer-enlace:hover {
   color: var(--limon);
 }
 

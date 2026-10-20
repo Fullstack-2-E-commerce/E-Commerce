@@ -98,7 +98,18 @@ export class SiteNavbar extends HTMLElement {
 
           <div class="header-acciones">
             <div class="auth-sesion" id="authSesion">
-              <span class="auth-correo" id="authCorreo"></span>
+              <a
+                class="auth-usuario"
+                id="authUsuario"
+                href="/src/pages/cuenta.html"
+              >
+                <span
+                  class="auth-inicial"
+                  id="authInicial"
+                  aria-hidden="true"
+                ></span>
+                <span class="auth-nombre" id="authNombre"></span>
+              </a>
 
               <button type="button" class="auth-salir" id="authSalir">
                 Salir

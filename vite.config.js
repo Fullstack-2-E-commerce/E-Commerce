@@ -12,6 +12,7 @@ export default defineConfig({
         blogs: resolve(__dirname, "src/pages/blogs.html"),
         carrito: resolve(__dirname, "src/pages/carrito.html"),
         checkout: resolve(__dirname, "src/pages/checkout.html"),
+        cuenta: resolve(__dirname, "src/pages/cuenta.html"),
         contacto: resolve(__dirname, "src/pages/contacto.html"),
         login: resolve(__dirname, "src/pages/login.html"),
         nosotros: resolve(__dirname, "src/pages/nosotros.html"),

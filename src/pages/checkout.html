@@ -30,10 +30,49 @@
 
       <section class="pedido-seccion">
         <div class="container pedido-grid">
-          <form id="checkoutForm" class="pedido-form" novalidate>
-            <h2 class="pedido-form-titulo">Datos de quien recibe</h2>
+          <!-- Con sesión abierta este paso no aparece: checkout.js lo oculta. -->
+          <section
+            class="pedido-form"
+            id="checkoutOpciones"
+            aria-labelledby="checkoutOpcionesTitulo"
+            hidden
+          >
+            <h2 class="pedido-form-titulo" id="checkoutOpcionesTitulo">
+              ¿Cómo quieres comprar?
+            </h2>
 
             <p class="pedido-nota">
+              Entra con tu cuenta y completamos el formulario con tus datos. Si
+              no tienes cuenta, puedes comprar como invitado.
+            </p>
+
+            <button
+              type="button"
+              class="cart-btn cart-btn--primario"
+              data-auth-abrir="login"
+            >
+              Iniciar sesión
+            </button>
+
+            <button
+              type="button"
+              class="cart-btn cart-btn--fantasma"
+              id="checkoutInvitado"
+            >
+              Continuar como invitado
+            </button>
+
+            <p class="pedido-nota">
+              ¿No tienes cuenta?
+              <a href="#" data-auth-abrir="registro">Crea una acá</a> y vuelves
+              a este pedido con los datos listos.
+            </p>
+          </section>
+
+          <form id="checkoutForm" class="pedido-form" novalidate hidden>
+            <h2 class="pedido-form-titulo">Datos de quien recibe</h2>
+
+            <p class="pedido-nota" id="checkoutInvitacion">
               ¿Tienes cuenta?
               <a href="#" data-auth-abrir="login">Inicia sesión</a> y completamos
               el formulario con tus datos.

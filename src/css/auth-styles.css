@@ -217,13 +217,40 @@
   display: flex;
 }
 
-.auth-correo {
-  font-size: 0.9rem;
+.auth-usuario {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s);
+  min-height: 44px;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.auth-inicial {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--tinta);
+  background: var(--limon);
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.auth-nombre {
+  font-size: 0.95rem;
   color: var(--tinta-2);
-  max-width: 22ch;
+  max-width: 18ch;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.auth-usuario:hover .auth-nombre {
+  color: var(--terracota-txt);
+  text-decoration: underline;
 }
 
 .auth-salir {
@@ -326,8 +353,8 @@
 }
 
 @media (max-width: 480px) {
-  .auth-correo {
-    display: none;
+  .auth-nombre {
+    max-width: 10ch;
   }
 
   .auth-modal {
@@ -876,8 +903,15 @@ body:has(.cart-modal[open]) {
 }
 
 .pedido-acciones .cart-btn,
-.pedido-form > .btn {
+.pedido-form > .btn,
+.pedido-form > .cart-btn {
   width: 100%;
+}
+
+/* Las tarjetas del checkout y de la cuenta arrancan ocultas y se muestran por
+   JS. El `display: grid` de la clase le gana al [hidden] del navegador. */
+.pedido-form[hidden] {
+  display: none;
 }
 
 /* La lista del carrito no se estira a lo ancho de la pantalla: con 40rem la
@@ -900,5 +934,64 @@ body:has(.cart-modal[open]) {
 @media (max-width: 900px) {
   .pedido-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* --- Mi cuenta ------------------------------------------------------------- */
+/* Las dos tarjetas reusan .pedido-form; acá solo va la columna y la fila de
+   los datos que no se editan (RUT y correo). */
+
+.cuenta-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--l);
+  align-items: start;
+}
+
+/* El aviso de "inicia sesión" ocupa el ancho completo. */
+#cuentaSinSesion {
+  grid-column: 1 / -1;
+  max-width: 44rem;
+}
+
+@media (max-width: 900px) {
+  .cuenta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cuenta-lectura {
+  display: grid;
+  gap: var(--s);
+  padding: var(--s) 0;
+  border-bottom: 2px solid var(--tinta);
+}
+
+.cuenta-dato {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s);
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.cuenta-dato dt {
+  color: var(--tinta-2);
+}
+
+.cuenta-dato dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.cuenta-clave {
+  display: grid;
+  gap: var(--m);
+}
+
+@media (max-width: 480px) {
+  .cuenta-dato {
+    display: grid;
   }
 }

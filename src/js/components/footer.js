@@ -1,3 +1,5 @@
+import { supabase } from "../supabase.js";
+
 export class SiteFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -23,9 +25,24 @@ export class SiteFooter extends HTMLElement {
 
         <nav class="footer-nav" aria-label="Cuenta">
           <h2 class="footer-titulo">Cuenta</h2>
-          <ul>
+          <ul data-footer-invitado>
             <li><a href="/src/pages/login.html">Iniciar sesión</a></li>
             <li><a href="/src/pages/registros.html">Crear cuenta</a></li>
+          </ul>
+          <!-- Con sesión abierta cambia la lista; el panel solo si el rol lo permite. -->
+          <ul data-footer-sesion hidden>
+            <li data-footer-admin hidden>
+              <a href="/src/pages/admin-productos.html"
+                >Panel de administración</a
+              >
+            </li>
+            <li><a href="/src/pages/cuenta.html">Mi cuenta</a></li>
+            <li><a href="/src/pages/carrito.html">Mi pedido</a></li>
+            <li>
+              <button type="button" class="footer-enlace" data-footer-salir>
+                Cerrar sesión
+              </button>
+            </li>
           </ul>
         </nav>
 
@@ -66,6 +83,53 @@ export class SiteFooter extends HTMLElement {
       </div>
     </footer>
     `;
+
+    // La nav "Cuenta" cambia con la sesión. El footer no depende del header:
+    // se consulta la sesión acá para que funcione en cualquier página.
+    const invitado = this.querySelector("[data-footer-invitado]");
+    const conSesion = this.querySelector("[data-footer-sesion]");
+    const bloqueAdmin = this.querySelector("[data-footer-admin]");
+    const salir = this.querySelector("[data-footer-salir]");
+
+    function pintarCuenta(sesion) {
+      const activa = Boolean(sesion);
+
+      invitado.hidden = activa;
+      conSesion.hidden = !activa;
+      bloqueAdmin.hidden = true;
+
+      if (!activa) return;
+
+      supabase
+        .from("usuarios")
+        .select("rol")
+        .eq("id", sesion.user.id)
+        .single()
+        .then(({ data, error }) => {
+          if (error) {
+            console.error("No se pudo leer el rol del usuario:", error);
+            return;
+          }
+
+          bloqueAdmin.hidden =
+            data?.rol !== "Administrador" && data?.rol !== "Vendedor";
+        });
+    }
+
+    if (salir) {
+      salir.addEventListener("click", async () => {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+          console.error("No se pudo cerrar la sesión:", error.message);
+        }
+      });
+    }
+
+    supabase.auth.getSession().then(({ data }) => pintarCuenta(data.session));
+    supabase.auth.onAuthStateChange((_evento, sesion) =>
+      pintarCuenta(sesion),
+    );
   }
 }
 

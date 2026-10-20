@@ -9,14 +9,16 @@ import { pintar } from "./carrito.js";
   const registrar = document.getElementById("authRegistrar");
   const salir = document.getElementById("authSalir");
   const sesion = document.getElementById("authSesion");
-  const correo = document.getElementById("authCorreo");
+  const usuario = document.getElementById("authUsuario");
+  const nombre = document.getElementById("authNombre");
+  const inicial = document.getElementById("authInicial");
 
   const cartTrigger = document.getElementById("cartTrigger");
   const cartModal = document.getElementById("cartModal");
   const cartCerrar = document.getElementById("cartCerrar");
 
   // Página sin el bloque de autenticación.
-  if (!entrar || !salir || !sesion || !correo) return;
+  if (!entrar || !salir || !sesion || !nombre) return;
 
   const modales = {
     login: document.getElementById("authModalLogin"),
@@ -34,7 +36,21 @@ import { pintar } from "./carrito.js";
 
     sesion.classList.toggle("activa", activo);
 
-    if (activo) correo.textContent = estado.user.email;
+    if (!activo) return;
+
+    // El nombre del perfil, con el correo como respaldo: es más corto y más
+    // legible en el header que la dirección completa.
+    const datos = estado.user.user_metadata || {};
+    const completo = (datos.nombre || "").trim();
+    const correo = estado.user.email || "";
+    const etiqueta = completo || correo.split("@")[0];
+
+    nombre.textContent = etiqueta;
+    inicial.textContent = etiqueta.charAt(0).toUpperCase();
+
+    if (usuario) {
+      usuario.title = completo ? completo + " <" + correo + ">" : correo;
+    }
   }
 
   // Abrir un modal.
