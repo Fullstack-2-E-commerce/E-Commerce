@@ -141,8 +141,18 @@ if (!registroForm) {
 
       if (error) {
         console.error("Error devuelto por Supabase Auth:", error);
-        if (registroMessage)
-          registroMessage.textContent = "Error: " + error.message;
+
+        // Supabase Auth conoce las cuentas de auth.users; la tabla public.usuarios
+        // no participa en esta comprobación.
+        const yaExiste =
+          error.code === "user_already_exists" ||
+          /already registered/i.test(error.message);
+
+        if (registroMessage) {
+          registroMessage.textContent = yaExiste
+            ? "Ese correo ya tiene una cuenta. Inicia sesión con tu contraseña."
+            : "Error: " + error.message;
+        }
         return;
       }
 
