@@ -1057,6 +1057,12 @@ html {
   flex-direction: column;
 }
 
+/* El display:flex de arriba le gana al [hidden] del navegador: sin esta regla
+   las dos listas de Cuenta (invitado y sesión) se ven siempre. */
+.footer-nav ul[hidden] {
+  display: none;
+}
+
 .footer-nav a,
 .footer-contacto a,
 .footer-enlace {
