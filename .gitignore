@@ -1,3 +1,7 @@
+# Documentación interna (no se versiona)
+*.md
+!README.md
+
 # Sistema operativo
 .DS_Store
 Thumbs.db
