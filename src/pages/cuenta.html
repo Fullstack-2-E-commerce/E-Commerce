@@ -11,11 +11,10 @@
     <link rel="stylesheet" href="/src/css/home-styles.css" />
     <link rel="stylesheet" href="/src/css/auth-styles.css" />
     <link rel="stylesheet" href="/src/css/animaciones.css" />
-    <script type="module" src="/src/js/components/navbar.js"></script>
-    <script type="module" src="/src/js/components/footer.js"></script>
   </head>
   <body>
-    <site-navbar></site-navbar>
+    <!-- <site-navbar></site-navbar> -->
+    <div id="react-navbar-root"></div>
 
     <main>
       <section class="pedido-hero">
@@ -31,180 +30,176 @@
       <section class="pedido-seccion">
         <div class="container">
           <div class="cuenta-grid">
-          <!-- Visitante: la cuenta no tiene datos que mostrar. -->
-          <section class="pedido-form" id="cuentaSinSesion" hidden>
-            <h2 class="pedido-form-titulo">Necesitas iniciar sesión</h2>
+            <!-- Visitante: la cuenta no tiene datos que mostrar. -->
+            <section class="pedido-form" id="cuentaSinSesion" hidden>
+              <h2 class="pedido-form-titulo">Necesitas iniciar sesión</h2>
 
-            <p class="pedido-nota">
-              Los datos de entrega viven en tu cuenta. Entra para revisarlos o
-              corregirlos.
-            </p>
+              <p class="pedido-nota">
+                Los datos de entrega viven en tu cuenta. Entra para revisarlos o
+                corregirlos.
+              </p>
 
-            <button type="button" class="btn" data-auth-abrir="login">
-              Iniciar sesión
-            </button>
-          </section>
+              <button type="button" class="btn" data-auth-abrir="login">
+                Iniciar sesión
+              </button>
+            </section>
 
-          <form class="pedido-form" id="cuentaForm" novalidate hidden>
-            <h2 class="pedido-form-titulo">Tus datos</h2>
+            <form class="pedido-form" id="cuentaForm" novalidate hidden>
+              <h2 class="pedido-form-titulo">Tus datos</h2>
 
-            <dl class="cuenta-lectura">
-              <div class="cuenta-dato">
-                <dt>RUT</dt>
-                <dd id="cuentaRut">—</dd>
+              <dl class="cuenta-lectura">
+                <div class="cuenta-dato">
+                  <dt>RUT</dt>
+                  <dd id="cuentaRut">—</dd>
+                </div>
+                <div class="cuenta-dato">
+                  <dt>Correo</dt>
+                  <dd id="cuentaCorreo">—</dd>
+                </div>
+              </dl>
+
+              <div class="form-group">
+                <label for="cuentaNombre">Nombre</label>
+                <input
+                  type="text"
+                  id="cuentaNombre"
+                  name="nombre"
+                  placeholder="Tu nombre"
+                  maxlength="50"
+                  autocomplete="given-name"
+                  required
+                />
+                <small
+                  id="cuentaNombreError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
               </div>
-              <div class="cuenta-dato">
-                <dt>Correo</dt>
-                <dd id="cuentaCorreo">—</dd>
+
+              <div class="form-group">
+                <label for="cuentaApellidos">Apellidos</label>
+                <input
+                  type="text"
+                  id="cuentaApellidos"
+                  name="apellidos"
+                  placeholder="Tus apellidos"
+                  maxlength="100"
+                  autocomplete="family-name"
+                  required
+                />
+                <small
+                  id="cuentaApellidosError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
               </div>
-            </dl>
 
-            <div class="form-group">
-              <label for="cuentaNombre">Nombre</label>
-              <input
-                type="text"
-                id="cuentaNombre"
-                name="nombre"
-                placeholder="Tu nombre"
-                maxlength="50"
-                autocomplete="given-name"
-                required
-              />
-              <small
-                id="cuentaNombreError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
+              <div class="form-group">
+                <label for="cuentaRegion">Región</label>
+                <select id="cuentaRegion" name="region" required>
+                  <option value="">Selecciona una región</option>
+                </select>
+                <small
+                  id="cuentaRegionError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
 
-            <div class="form-group">
-              <label for="cuentaApellidos">Apellidos</label>
-              <input
-                type="text"
-                id="cuentaApellidos"
-                name="apellidos"
-                placeholder="Tus apellidos"
-                maxlength="100"
-                autocomplete="family-name"
-                required
-              />
-              <small
-                id="cuentaApellidosError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
+              <div class="form-group">
+                <label for="cuentaComuna">Comuna</label>
+                <select id="cuentaComuna" name="comuna" disabled required>
+                  <option value="">Selecciona una comuna</option>
+                </select>
+                <small
+                  id="cuentaComunaError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
 
-            <div class="form-group">
-              <label for="cuentaRegion">Región</label>
-              <select id="cuentaRegion" name="region" required>
-                <option value="">Selecciona una región</option>
-              </select>
-              <small
-                id="cuentaRegionError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
+              <div class="form-group">
+                <label for="cuentaDireccion">Dirección</label>
+                <input
+                  type="text"
+                  id="cuentaDireccion"
+                  name="direccion"
+                  placeholder="Calle y número"
+                  maxlength="300"
+                  autocomplete="street-address"
+                  required
+                />
+                <small
+                  id="cuentaDireccionError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
 
-            <div class="form-group">
-              <label for="cuentaComuna">Comuna</label>
-              <select id="cuentaComuna" name="comuna" disabled required>
-                <option value="">Selecciona una comuna</option>
-              </select>
-              <small
-                id="cuentaComunaError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
+              <button type="submit" class="btn" id="cuentaGuardar">
+                Guardar cambios
+              </button>
 
-            <div class="form-group">
-              <label for="cuentaDireccion">Dirección</label>
-              <input
-                type="text"
-                id="cuentaDireccion"
-                name="direccion"
-                placeholder="Calle y número"
-                maxlength="300"
-                autocomplete="street-address"
-                required
-              />
-              <small
-                id="cuentaDireccionError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
+              <p id="cuentaMessage" class="form-message" aria-live="polite"></p>
+            </form>
 
-            <button type="submit" class="btn" id="cuentaGuardar">
-              Guardar cambios
-            </button>
+            <form class="pedido-form" id="claveForm" novalidate hidden>
+              <h2 class="pedido-form-titulo">Cambiar contraseña</h2>
 
-            <p
-              id="cuentaMessage"
-              class="form-message"
-              aria-live="polite"
-            ></p>
-          </form>
+              <p class="pedido-nota">
+                Mínimo 6 caracteres. La sesión sigue abierta después del cambio.
+              </p>
 
-          <form class="pedido-form" id="claveForm" novalidate hidden>
-            <h2 class="pedido-form-titulo">Cambiar contraseña</h2>
+              <div class="form-group">
+                <label for="cuentaClaveNueva">Contraseña nueva</label>
+                <input
+                  type="password"
+                  id="cuentaClaveNueva"
+                  name="claveNueva"
+                  placeholder="Mínimo 6 caracteres"
+                  autocomplete="new-password"
+                  required
+                />
+                <small
+                  id="cuentaClaveNuevaError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
 
-            <p class="pedido-nota">
-              Mínimo 6 caracteres. La sesión sigue abierta después del cambio.
-            </p>
+              <div class="form-group">
+                <label for="cuentaClaveRepetir">Repite la contraseña</label>
+                <input
+                  type="password"
+                  id="cuentaClaveRepetir"
+                  name="claveRepetir"
+                  placeholder="Otra vez, para confirmar"
+                  autocomplete="new-password"
+                  required
+                />
+                <small
+                  id="cuentaClaveRepetirError"
+                  class="error-message"
+                  aria-live="polite"
+                ></small>
+              </div>
 
-            <div class="form-group">
-              <label for="cuentaClaveNueva">Contraseña nueva</label>
-              <input
-                type="password"
-                id="cuentaClaveNueva"
-                name="claveNueva"
-                placeholder="Mínimo 6 caracteres"
-                autocomplete="new-password"
-                required
-              />
-              <small
-                id="cuentaClaveNuevaError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
+              <button type="submit" class="btn" id="cuentaClaveGuardar">
+                Cambiar contraseña
+              </button>
 
-            <div class="form-group">
-              <label for="cuentaClaveRepetir">Repite la contraseña</label>
-              <input
-                type="password"
-                id="cuentaClaveRepetir"
-                name="claveRepetir"
-                placeholder="Otra vez, para confirmar"
-                autocomplete="new-password"
-                required
-              />
-              <small
-                id="cuentaClaveRepetirError"
-                class="error-message"
-                aria-live="polite"
-              ></small>
-            </div>
-
-            <button type="submit" class="btn" id="cuentaClaveGuardar">
-              Cambiar contraseña
-            </button>
-
-            <p
-              id="claveMessage"
-              class="form-message"
-              aria-live="polite"
-            ></p>
-          </form>
+              <p id="claveMessage" class="form-message" aria-live="polite"></p>
+            </form>
           </div>
         </div>
       </section>
     </main>
 
-    <site-footer></site-footer>
+    <!-- <site-footer></site-footer> -->
+    <div id="react-footer-root"></div>
+
+    <script type="module" src="/src/js/main-navbar.jsx"></script>
+    <script type="module" src="/src/js/main-footer.jsx"></script>
 
     <script type="module" src="/src/js/cuenta.js"></script>
     <script type="module" src="/src/js/app.js"></script>

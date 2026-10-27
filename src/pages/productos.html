@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="/src/css/auth-styles.css" />
     <link rel="stylesheet" href="/src/css/animaciones.css" />
     <link rel="stylesheet" href="/src/css/productos-styles.css" />
-    <script type="module" src="/src/js/components/navbar.js"></script>
-    <script type="module" src="/src/js/components/footer.js"></script>
   </head>
   <body>
-    <site-navbar></site-navbar>
+    <!-- <site-navbar></site-navbar> -->
+    <div id="react-navbar-root"></div>
 
     <main>
       <section class="productos-hero">
@@ -124,13 +123,17 @@
       </section>
     </main>
 
-    <site-footer></site-footer>
+    <!-- <site-footer></site-footer> -->
+    <div id="react-footer-root"></div>
 
     <!-- El catalogo va antes de app.js: ese archivo arma el
          scroll-reveal al ejecutarse y necesita las tarjetas ya en el DOM. -->
     <script type="module" src="/src/js/tienda.js"></script>
     <script type="module" src="/src/js/app.js"></script>
     <script type="module" src="/src/js/animaciones.js"></script>
+
+    <script type="module" src="/src/js/main-navbar.jsx"></script>
+    <script type="module" src="/src/js/main-footer.jsx"></script>
 
     <script type="module" src="/src/js/supabase.js"></script>
     <script type="module" src="/src/js/registro.js"></script>
