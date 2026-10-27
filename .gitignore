@@ -1,6 +1,10 @@
 # Documentación interna (no se versiona)
-*.md
-!README.md
+ANALISIS_PROYECTO.md
+COMMIT_GUIA.md
+GUIA_PORT_REACT.md
+Instrucciones_Fullstack2.md
+investigacion-diseno-restaurante-chileno.md
+PLAN.md
 
 # Sistema operativo
 .DS_Store
@@ -31,8 +35,6 @@ nosotros-desktop.png
 # NO ignorar *.webp: las fotos de src/assets/img/ son parte del sitio.
 # Si se ignoran, no entran al repo y la pagina se rompe al clonar.
 
-.investigacion-diseno-restaurante-chileno.md
-investigacion-diseno-restaurante-chileno.md
 repomix-output.xml
 
 # Archivos locales y temporales

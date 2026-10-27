@@ -1,50 +1,162 @@
-# E-Commerce — Proyecto Fullstack 2
+# Sabores de Chile
 
-Proyecto académico de la asignatura **DSY1104 (Fullstack 2)**: un e-commerce dinámico construido con HTML, CSS, JavaScript, React y Bootstrap.
+E-commerce de cocina casera chilena con catálogo dinámico, carrito, checkout y
+panel de administración. Proyecto académico de la asignatura **DSY1104 —
+Fullstack 2**.
 
-> **Estado del stack (2026-09-29):** lo que hay en el repositorio es HTML + CSS + JS puro, sin framework y sin build. React y Bootstrap son el siguiente paso (Fase 7 del `PLAN.md`) y todavía no están implementados.
+El sitio tiene dos áreas:
 
-## Descripción
+- **Tienda (cliente):** home, catálogo, blogs, nosotros, contacto, carrito,
+  checkout, mi cuenta, login y registro.
+- **Administración:** mantenedor de productos protegido por rol.
 
-El sitio será una tienda en línea con dos áreas principales:
+## Stack
 
-- **Vistas de Tienda** (lado cliente): Home, Nosotros, Blogs, Detalle de Blogs, Contacto, Productos, Login y Registro de Usuarios.
-- **Vistas de Administrador**: Dashboard, listados y mantenedores (Usuarios y Productos).
+| Tecnología | Uso |
+|---|---|
+| HTML5 + CSS3 | Estructura y estilos (11 páginas, 10 hojas de estilo) |
+| JavaScript ES Modules | Lógica de la aplicación |
+| React 19 | Navbar y footer montados como islas |
+| Vite 8 | Servidor de desarrollo y build multi-página |
+| Supabase | Base de datos Postgres, Auth y perfiles |
 
-Todo el contenido (catálogo de productos, regiones/comunas, usuarios) se manejará mediante arreglos en JavaScript. El carrito se mantiene solo en memoria durante la sesión (sin Web Storage). **Por seguridad, en Login/Registro no se debe utilizar `localStorage` ni `sessionStorage` para credenciales, tokens o datos personales (riesgo XSS); solo memoria o backend seguro.**
+El catálogo vive en Supabase, no en arrays locales. El carrito y los pedidos se
+guardan en `localStorage`.
 
-## Características
+## Requisitos
 
-- Layout responsivo: menú global y pie de página consistentes en todo el sitio.
-- Sistema de diseño de afiche serigrafiado a 2 tintas: tinta plana, sombras duras, tokens CSS en `home-styles.css`.
-- Catálogo de productos renderizado dinámicamente desde arrays JS.
-- Video del catálogo en `productos.html` (`platos.webm`, VP8, loop, con póster).
-- Carrito de compras funcional: agregar, modificar cantidades y calcular total, mantenido en memoria durante la sesión (sin persistencia local por seguridad).
-- Validación de formularios (Login, Contacto, Usuarios, Productos), incluyendo RUT y dominios de correo restringidos.
-- Control de acceso según rol: **Administrador**, **Vendedor** y **Cliente**.
-- Autenticación con Supabase Auth, con confirmación de correo.
-- Documentación de requisitos (ERS) según norma **IEEE 830**.
+- Node.js 18 o superior
+- Una cuenta de Supabase con las tablas descritas más abajo
 
-## Estructura de Carpetas
+## Cómo ejecutar
 
-Todo cuelga de `src/`. La estructura pedida (`/css`, `/js`, `/assets`, `/pages`) existe un nivel más abajo.
+1. Clona el repositorio y entra a la carpeta:
+
+   ```bash
+   git clone https://github.com/Fullstack-2-E-commerce/E-Commerce.git
+   cd E-Commerce
+   ```
+
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Crea el archivo `.env` en la raíz con las credenciales de Supabase:
+
+   ```env
+   VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+   VITE_SUPABASE_ANON_KEY=tu_clave_publica
+   ```
+
+   Si no existe `.env`, `src/js/supabase.js` usa credenciales de respaldo
+   incluidas en el código. Configúralo para apuntar a tu propio proyecto.
+
+4. Levanta el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+   Abre `http://localhost:5173` en el navegador. Los cambios en HTML, CSS y JS
+   se recargan automáticamente.
+
+### Build de producción
+
+```bash
+npm run build     # genera la carpeta dist/
+npm run preview   # sirve dist/ en http://localhost:4173
+```
+
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con recarga en caliente |
+| `npm run build` | Compila el sitio multi-página en `dist/` |
+| `npm run preview` | Previsualiza el build de producción |
+
+## Estructura
 
 ```
-/src
-├── pages      # HTML: tienda, auth y (pendiente) administrador
-├── css        # Un archivo de estilos por página; home-styles.css es el sistema compartido
-├── js         # Lógica: catálogo, render, validaciones, auth con Supabase
-└── assets     # Fotos .webp de los platos y video del catálogo
+.
+├── index.html                  # Home
+├── src/
+│   ├── components/             # Navbar y Footer (React)
+│   ├── css/                    # Estilos por página + animaciones
+│   ├── js/                     # Lógica de la aplicación
+│   │   ├── supabase.js         # Cliente de Supabase
+│   │   ├── validaciones.js     # RUT, correo, precios, escape HTML
+│   │   ├── regiones.js         # Regiones y comunas de Chile
+│   │   ├── carrito.js          # Estado y render del carrito
+│   │   ├── tienda.js           # Catálogo desde Supabase
+│   │   ├── checkout.js         # Validación y cierre del pedido
+│   │   └── admin-productos.js  # CRUD y guardia de rol
+│   └── pages/                  # Vistas HTML internas
+├── public/assets/              # Imágenes y video
+└── vite.config.js              # Entradas del build multi-página
 ```
 
-Para ver el sitio, servir la raíz del repositorio y entrar por `src/pages/index.html`.
+## Páginas
 
-## Roles en el Equipo
+| Ruta | Descripción |
+|---|---|
+| `/index.html` | Home con hero, destacados, marquesina y manifiesto |
+| `/src/pages/productos.html` | Catálogo completo |
+| `/src/pages/carrito.html` | Carrito con cantidades y totales |
+| `/src/pages/checkout.html` | Datos de entrega y confirmación del pedido |
+| `/src/pages/cuenta.html` | Perfil del usuario y sus pedidos |
+| `/src/pages/login.html` | Inicio de sesión |
+| `/src/pages/registros.html` | Registro de usuario |
+| `/src/pages/admin-productos.html` | Panel de administración |
+| `/src/pages/blogs.html` | Blog |
+| `/src/pages/nosotros.html` | Historia del proyecto |
+| `/src/pages/contacto.html` | Formulario de contacto |
 
-- **Integrante 1** — Módulo Usuarios y Autenticación (Login/Registro con Supabase Auth, validaciones de RUT y correo, select de Regiones/Comunas, maquetación de las páginas de auth).
-- **Integrante 2** — Módulo Tienda y Carrito (HTML/CSS del sitio, sistema de diseño, validaciones de contacto, productos en arrays, carrito en memoria sin Web Storage).
-- **Integrante 3** — Módulo Administrador y Roles (Dashboard, mantenedores, validaciones de productos, control de acceso por rol).
+## Funcionalidades
 
-Cada integrante trabaja en su rama y sube sus cambios con commits individuales para demostrar participación en el historial de Git.
+- Catálogo dinámico consultado a Supabase, con precios en CLP.
+- Carrito persistente en `localStorage`, con control de cantidades.
+- Checkout con validación de nombre, RUT, correo, región, comuna y dirección.
+- Generación de folio y guardado local del pedido.
+- Registro y login con Supabase Auth.
+- Perfil de usuario con región y comuna (lista local de `regiones.js`).
+- Panel de administración con crear, editar y eliminar productos.
+- Navbar responsive y enlace activo según la ruta.
+- Animaciones al hacer scroll con `IntersectionObserver`, respetando
+  `prefers-reduced-motion`.
 
-> **Nota:** este README es una versión temporal y será reemplazado por la documentación definitiva del proyecto.
+## Roles
+
+El acceso al panel se controla con la columna `rol` de la tabla `usuarios`:
+
+| Rol | Acceso |
+|---|---|
+| `Administrador` | Panel de productos completo |
+| `Vendedor` | Panel de productos completo |
+| `Cliente` | Tienda y cuenta propia |
+
+La guardia de ruta es del lado del cliente. La protección efectiva debe
+implementarse con políticas RLS en Supabase.
+
+## Modelo de datos
+
+### `productos`
+
+`id`, `codigo`, `nombre`, `descripcion`, `precio`, `categoria`, `imagen_url`,
+`destacado`, `stock`, `stock_critico`, `created_at`.
+
+### `usuarios`
+
+`id` (igual a `auth.users.id`), `rol`, `nombre`, `apellidos`, `rut`,
+`fecha_nacimiento`, `region`, `comuna`, `direccion`.
+
+## Limitaciones conocidas
+
+- Los pedidos se guardan solo en el navegador; no se persisten en el backend.
+- El esquema de Supabase no está versionado en el repositorio.
+- El stock se almacena pero no se descuenta en la tienda.
+- No hay pruebas automatizadas.
+
+## Licencia
+
+ISC.
