@@ -14,7 +14,7 @@ El sitio tiene dos áreas:
 
 | Tecnología | Uso |
 |---|---|
-| HTML5 + CSS3 | Estructura y estilos (11 páginas, 10 hojas de estilo) |
+| HTML5 + CSS3 | Estructura y estilos (11 páginas, 8 hojas de estilo) |
 | JavaScript ES Modules | Lógica de la aplicación |
 | React 19 | Navbar y footer montados como islas |
 | Vite 8 | Servidor de desarrollo y build multi-página |
@@ -25,7 +25,7 @@ guardan en `localStorage`.
 
 ## Requisitos
 
-- Node.js 18 o superior
+- Node.js 20.19 o superior (Vite 8 exige `^20.19.0 || >=22.12.0`)
 - Una cuenta de Supabase con las tablas descritas más abajo
 
 ## Cómo ejecutar
