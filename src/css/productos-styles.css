@@ -35,7 +35,6 @@
 
 .productos-hero-titulo {
   font-size: clamp(2.4rem, 6vw, 4.4rem);
-  text-shadow: 5px 5px 0 var(--ocre);
 }
 
 .productos-hero-titulo em {

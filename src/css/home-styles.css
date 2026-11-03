@@ -409,8 +409,8 @@ html {
 }
 
 /* Los heroes interiores ya entran por la capa de sellos de animaciones.css:
-   el h1 con su segunda tinta y el kicker y el lead con entrada simple. Esta
-   animacion sobre el wrapper sumaba un segundo desplazamiento al h1. */
+   el h1 y el kicker y el lead con entrada simple. Esta animacion sobre el
+   wrapper sumaba un segundo desplazamiento al h1. */
 
 .blog-hero-placa,
 .contacto-hero-placa,
@@ -436,8 +436,6 @@ html {
   max-width: 15ch;
   font-size: clamp(2.6rem, 8vw, 5.5rem);
   font-weight: 700;
-  /* el registro desalineado: segunda tinta desplazada */
-  text-shadow: 5px 5px 0 var(--terracota);
 }
 
 .hero-line {
@@ -450,7 +448,6 @@ html {
 
 .hero-line--ocre {
   color: var(--ocre-2);
-  text-shadow: 5px 5px 0 var(--terracota);
 }
 
 .hero-ornament {
@@ -1313,17 +1310,9 @@ html {
     font-size: 1.25rem;
   }
 
-  /* Cinco lineas del titulo a 41,6 px: 1,05 de interlineado las pega. El
-     desplazamiento de la segunda tinta se apaga en animaciones.css, que es
-     donde vive ese tratamiento. */
+  /* Cinco lineas del titulo a 41,6 px: 1,05 de interlineado las pega. */
   .hero-title {
     line-height: 1.12;
-  }
-
-  /* La linea en ocre lleva su propio desplazamiento y a este cuerpo tambien
-     se le apaga: el ocre oscuro sobre terracota no se lee. */
-  .hero-line--ocre {
-    text-shadow: none;
   }
 
   /* A una columna el borde derecho de la ultima cifra sobra y el de abajo

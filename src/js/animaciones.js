@@ -39,7 +39,7 @@
 
     frases.forEach(function (frase) {
       /* Se recorre nodo por nodo, no con textContent: partir el innerHTML
-         perderia el <em> del medio y el texto quedaria sin la segunda tinta.
+         perderia el <em> del medio y su color.
 
          childNodes se copia antes: es una lista viva, y sacar nodos mientras
          se recorre hace que el forEach se salte el que sigue. */
@@ -109,23 +109,23 @@
   }
 
   /* --- Bloques que entran con "sello" -------------------------------------- */
-  /* El titulo de cada seccion lleva la segunda tinta desalineada y se
-     asienta al entrar en pantalla. Los bloques de dos columnas entran desde
-     su lado. Todo lo demas ya tiene su animacion en home-styles.css. */
+  /* El titulo de cada seccion se asienta al entrar en pantalla. Los bloques
+     de dos columnas entran desde su lado. Todo lo demas ya tiene su animacion
+     en home-styles.css. */
   var Sellos = [
     // [selector, clase de entrada]
-    [".productos-titulo", "sello-titulo sello"],
-    [".cocina-titulo", "sello-titulo sello"],
-    [".blog-titulo", "sello-titulo sello"],
-    [".contacto-titulo", "sello-titulo sello"],
-    [".nosotros-hero-titulo", "sello-titulo sello"],
-    [".productos-hero-titulo", "sello-titulo sello"],
-    [".valores-head h2", "sello-titulo sello"],
-    [".hero-title", "sello-titulo sello"],
+    [".productos-titulo", "sello"],
+    [".cocina-titulo", "sello"],
+    [".blog-titulo", "sello"],
+    [".contacto-titulo", "sello"],
+    [".nosotros-hero-titulo", "sello"],
+    [".productos-hero-titulo", "sello"],
+    [".valores-head h2", "sello"],
+    [".hero-title", "sello"],
     // Paginas de carrito y checkout.
-    [".pedido-titulo", "sello-titulo sello"],
-    // Bloques de apoyo: entran sin segunda tinta para no competes con el
-    // titulo de su propia seccion.
+    [".pedido-titulo", "sello"],
+    // Bloques de apoyo: entran con un desplazamiento mas corto para no competir
+    // con el titulo de su propia seccion.
     [".valores-head .valores-lead", "sello-plano"],
     [".productos-head .productos-lead", "sello-plano"],
     [".blog-lead", "sello-plano"],

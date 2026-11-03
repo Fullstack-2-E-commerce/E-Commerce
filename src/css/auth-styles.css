@@ -131,9 +131,7 @@
 }
 
 .auth-card h1 {
-  /* el registro desalineado de la segunda tinta, igual que los heroes */
   font-size: clamp(2rem, 6vw, 2.8rem);
-  text-shadow: 4px 4px 0 var(--terracota);
 }
 
 .auth-subtitle {

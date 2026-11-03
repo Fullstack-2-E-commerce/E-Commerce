@@ -62,28 +62,6 @@
   transform: none;
 }
 
-/* El ajuste de la segunda tinta va en su propio transition: aislarlo deja
-   el repintado limitado a la capa de texto durante el asentamiento. */
-.anim-listo .sello-titulo {
-  text-shadow: 10px 10px 0 var(--terracota);
-}
-
-.anim-listo .sello-titulo.is-visible {
-  text-shadow: 5px 5px 0 var(--terracota);
-}
-
-/* Titulo sobre pizarra: la segunda tinta tiene que ser clara, no terracota,
-   o desaparece. */
-.anim-listo .valores .sello-titulo,
-.anim-listo .blog-cta .sello-titulo {
-  text-shadow: 10px 10px 0 var(--ocre-2);
-}
-
-.anim-listo .valores .sello-titulo.is-visible,
-.anim-listo .blog-cta .sello-titulo.is-visible {
-  text-shadow: 5px 5px 0 var(--ocre-2);
-}
-
 .anim-listo .sello-izq {
   opacity: 0;
   transform: translateX(-22px);
@@ -113,8 +91,7 @@
 .anim-listo .sello-der {
   transition:
     opacity var(--t-sello) var(--salida),
-    transform var(--t-sello) var(--salida),
-    text-shadow 0.9s var(--salida);
+    transform var(--t-sello) var(--salida);
 }
 
 /* --- 5. Tarjetas: elevacion, inclinacion y foto con zoom-------------------- */
@@ -601,17 +578,3 @@
 }
 
 /* --- 14. Titulos en movil -------------------------------------------------- */
-/* A 37-42 px el desplazamiento de 5 px de la segunda tinta ensucia la
-   lectura: las letras dobladas se leen como texto borroso. Abajo de 480 px
-   el titulo queda a una sola tinta; el afiche conserva el color en las lineas
-   y en las palabras en ocre. */
-@media (max-width: 480px) {
-  .anim-listo .sello-titulo,
-  .anim-listo .sello-titulo.is-visible,
-  .anim-listo .valores .sello-titulo,
-  .anim-listo .valores .sello-titulo.is-visible,
-  .anim-listo .blog-cta .sello-titulo,
-  .anim-listo .blog-cta .sello-titulo.is-visible {
-    text-shadow: none;
-  }
-}

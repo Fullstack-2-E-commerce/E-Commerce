@@ -322,7 +322,7 @@ export function Navbar() {
           </button>
         </div>
         <div className="auth-modal-cuerpo">
-          <form id="loginForm" noValidate>
+          <form id="loginForm" method="post" noValidate>
             <div className="form-group">
               <label htmlFor="login-email">Correo electrónico</label>
               <input
@@ -401,7 +401,7 @@ export function Navbar() {
           </button>
         </div>
         <div className="auth-modal-cuerpo">
-          <form id="registroForm" noValidate>
+          <form id="registroForm" method="post" noValidate>
             <div className="form-group">
               <label htmlFor="rut">RUT</label>
               <input
